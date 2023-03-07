@@ -118,22 +118,22 @@ namespace lagalt_back_end.Data
             },
         };
 
-        private static List<Application> applications = new List<Application>
-        {
-            new Application
-            {
-                User = new U
-                Id = 1,
+        //private static List<Application> applications = new List<Application>
+        //{
+        //    new Application
+        //    {
+        //        User = new User();
+        //        Id = 1,
                 
-            },
-            new Application
-            {
-               User =  new User { Id=1 },
-               Project = new Project{ Id = 1},
-               State = State.Pending,
-               MotivationLetter = "Default Letter, out of words"
-            }
-        };
+        //    },
+        //    new Application
+        //    {
+        //       User =  new User { Id=1 },
+        //       Project = new Project{ Id = 1},
+        //       State = State.Pending,
+        //       MotivationLetter = "Default Letter, out of words"
+        //    }
+        //};
                  
 
 
