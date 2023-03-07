@@ -2,8 +2,13 @@
 
 namespace lagalt_back_end.Models
 {
-    public enum Progress { 
-    Founding, InProgress, Stalled, Completed
+    public enum ProgressState
+    {
+        Founding, InProgress, Stalled, Completed
+    }
+    public enum CategoryState
+    {
+        Music, Film, GameDevelopment, WebDevelopment
     }
     public class Project
     {
@@ -29,15 +34,16 @@ namespace lagalt_back_end.Models
         /// <value>
         /// The alias.
         /// </value>
-        [MaxLength(50)]
-        public string Category { get; set; }
+        [EnumDataType(typeof(CategoryState))]
+        public CategoryState Category { get; set; }
         /// <summary>
         /// Gets or sets the gender.
         /// </summary>
         /// <value>
         /// The gender.
         /// </value>
-        public Progress Progress { get; set; }
+        [EnumDataType(typeof(ProgressState))]
+        public ProgressState Progress { get; set; }
         /// <summary>
         /// Gets or sets the picture.
         /// </summary>
@@ -45,13 +51,15 @@ namespace lagalt_back_end.Models
         /// The picture.
         /// </value>
         public string? Description { get; set; }
+        [Url]
         public string? GitURL { get; set; }
-        public string? ImageURL { get; set; }
-        public List<string>? NeededSkills { get; set; } 
- /*
+        [Url]
+        public List<string>? ImageURL { get; set; }
+        public List<string>? NeededSkills { get; set; }
+
         ICollection<User> Admins { get; set; }
         ICollection<User> Contributors { get; set; }
- */
+
 
     }
 }

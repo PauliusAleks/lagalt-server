@@ -26,6 +26,7 @@ namespace lagalt_back_end.Data
 	    public DbSet<History> HistoryModels { get; set; }
         public DbSet<User> UserModels { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Application> Applications { get; set; }
       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
