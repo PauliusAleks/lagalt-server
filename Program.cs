@@ -5,8 +5,10 @@ using lagalt_back_end.Repositories;
 using Microsoft.OpenApi.Models;
 using System.Reflection; 
 
-var builder = WebApplication.CreateBuilder(args); 
+var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMvc().AddJsonOptions(options => { 
+    options.JsonSerializerOptions.WriteIndented = true; });
 
 builder.Services.AddDbContext<LagaltDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LAGALT_DB")));

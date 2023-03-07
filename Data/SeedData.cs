@@ -14,6 +14,7 @@ namespace lagalt_back_end.Data
         {
                 new Project
                 {
+                    Id = 1,
                     Name = "Tinder v2",
                     Category = CategoryState.WebDevelopment,
                     Progress = ProgressState.Founding,//In percentage
@@ -24,6 +25,7 @@ namespace lagalt_back_end.Data
                 },
                 new Project
                 {
+                    Id = 2,
                     Name = "EF_CodeFirst",
                     Category = CategoryState.WebDevelopment,
                     Progress = ProgressState.Founding,
@@ -35,6 +37,7 @@ namespace lagalt_back_end.Data
                 },
                  new Project
                 {
+                    Id = 3,
                     Name = "Exciting_Angular_Project",
                     Category = CategoryState.WebDevelopment,
                     Progress = ProgressState.InProgress,//In percentage
@@ -45,6 +48,7 @@ namespace lagalt_back_end.Data
                 },
                  new Project
                 {
+                    Id = 4,
                     Name = "High School Musical",
                     Category = CategoryState.Film,
                     Progress = ProgressState.Completed,//In percentage
@@ -55,6 +59,7 @@ namespace lagalt_back_end.Data
                 },
                  new Project
                 {
+                    Id = 5,
                     Name = "Best song ever!!!",
                     Category = CategoryState.Music,
                     Progress = ProgressState.InProgress,//In percentage
@@ -68,6 +73,7 @@ namespace lagalt_back_end.Data
         {
             new User 
             {
+                Id = 1,
                 Username = "adminBoy",
                 FirstName = "Admin",
                 LastName = "Adminson",
@@ -79,6 +85,7 @@ namespace lagalt_back_end.Data
 
             new User
             {
+                Id = 2,
                 Username = "sharkboy05",
                 FirstName = "Per",
                 LastName = "Polle",
@@ -89,6 +96,7 @@ namespace lagalt_back_end.Data
             },
             new User
             {
+                Id = 3,
                 Username = "ProperUser",
                 FirstName = "Proper",
                 LastName = "Userito",
@@ -99,6 +107,7 @@ namespace lagalt_back_end.Data
             },
             new User
             {
+                Id = 4,
                 Username = "StrangerHere",
                 FirstName = "Bob",
                 LastName = "Forr",
@@ -107,6 +116,23 @@ namespace lagalt_back_end.Data
                 Skills = new List<string>{"Writing","Sitting","Reading", "Comedian"},
                 MotivationLetter = "Roses are red, violets are blue... ",
             },
+        };
+
+        private static List<Application> applications = new List<Application>
+        {
+            new Application
+            {
+                User = new U
+                Id = 1,
+                
+            },
+            new Application
+            {
+               User =  new User { Id=1 },
+               Project = new Project{ Id = 1},
+               State = State.Pending,
+               MotivationLetter = "Default Letter, out of words"
+            }
         };
                  
 
