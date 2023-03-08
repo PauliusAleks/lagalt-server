@@ -1,12 +1,12 @@
 ﻿using lagalt_back_end.Models;
 
-namespace lagalt_back_end.Repositories.Base
+namespace lagalt_web_api.Repositories.Interface
 {
     /// <summary>
     /// 
     /// </summary>
     /// <seealso cref="AssignmentThree.Repositories.Base.IRepository&lt;AssignmentThree.Models.Project&gt;" />
-    public interface IProjectRepository : IRepository<Project>
+    public interface ISkillRepository : IRepository<Skill>
     {
     }
 }

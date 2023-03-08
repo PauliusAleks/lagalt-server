@@ -11,6 +11,7 @@ using lagalt_back_end.Repositories;
 using AutoMapper;
 using lagalt_back_end.Models.DTO;
 using System.Net.Mime;
+using lagalt_web_api.Controllers;
 
 namespace lagalt_back_end.Controllers
 {
@@ -23,12 +24,12 @@ namespace lagalt_back_end.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
     [ApiConventionType(typeof(DefaultApiConventions))]
-    public class ProjectsController : ControllerBase
+    public class ProjectsController : ControllerBase, RESTController<Project>
     {
         /// <summary>
         /// The context
         /// </summary>
-        private readonly IRepositoryWrapper _context;
+        private readonly IRepositories _repositories;
         /// <summary>
         /// The mapper
         /// </summary>
@@ -36,11 +37,11 @@ namespace lagalt_back_end.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectsController"/> class.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="repositories">The context.</param>
         /// <param name="mapper">The mapper.</param>
-        public ProjectsController(IRepositoryWrapper context, IMapper mapper)
+        public ProjectsController(IRepositories repositories, IMapper mapper)
         {
-            _context = context;
+            _repositories = repositories;
             _mapper = mapper;
         }
 
@@ -52,7 +53,7 @@ namespace lagalt_back_end.Controllers
         [HttpGet] 
         public ActionResult<IEnumerable<ProjectDTO>> GetProject()
         {
-            var projects = _context.Projects.GetAll();
+            var projects = _repositories.Projects.GetAll();
             var projectsDTO = projects.Select(project => _mapper.Map<ProjectDTO>(projects));
             return projectsDTO.ToList();
         }
@@ -66,7 +67,7 @@ namespace lagalt_back_end.Controllers
         [HttpGet("{id}")] 
         public ActionResult<ProjectDTO> GetProject(int id)
         {
-            var project = _context.Projects.Get(id);
+            var project = _repositories.Projects.Get(id);
 
             if (project is null)
             {
@@ -95,7 +96,7 @@ namespace lagalt_back_end.Controllers
             {
                 return BadRequest();
             }
-            _context.Projects.Update(_mapper.Map<Project>(project));
+            _repositories.Projects.Update(_mapper.Map<Project>(project));
 
             return NoContent();
         }
@@ -114,7 +115,7 @@ namespace lagalt_back_end.Controllers
             {
                 return BadRequest("project is null.");
             }
-            _context.Projects.Create(_mapper.Map<Project>(project));
+            _repositories.Projects.Create(_mapper.Map<Project>(project));
 
             return CreatedAtAction("GetProject", project);
         }
@@ -128,12 +129,12 @@ namespace lagalt_back_end.Controllers
         [HttpDelete("{id}")] 
         public IActionResult DeleteProject(int id)
         {
-            var projects = _context.Projects.Get(id);
+            var projects = _repositories.Projects.Get(id);
             if (!ProjectExists(id))
             {
                 return NotFound();
             }
-            _context.Projects.Delete(projects);
+            _repositories.Projects.Delete(projects);
             return NoContent();
         }
 
@@ -144,7 +145,7 @@ namespace lagalt_back_end.Controllers
         /// <returns>Wether project exists or not.</returns>
         private bool ProjectExists(int id)
         {
-            return _context.Projects.Get(id) is not null;
+            return _repositories.Projects.Get(id) is not null;
         }
     }
 }

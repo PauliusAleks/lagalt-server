@@ -3,18 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lagalt_back_end.Models
 {
-    /// <summary>
-    /// Model for the User - Admin table
-    /// </summary>
-    [Table("Admin")]
-    public class Admin
+    public class Admin:User
     {
-        [Key]
-        [Required]
-        public int Id { get; set; }
-        [ForeignKey("UserId")]
-        public User AdminName { get; set; }
-        [ForeignKey("ProjectId")]
-        public Project Project { get; set; }
+        /// <summary>
+        /// Gets or sets the admin's project (the projects where the user is an administrator).
+        /// </summary>
+        /// <value>
+        /// The administrator's projects.
+        /// </value>
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

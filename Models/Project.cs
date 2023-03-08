@@ -2,10 +2,16 @@
 
 namespace lagalt_back_end.Models
 {
+    /// <summary>
+    /// Enum indicating the project's progress.
+    /// </summary>
     public enum ProgressState
     {
         Founding, InProgress, Stalled, Completed
     }
+    /// <summary>
+    /// Enum indicating which category a project belongs to.
+    /// </summary>
     public enum CategoryState
     {
         Music, Film, GameDevelopment, WebDevelopment
@@ -13,22 +19,22 @@ namespace lagalt_back_end.Models
     public class Project
     {
         /// <summary>
-        /// Gets or sets the identifier.
+        /// Gets or sets the project's identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
+        /// The project's identifier.
         /// </value>
         public int Id { get; set; }
         /// <summary>
-        /// Gets or sets the full name.
+        /// Gets or sets the project's name.
         /// </summary>
         /// <value>
-        /// The full name.
+        /// The project's name.
         /// </value>
         [MaxLength(50)]
         public string Name { get; set; }
         /// <summary>
-        /// Gets or sets the alias.
+        /// Gets or sets the project's category.
         /// </summary>
         /// <value>
         /// The alias.
@@ -36,27 +42,56 @@ namespace lagalt_back_end.Models
         [EnumDataType(typeof(CategoryState))]
         public CategoryState Category { get; set; }
         /// <summary>
-        /// Gets or sets the gender.
+        /// Gets or sets the project's progress.
         /// </summary>
         /// <value>
-        /// The gender.
+        /// The project's progress.
         /// </value>
         [EnumDataType(typeof(ProgressState))]
         public ProgressState Progress { get; set; }
         /// <summary>
-        /// Gets or sets the picture.
+        /// Gets or sets the project's description.
         /// </summary>
         /// <value>
-        /// The picture.
+        /// The project's description.
         /// </value>
         public string? Description { get; set; }
+        /// <summary>
+        /// Gets or sets the project's git URL.
+        /// </summary>
+        /// <value>
+        /// The git URL.
+        /// </value>
         [Url]
         public string? GitURL { get; set; }
-        public ICollection<Url>? ImageURL { get; set; }
-        public ICollection<Skill>? NeededSkills { get; set; }
-
-        public ICollection<Admin> Admins { get; set; }
-        public ICollection<Contributor> Contributors { get; set; }
+        /// <summary>
+        /// Gets or sets the project's image URL.
+        /// </summary>
+        /// <value>
+        /// The project's image URL.
+        /// </value>
+        public virtual ICollection<ImageUrl>? ImageURLs { get; set; }
+        /// <summary>
+        /// Gets or sets the project's needed skills.
+        /// </summary>
+        /// <value>
+        /// The project's needed skills.
+        /// </value>
+        public virtual ICollection<Skill>? NeededSkills { get; set; }
+        /// <summary>
+        /// Gets or sets the project's admins.
+        /// </summary>
+        /// <value>
+        /// The admins.
+        /// </value>
+        public virtual ICollection<Admin> Admins { get; set; }
+        /// <summary>
+        /// Gets or sets the project's contributors.
+        /// </summary>
+        /// <value>
+        /// The project's contributors.
+        /// </value>
+        public virtual ICollection<Contributor> Contributors { get; set; }
 
 
     }

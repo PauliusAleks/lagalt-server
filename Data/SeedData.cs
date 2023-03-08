@@ -10,7 +10,7 @@ namespace lagalt_back_end.Data
         /// <summary>
         /// The movies.
         /// </summary>
-        private static List<Project> _projects = new List<Project>
+        public static List<Project> ProjectSeed = new List<Project>
         {
                 new Project
                 {
@@ -69,7 +69,7 @@ namespace lagalt_back_end.Data
                 }
 
          };
-        private static List<User> Users = new List<User>
+        public static List<User> UserSeed = new List<User>
         {
             new User 
             {
@@ -118,34 +118,39 @@ namespace lagalt_back_end.Data
             },
         };
 
-        //private static List<Application> applications = new List<Application>
-        //{
-        //    new Application
-        //    {
-        //        User = new User();
-        //        Id = 1,
-                
-        //    },
-        //    new Application
-        //    {
-        //       User =  new User { Id=1 },
-        //       Project = new Project{ Id = 1},
-        //       State = State.Pending,
-        //       MotivationLetter = "Default Letter, out of words"
-        //    }
-        //};
-                 
-
-
-
-
-/// <summary>
-/// Gets the character seed data.
-/// </summary>
-/// <returns>The character seed data.</returns>
-public static List<Project> GetProjectSeedData()
+        private static List<Application> ApplicationSeed = new List<Application>
         {
-            return _projects;
+            new Application
+            {
+                User = new User(),
+                State = ApplicationState.Pending
+                
+            }
+        };
+
+        internal static Application[] GetApplicationSeedData()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static HistoricEvent[] GetHistoricEventSeedData()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static ImageUrl[] GetImageUrlSeedData()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static Skill[] GetSkillSeedData()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static User[] GetUserSeedData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

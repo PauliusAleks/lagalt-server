@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace lagalt_back_end.Repositories.Base
+namespace lagalt_web_api.Repositories.Interface
 {
     // Should be called IBaseRepository actually...
     public interface IRepository<T>

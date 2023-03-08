@@ -3,16 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lagalt_back_end.Models
 {
-    
-    [Table("Contributor")]
-    public class Contributor
+    public class Contributor:User
     {
-        [Key]
-        [Required]
-        public int Id { get; set; }
-        [ForeignKey("UserId")]
-        public User ContributorName { get; set; }
-        [ForeignKey("ProjectId")]
-        public Project Project { get; set; }
+        /// <summary>
+        /// Gets or sets the contributer's projects (or projects which a user has contributed to if you will).
+        /// </summary>
+        /// <value>
+        /// The contributer's projects.
+        /// </value>
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }
