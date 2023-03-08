@@ -15,7 +15,7 @@ using System.Net.Mime;
 namespace lagalt_back_end.Controllers
 {
     /// <summary>
-    /// Web API endpoint for Characters.
+    /// Web API endpoint for Projetcs.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
@@ -44,16 +44,16 @@ namespace lagalt_back_end.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Characters
+        // GET: api/Projetcs
         /// <summary>
-        /// Gets the characters.
+        /// Gets the projects.
         /// </summary>
         /// <returns></returns>
         [HttpGet] 
-        public ActionResult<IEnumerable<ProjectDTO>> GetCharacters()
+        public ActionResult<IEnumerable<ProjectDTO>> GetProject()
         {
             var projects = _context.Projects.GetAll();
-            var projectsDTO = projects.Select(character => _mapper.Map<ProjectDTO>(projects));
+            var projectsDTO = projects.Select(project => _mapper.Map<ProjectDTO>(projects));
             return projectsDTO.ToList();
         }
 
@@ -105,10 +105,10 @@ namespace lagalt_back_end.Controllers
         /// <summary>
         /// Posts the project.
         /// </summary>
-        /// <param name="project">The character.</param>
+        /// <param name="project">The project.</param>
         /// <returns>The ProjectDTO.</returns>
         [HttpPost] 
-        public ActionResult<ProjectDTO> PostCharacter(ProjectDTO project)
+        public ActionResult<ProjectDTO> PostProject(ProjectDTO project)
         {
             if (project is null)
             {

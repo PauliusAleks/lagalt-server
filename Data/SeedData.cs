@@ -20,8 +20,8 @@ namespace lagalt_back_end.Data
                     Progress = ProgressState.Founding,//In percentage
                     Description = "Joachim Rønning",
                     GitURL = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C6AB0EDCE8F41882EBBB782B76DD4F05D7E360D7C3F23B4F6D02C24699B26105/scale?width=1200&aspectRatio=1.78&format=jpeg",
-                    ImageURL = new List<string> {"https://www.youtube.com/watch?v=LkWQvzrv6gI" } ,
-                    NeededSkills = new List<string>{"Drawing","Programming","Hiking" }
+                    //ImageURL = new List<string> {"https://www.youtube.com/watch?v=LkWQvzrv6gI" } ,
+                    //NeededSkills = new List<string>{"Drawing","Programming","Hiking" }
                 },
                 new Project
                 {
@@ -31,8 +31,8 @@ namespace lagalt_back_end.Data
                     Progress = ProgressState.Founding,
                     Description = "Looking for a c# back-end developer",
                     GitURL = "https://gitlab.com/Frechr/assignment-three/-/tree/master/",
-                    ImageURL = new List<string>{"https://picsum.photos/200/300" },
-                    NeededSkills = new List<string>{"C#", ".NET", "SQL"}
+                    //ImageURL = new List<string>{"https://picsum.photos/200/300" },
+                    //NeededSkills = new List<string>{"C#", ".NET", "SQL"}
 
                 },
                  new Project
@@ -43,8 +43,8 @@ namespace lagalt_back_end.Data
                     Progress = ProgressState.InProgress,//In percentage
                     Description = "Web app to catch pokemons!",
                     GitURL = "https://gitlab.com/JarandNL/angular_pokemontrainer",
-                    ImageURL = new List<string> { "https://picsum.photos/200/350,https://picsum.photos/200/250" } ,
-                    NeededSkills = new List<string>{"TypeScript","Html","Tailwind CSS" }
+                    //ImageURL = new List<string> { "https://picsum.photos/200/350,https://picsum.photos/200/250" } ,
+                   //NeededSkills = new List<string>{"TypeScript","Html","Tailwind CSS" }
                 },
                  new Project
                 {
@@ -54,8 +54,8 @@ namespace lagalt_back_end.Data
                     Progress = ProgressState.Completed,//In percentage
                     Description = "Hot youth!!!!",
                     GitURL = "https://www.imdb.com/title/tt0475293/",
-                    ImageURL = new List<string> { "https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" } ,
-                    NeededSkills = new List<string>{"Singer","Actor","Dancer" }
+                    //ImageURL = new List<string> { "https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" } ,
+                    //NeededSkills = new List<string>{"Singer","Actor","Dancer" }
                 },
                  new Project
                 {
@@ -64,8 +64,8 @@ namespace lagalt_back_end.Data
                     Category = CategoryState.Music,
                     Progress = ProgressState.InProgress,//In percentage
                     Description = "Pls help make the best song ever",
-                    ImageURL = new List<string> { "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" } ,
-                    NeededSkills = new List<string>{"Singer", "Writer", "Composer" }
+                    //ImageURL = new List<string> { "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" } ,
+                    //NeededSkills = new List<string>{"Singer", "Writer", "Composer" }
                 }
 
          };
@@ -79,8 +79,8 @@ namespace lagalt_back_end.Data
                 LastName = "Adminson",
                 Email = "admin123@admin.no",
                 UserStatus = false,
-                Skills = new List<string>{"Singer","HTML","CSS","Dancer","Administration"},
-                MotivationLetter = "I am very good at being admin",
+                //Skills = new List<string>{"Singer","HTML","CSS","Dancer","Administration"},
+                //MotivationLetter = "I am very good at being admin",
             },
 
             new User
@@ -90,7 +90,7 @@ namespace lagalt_back_end.Data
                 FirstName = "Per",
                 LastName = "Polle",
                 Email = "PerPolle@sharkboy.no,",
-                Skills = new List<string>{"Actor", "Worker", "Dancer", "Singer"},
+                //Skills = new List<string>{"Actor", "Worker", "Dancer", "Singer"},
                 MotivationLetter = "I really need a job, I can do everything!",
                 UserStatus = true
             },
@@ -102,7 +102,7 @@ namespace lagalt_back_end.Data
                 LastName = "Userito",
                 Email = "testing123@Proper.no",
                 UserStatus = false,
-                Skills = new List<string>{"Singer","Running","TypeScript","Dancer","Gaming"},
+               // Skills = new List<string>{"Singer","Running","TypeScript","Dancer","Gaming"},
                 MotivationLetter = "I am working so hard, please add me.",
             },
             new User
@@ -113,7 +113,7 @@ namespace lagalt_back_end.Data
                 LastName = "Forr",
                 Email = "BobBobby@mail.no",
                 UserStatus = true,
-                Skills = new List<string>{"Writing","Sitting","Reading", "Comedian"},
+                //Skills = new List<string>{"Writing","Sitting","Reading", "Comedian"},
                 MotivationLetter = "Roses are red, violets are blue... ",
             },
         };

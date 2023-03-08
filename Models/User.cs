@@ -18,10 +18,11 @@ namespace lagalt_back_end.Models
         [Required]
         public bool UserStatus { get; set; }
         public string? MotivationLetter { get; set; }
-        public List<string>? Skills { get; set; }
-        public History? history { get; set; }
-        public ICollection<Project>? ProjectsWhereAdmin { get; set; }
-        public ICollection<Project>? ProjectsWhereMember { get; set; }
+        public ICollection<Skill>? Skills { get; set; }
+        [ForeignKey("HistoryId")]
+        public History History { get; set; }
+        public ICollection<Admin>? ProjectsWhereAdmin { get; set; }
+        public ICollection<Contributor>? ProjectsWhereContributor { get; set; }
         public ICollection<Application>? Applications { get; set; }
 
     }

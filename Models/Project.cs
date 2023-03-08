@@ -12,7 +12,6 @@ namespace lagalt_back_end.Models
     }
     public class Project
     {
-        public Project() { }
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -53,12 +52,11 @@ namespace lagalt_back_end.Models
         public string? Description { get; set; }
         [Url]
         public string? GitURL { get; set; }
-        [Url]
-        public List<string>? ImageURL { get; set; }
-        public List<string>? NeededSkills { get; set; }
+        public ICollection<Url>? ImageURL { get; set; }
+        public ICollection<Skill>? NeededSkills { get; set; }
 
-        ICollection<User> Admins { get; set; }
-        ICollection<User> Contributors { get; set; }
+        public ICollection<Admin> Admins { get; set; }
+        public ICollection<Contributor> Contributors { get; set; }
 
 
     }

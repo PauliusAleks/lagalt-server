@@ -16,6 +16,8 @@ namespace lagalt_back_end.Models
         public ICollection<Project>? ContributedProject { get; set; }
         public ICollection<Project>? ViewedProject { get; set; }
         public ICollection<Project>? AppliedToProject { get; set; }
+
+        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }
