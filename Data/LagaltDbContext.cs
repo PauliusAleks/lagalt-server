@@ -1,6 +1,5 @@
 ﻿using lagalt_back_end.Models;
 using lagalt_back_end.Repositories;
-using lagalt_back_end.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace lagalt_back_end.Data
@@ -23,14 +22,16 @@ namespace lagalt_back_end.Data
         public LagaltDbContext(DbContextOptions<LagaltDbContext> options) : base(options)
         {
         }
-	    public DbSet<History> HistoryModels { get; set; }
-        public DbSet<User> UserModels { get; set; }
+        public DbSet<History> History { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Application> Applications { get; set; }
-      
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<Url> Urls { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Project>().HasData(SeedData.GetProjectSeedData()); 
+            //modelBuilder.Entity<Project>().HasData(SeedData.GetProjectSeedData()); 
         }
     }
 }

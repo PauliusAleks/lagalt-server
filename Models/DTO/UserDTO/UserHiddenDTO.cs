@@ -19,7 +19,7 @@ namespace lagalt_back_end.Models.DTO
         /// <value>
         /// The alias.
         /// </value>
-        [MaxLength(50)]
+        //[MaxLength(50)]
 
 
     }
