@@ -1,6 +1,5 @@
-﻿using lagalt_back_end.Models.DTO;
-using AutoMapper;
-using lagalt_back_end.Models;
+﻿using lagalt_web_api.Models.DTO.ProjectDTO;
+using AutoMapper; 
 
 namespace lagalt_web_api.Models.DTO.Profiles
 {
@@ -8,7 +7,7 @@ namespace lagalt_web_api.Models.DTO.Profiles
     {
         public ProjectProfile()
         {
-            CreateMap<Project, ProjectDTO>();
+            CreateMap<Project, ProjectBannerDTO>();
         }
     }
 }

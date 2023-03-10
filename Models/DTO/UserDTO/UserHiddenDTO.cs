@@ -1,7 +1,7 @@
-﻿using lagalt_back_end.Models;
+﻿using lagalt_web_api.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace lagalt_back_end.Models.DTO
+namespace lagalt_web_api.Models.DTO.UserDTO
 {
     public class UserHiddenDTO
     {
@@ -12,7 +12,7 @@ namespace lagalt_back_end.Models.DTO
         /// The full name.
         /// </value>
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string Username { get; set; }
         /// <summary>
         /// Gets or sets the alias.
         /// </summary>

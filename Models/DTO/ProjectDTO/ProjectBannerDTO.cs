@@ -1,9 +1,9 @@
-﻿using lagalt_back_end.Models;
+﻿using lagalt_web_api.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace lagalt_back_end.Models.DTO
+namespace lagalt_web_api.Models.DTO.ProjectDTO
 {
-    public class ProjectDTO
+    public class ProjectBannerDTO
     {
         /// <summary>
         /// Gets or sets the full name.
@@ -34,6 +34,6 @@ namespace lagalt_back_end.Models.DTO
         /// <value>
         /// The picture.
         /// </value>
-        public List<string>? NeededSkills { get; set; }
+        public List<int>? NeededSkillsId { get; set; }
     }
 }

@@ -1,10 +1,11 @@
  using System.Text.Json.Serialization;
-using lagalt_back_end.Repositories;
+using lagalt_web_api.Repositories;
 using lagalt_web_api.Repositories.Interface;
-using lagalt_back_end.Repositories.Base;
+using lagalt_web_api.Repositories.Database;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using System.Net; 
+using System.Net;
+using lagalt_web_api.Data;
 
 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -12,6 +13,8 @@ ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
 var builder = WebApplication.CreateBuilder(args);
 var Configuration = builder.Configuration;
+
+builder.Services.AddDbContext<LagaltDbContext>();
 
 builder.Services.AddSingleton(Configuration);
 
@@ -39,6 +42,7 @@ builder.Services.AddControllers().
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
         Title = "Lagalt API",

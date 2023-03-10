@@ -1,17 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace lagalt_back_end.Models
+namespace lagalt_web_api.Models;
+
+public class Contributor:User
 {
-    public class Contributor:User
-    {
-        public int Id { get; set; }
-        /// <summary>
-        /// Gets or sets the contributer's projects (or projects which a user has contributed to if you will).
-        /// </summary>
-        /// <value>
-        /// The contributer's projects.
-        /// </value>
-        public virtual ICollection<Project> Projects { get; set; }
-    }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    /// <summary>
+    /// Gets or sets the contributer's projects (or projects which a user has contributed to if you will).
+    /// </summary>
+    /// <value>
+    /// The contributer's projects.
+    /// </value
+    [ForeignKey("ProjectId")]
+    public virtual ICollection<Project> Projects { get; set; }
 }

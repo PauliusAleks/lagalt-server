@@ -1,6 +1,12 @@
-﻿namespace lagalt_back_end.DataTransferObjects.UserDTO
+﻿using lagalt_web_api.Models;
+
+namespace lagalt_web_api.Models.DTO.UserDTO
 {
     public class UserReadDTO
     {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public List<int>? SkillIds { get; set; }
     }
 }

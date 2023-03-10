@@ -1,6 +1,6 @@
 ﻿using lagalt_web_api.Repositories.Interface;
 
-namespace lagalt_back_end.Repositories
+namespace lagalt_web_api.Repositories
 {
 
     public interface IRepositories 

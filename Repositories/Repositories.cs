@@ -1,9 +1,9 @@
-﻿using lagalt_back_end.Data;
-using lagalt_back_end.Repositories.Base;
+﻿using lagalt_web_api.Data;
+using lagalt_web_api.Repositories.Database;
 using lagalt_web_api.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace lagalt_back_end.Repositories
+namespace lagalt_web_api.Repositories
 {
     /// <summary>
     /// The main access point to the repositories, if we want to add more repositories this makes it easier.

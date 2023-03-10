@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc; 
+﻿using Microsoft.AspNetCore.Mvc;
 using lagalt_web_api.Models;
 using AutoMapper;
-using lagalt_web_api.Repositories; 
-using lagalt_web_api.Models.DTO.ProjectDTO;
+using lagalt_web_api.Repositories;
+using lagalt_web_api.Models.DTO.UserDTO;
 
 namespace lagalt_web_api.Controllers
 {
@@ -10,7 +10,7 @@ namespace lagalt_web_api.Controllers
     [ApiController]
     [Produces("Application/json")]
     [Consumes("Application/json")]
-    public class ProjectsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         /// <summary>
         /// The context
@@ -26,103 +26,103 @@ namespace lagalt_web_api.Controllers
         /// <param name="repositories">The context.</param>
         /// <param name="mapper">The mapper.</param>
 
-        public ProjectsController(IRepositories repositories, IMapper mapper)
+        public UsersController(IRepositories repositories, IMapper mapper)
         {
             _repositories = repositories;
             _mapper = mapper;
         }
 
-        // GET: api/Projects
+        // GET: api/Users
         /// <summary>
-        /// Gets the projects.
+        /// Gets the users.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjects()
+        public ActionResult<IEnumerable<UserReadDTO>> GetUsers()
         {
-            var projects = _repositories.Projects.GetAll();
-            var projectsDTO = projects.Select(project => _mapper.Map<ProjectBannerDTO>(projects));
-            return Ok(projects);
+            var users = _repositories.Users.GetAll();
+            var usersDTO = users.Select(user => _mapper.Map<UserReadDTO>(users));
+            return Ok(users);
         }
 
 
-        // GET: api/projects/5
+        // GET: api/users/5
         /// <summary>
-        /// Gets the project.
+        /// Gets the user.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>An ProjectBannerDTO.</returns>
+        /// <returns>An UserReadDTO.</returns>
         [HttpGet("{id}")]
-        public ActionResult<ProjectBannerDTO> GetProject(int id)
+        public ActionResult<UserReadDTO> GetUser(int id)
         {
-            var project = _repositories.Projects.Get(id);
+            var user = _repositories.Users.Get(id);
 
-            if (project is null)
+            if (user is null)
             {
                 return NotFound();
             }
 
-            return _mapper.Map<ProjectBannerDTO>(project);
+            return _mapper.Map<UserReadDTO>(user);
         }
 
-        // PUT: api/Projects/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Puts the project.
+        /// Puts the user.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="project">The project.</param>
+        /// <param name="user">The user.</param>
         /// <returns>Action result.</returns>
         [HttpPut("{id}")]
-        public IActionResult PutProject(int id, ProjectCreateDTO project)
+        public IActionResult PutUser(int id, UserCreateDTO user)
         {
-            if (!ProjectExists(id))
+            if (!UserExists(id))
             {
                 return NotFound();
             }
-            if (project is null)
+            if (user is null)
             {
                 return BadRequest();
             }
-            _repositories.Projects.Update(_mapper.Map<Project>(project));
+            _repositories.Users.Update(_mapper.Map<User>(user));
 
             return NoContent();
         }
 
-        // POST: api/projects
+        // POST: api/users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Posts the projects.
+        /// Posts the users.
         /// </summary>
-        /// <param name="project">The project.</param>
-        /// <returns>The ProjectCreateDTO.</returns>
+        /// <param name="user">The user.</param>
+        /// <returns>The UserCreateDTO.</returns>
         [HttpPost]
-        public ActionResult<ProjectCreateDTO> PostProject(ProjectCreateDTO project)
+        public ActionResult<UserCreateDTO> PostUser(UserCreateDTO user)
         {
-            if (project is null)
+            if (user is null)
             {
-                return BadRequest("project is null.");
+                return BadRequest("user is null.");
             }
-            _repositories.Projects.Create(_mapper.Map<Project>(project));
+            _repositories.Users.Create(_mapper.Map<User>(user));
 
-            return CreatedAtAction("GetProject", project);
+            return CreatedAtAction("GetUser", user);
         }
 
-        // DELETE: api/projects/5
+        // DELETE: api/users/5
         /// <summary>
-        /// Deletes the project.
+        /// Deletes the user.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>The action result.</returns>
         [HttpDelete("{id}")]
-        public IActionResult DeleteProject(int id)
+        public IActionResult DeleteUser(int id)
         {
-            var projects = _repositories.Projects.Get(id);
-            if (!ProjectExists(id))
+            var users = _repositories.Users.Get(id);
+            if (!UserExists(id))
             {
                 return NotFound();
             }
-            _repositories.Projects.Delete(projects);
+            _repositories.Users.Delete(users);
             return NoContent();
         }
 
@@ -131,9 +131,9 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Wether project exists or not.</returns>
-        private bool ProjectExists(int id)
+        private bool UserExists(int id)
         {
-            return _repositories.Projects.Get(id) is not null;
+            return _repositories.Users.Get(id) is not null;
         }
     }
 }

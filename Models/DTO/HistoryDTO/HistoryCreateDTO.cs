@@ -1,6 +1,5 @@
-﻿namespace lagalt_back_end.DataTransferObjects.HistoryDTO
+﻿namespace lagalt_web_api.Models.DTO.HistoryDTO;
+
+public class HistoryCreateDTO
 {
-    public class HistoryCreateDTO
-    {
-    }
 }

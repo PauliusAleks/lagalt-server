@@ -1,9 +1,9 @@
-﻿using lagalt_back_end.Models;
+﻿using lagalt_web_api.Models;
 
-namespace lagalt_back_end.Data
+namespace lagalt_web_api.Data
 {
     /// <summary>
-    /// Data seeded for testing purposes
+    /// Seeding data for testing purposes
     /// </summary>
     public class SeedData
     {
@@ -11,10 +11,8 @@ namespace lagalt_back_end.Data
         /// The projects.
         /// </summary>
         /// 
-        public static List<Project> getProjects()
+        public static List<Project> Projects => new List<Project>
         {
-            List<Project> projects = new List<Project>
-            {
                 new Project
                 {
                     Id = 1,
@@ -22,9 +20,7 @@ namespace lagalt_back_end.Data
                     Category = CategoryState.WebDevelopment,
                     Progress = ProgressState.Founding,//In percentage
                     Description = "Joachim Rønning",
-                    GitURL = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C6AB0EDCE8F41882EBBB782B76DD4F05D7E360D7C3F23B4F6D02C24699B26105/scale?width=1200&aspectRatio=1.78&format=jpeg",
-                    //ImageURL = new List<string> {"https://www.youtube.com/watch?v=LkWQvzrv6gI" } ,
-                    //NeededSkills = new List<string>{"Drawing","Programming","Hiking" }
+                    GitURL = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C6AB0EDCE8F41882EBBB782B76DD4F05D7E360D7C3F23B4F6D02C24699B26105/scale?width=1200&aspectRatio=1.78&format=jpeg"
                 },
                 new Project
                 {
@@ -33,9 +29,7 @@ namespace lagalt_back_end.Data
                     Category = CategoryState.WebDevelopment,
                     Progress = ProgressState.Founding,
                     Description = "Looking for a c# back-end developer",
-                    GitURL = "https://gitlab.com/Frechr/assignment-three/-/tree/master/",
-                    //ImageURL = new List<string>{"https://picsum.photos/200/300" },
-                    //NeededSkills = new List<string>{"C#", ".NET", "SQL"}
+                    GitURL = "https://gitlab.com/Frechr/assignment-three/-/tree/master/"
 
                 },
                  new Project
@@ -45,9 +39,7 @@ namespace lagalt_back_end.Data
                     Category = CategoryState.WebDevelopment,
                     Progress = ProgressState.InProgress,//In percentage
                     Description = "Web app to catch pokemons!",
-                    GitURL = "https://gitlab.com/JarandNL/angular_pokemontrainer",
-                    //ImageURL = new List<string> { "https://picsum.photos/200/350,https://picsum.photos/200/250" } ,
-                   //NeededSkills = new List<string>{"TypeScript","Html","Tailwind CSS" }
+                    GitURL = "https://gitlab.com/JarandNL/angular_pokemontrainer"
                 },
                  new Project
                 {
@@ -57,8 +49,6 @@ namespace lagalt_back_end.Data
                     Progress = ProgressState.Completed,//In percentage
                     Description = "Hot youth!!!!",
                     GitURL = "https://www.imdb.com/title/tt0475293/",
-                    //ImageURL = new List<string> { "https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" } ,
-                    //NeededSkills = new List<string>{"Singer","Actor","Dancer" }
                 },
                  new Project
                 {
@@ -67,89 +57,114 @@ namespace lagalt_back_end.Data
                     Category = CategoryState.Music,
                     Progress = ProgressState.InProgress,//In percentage
                     Description = "Pls help make the best song ever",
-                    //ImageURL = new List<string> { "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" } ,
-                    //NeededSkills = new List<string>{"Singer", "Writer", "Composer" }
                 }
             };
-            return projects;
-        }
+
 
         /// <summary>
         /// The users
         /// </summary>
-        public static List<User> UserSeed = new List<User>
+        public static List<User> Users =>
+            new List<User>
+            {
+                new User
+                {
+                    Id = 1,
+                    Username = "adminBoy",
+                    FirstName = "Admin",
+                    LastName = "Adminson",
+                    Email = "admin123@admin.no",
+                    UserStatus = false, 
+                },
+
+                new User
+                {
+                    Id = 2,
+                    Username = "sharkboy05",
+                    FirstName = "Per",
+                    LastName = "Polle",
+                    Email = "PerPolle@sharkboy.no,",
+                    UserStatus = true,
+               
+                },
+                new User
+                {
+                    Id = 3,
+                    Username = "ProperUser",
+                    FirstName = "Proper",
+                    LastName = "Userito",
+                    Email = "testing123@Proper.no",
+                    UserStatus = false, 
+                },
+                new User
+                {
+                    Id = 4,
+                    Username = "StrangerHere",
+                    FirstName = "Bob",
+                    LastName = "Forr",
+                    Email = "BobBobby@mail.no",
+                    UserStatus = true, 
+                },
+            };
+
+
+        public static List<ImageUrl> ImageURLs => new List<ImageUrl>
         {
-            new User
-            {
-                Id = 1,
-                Username = "adminBoy",
-                FirstName = "Admin",
-                LastName = "Adminson",
-                Email = "admin123@admin.no",
-                UserStatus = false,
-                //Skills = new List<string>{"Singer","HTML","CSS","Dancer","Administration"},
-                //MotivationLetter = "I am very good at being admin",
-            },
+                 new ImageUrl {Id=5,  Url="https://www.youtube.com/watch?v=LkWQvzrv6gI" },
+                 new ImageUrl {Id=4, Url="https://picsum.photos/200/300" },
+                 new ImageUrl {Id=3, Url="https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" },
+                 new ImageUrl {Id=2, Url="https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" },
+                 new ImageUrl {Id=1,  Url="https://picsum.photos/200/350,https://picsum.photos/200/250" }
+         };
 
-            new User
-            {
-                Id = 2,
-                Username = "sharkboy05",
-                FirstName = "Per",
-                LastName = "Polle",
-                Email = "PerPolle@sharkboy.no,",
-                //Skills = new List<string>{"Actor", "Worker", "Dancer", "Singer"},
-                MotivationLetter = "I really need a job, I can do everything!",
-                UserStatus = true
-            },
-            new User
-            {
-                Id = 3,
-                Username = "ProperUser",
-                FirstName = "Proper",
-                LastName = "Userito",
-                Email = "testing123@Proper.no",
-                UserStatus = false,
-               // Skills = new List<string>{"Singer","Running","TypeScript","Dancer","Gaming"},
-                MotivationLetter = "I am working so hard, please add me.",
-            },
-            new User
-            {
-                Id = 4,
-                Username = "StrangerHere",
-                FirstName = "Bob",
-                LastName = "Forr",
-                Email = "BobBobby@mail.no",
-                UserStatus = true,
-                //Skills = new List<string>{"Writing","Sitting","Reading", "Comedian"},
-                MotivationLetter = "Roses are red, violets are blue... ",
-            },
-        };
 
-        private static List<Application> ApplicationSeed = new List<Application>
+        public static List<Skill> Skills => new List<Skill>
+            {
+                new Skill{ Id=1, Name="Java"},
+                new Skill{ Id=2, Name="C#"},
+                new Skill{ Id=3, Name="Photoshop"},
+                new Skill{ Id=4, Name="Sony Vegas"},
+                new Skill{ Id=5, Name="Fruity Loops Studio"}
+            };
+        /*
+        public static void Admins(Modelbuilder modelBuilder)
         {
-            new Application
+            modelBuilder.UsingEntity(j => j
+                .ToTable("UserTechnology")
+                .HasData(new[]
+                    {
+                        { UsersID = 1, TechnologiesID = 1 },
+                        { UsersID = 1, TechnologiesID = 2 }
+                    }
+                ));
+        }
+        */
+
+
+        private static List<Application> Applications => new List<Application>
             {
+                new Application
+                {
 
-            }
-        };
+                }
+            };
 
-        internal static Application[] GetApplicationSeedData()
+        internal static Application[] ApplicationSeedData()
         {
             throw new NotImplementedException();
         }
 
-        internal static ImageUrl[] GetImageUrlSeedData()
+        internal static ImageUrl[] ImageUrlSeedData()
         {
             throw new NotImplementedException();
         }
 
-        internal static Skill[] GetSkillSeedData()
+        internal static Skill[] SkillSeedData()
         {
             throw new NotImplementedException();
         }
 
-        internal static User[] GetUserSeedData()
+        internal static User[] UserSeedData()
         {
             throw new NotImplementedException();
         }

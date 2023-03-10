@@ -1,9 +1,7 @@
-﻿using lagalt_back_end.Data;
-using lagalt_back_end.Models;
+﻿using lagalt_web_api.Models;
 using lagalt_web_api.Repositories.Interface;
-using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace lagalt_back_end.Repositories.Base
+namespace lagalt_web_api.Repositories.Database
 {
     public class DbUserRepository : DbRepository<User>, IUserRepository    {
         public DbUserRepository(IConfiguration config) : base(config)
