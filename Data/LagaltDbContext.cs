@@ -1,5 +1,6 @@
 ﻿using lagalt_back_end.Models;
-using lagalt_back_end.Repositories; 
+using lagalt_back_end.Repositories;
+using lagalt_web_api.Models.History;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -28,12 +29,14 @@ namespace lagalt_back_end.Data
         { 
             Configuration= config;
         }
-        public DbSet<HistoricEvent> HistoricEvents { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Application> Applications { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<ImageUrl> ImageUrls { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Contributor> Contributors { get; set; }
+        public DbSet<Record> Records { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

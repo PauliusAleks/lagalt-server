@@ -1,4 +1,4 @@
-﻿namespace lagalt_back_end.Profiles
+﻿namespace lagalt_web_api.Models.DTO.Profiles
 {
     public class ApplicationProfile
     {

@@ -3,15 +3,18 @@
 namespace lagalt_back_end.Data
 {
     /// <summary>
-    /// 
+    /// Data seeded for testing purposes
     /// </summary>
     public class SeedData
     {
         /// <summary>
-        /// The movies.
+        /// The projects.
         /// </summary>
-        public static List<Project> ProjectSeed = new List<Project>
+        /// 
+        public static List<Project> getProjects()
         {
+            List<Project> projects = new List<Project>
+            {
                 new Project
                 {
                     Id = 1,
@@ -67,11 +70,16 @@ namespace lagalt_back_end.Data
                     //ImageURL = new List<string> { "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" } ,
                     //NeededSkills = new List<string>{"Singer", "Writer", "Composer" }
                 }
+            };
+            return projects;
+        }
 
-         };
+        /// <summary>
+        /// The users
+        /// </summary>
         public static List<User> UserSeed = new List<User>
         {
-            new User 
+            new User
             {
                 Id = 1,
                 Username = "adminBoy",
@@ -122,18 +130,11 @@ namespace lagalt_back_end.Data
         {
             new Application
             {
-                User = new User(),
-                State = ApplicationState.Pending
-                
+
             }
         };
 
         internal static Application[] GetApplicationSeedData()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static HistoricEvent[] GetHistoricEventSeedData()
         {
             throw new NotImplementedException();
         }

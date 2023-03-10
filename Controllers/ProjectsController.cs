@@ -55,8 +55,33 @@ namespace lagalt_back_end.Controllers
         {
             var projects = _repositories.Projects.GetAll();
             var projectsDTO = projects.Select(project => _mapper.Map<ProjectDTO>(projects));
+
             return projectsDTO.ToList();
-        }
+        }        
+        
+        delegate ActionResult<string> ActionResultDelegate(string str);
+        //// TEST FOR SKILLS API
+        ///// <summary>
+        ///// Gets the projects.
+        ///// </summary>
+        ///// <returns></returns>
+        //[HttpGet("/skills")] 
+        //public async Task<ActionResult<string>> GetSkills(IHttpClientFactory httpClientFactory)
+        //{
+        //    const string SKILLS_URL = "http://api.dataatwork.org/v1/skills?offset=0&limit=20";
+        //    using (var httpClient = httpClientFactory.CreateClient()) {
+        //        var response = await httpClient.GetAsync(SKILLS_URL);
+        //        ActionResult resultDelegate = null; 
+        //        try {
+        //            var responseMsg = response.EnsureSuccessStatusCode();
+        //            resultDelegate = new ActionResultDelegate(Ok);
+        //        }
+        //        catch (Exception error) {
+        //            result = NotFound;
+        //        }
+        //        result(SKILLS_URL);
+        //    };
+        //}
 
         // GET: api/projects/5
         /// <summary>

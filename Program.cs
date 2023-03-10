@@ -20,8 +20,7 @@ builder.Services.AddMvc().AddJsonOptions(options => {
 
 
 builder.Services.AddScoped<IProjectRepository, DbProjectRepository>();
-builder.Services.AddScoped<IUserRepository, DbUserRepository>();
-builder.Services.AddScoped<IHistoricEventRepository, DbHistoricEventRepository>();
+builder.Services.AddScoped<IUserRepository, DbUserRepository>(); 
 builder.Services.AddScoped<IApplicationRepository, DbApplicationRepository>();
 builder.Services.AddScoped<ISkillRepository, DbSkillRepository>();
 builder.Services.AddScoped<IImageURLRepository, DbImageURLRepository>();
@@ -30,6 +29,8 @@ builder.Services.AddScoped<IContributorRepository, DbContributorRepository>();
 
 // Use this for accessing data
 builder.Services.AddScoped<IRepositories, Repositories>();
+
+builder.Services.AddHttpClient();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddControllers().

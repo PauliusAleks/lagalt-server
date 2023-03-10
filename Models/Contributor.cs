@@ -5,6 +5,7 @@ namespace lagalt_back_end.Models
 {
     public class Contributor:User
     {
+        public int Id { get; set; }
         /// <summary>
         /// Gets or sets the contributer's projects (or projects which a user has contributed to if you will).
         /// </summary>

@@ -7,7 +7,6 @@ namespace lagalt_back_end.Repositories
     {
         IProjectRepository Projects { get; }
         IUserRepository Users { get; }
-        IHistoricEventRepository History { get; }
         IApplicationRepository Applications { get; }
         ISkillRepository Skills { get; }
         IImageURLRepository ImageURLs { get; }

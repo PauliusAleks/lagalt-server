@@ -5,6 +5,7 @@ namespace lagalt_back_end.Models
 {
     public class Admin:User
     {
+        public int Id { get; set; }
         /// <summary>
         /// Gets or sets the admin's project (the projects where the user is an administrator).
         /// </summary>

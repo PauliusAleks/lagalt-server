@@ -13,7 +13,6 @@ namespace lagalt_back_end.Repositories
     {
         private IProjectRepository _projectRepository;
         private IUserRepository _userRepository;
-        private IHistoricEventRepository _historicEventRepository;
         private IApplicationRepository _applicationRepository;
         private ISkillRepository _skillRepository;
         private IImageURLRepository _imageURLRepository;
@@ -28,7 +27,6 @@ namespace lagalt_back_end.Repositories
         /// <exception cref="System.ArgumentNullException">Failed to initialize LagaltDbContext.</exception>
         public Repositories(IProjectRepository projectRepository,
                                    IUserRepository userRepository,
-                                   IHistoricEventRepository historicEventRepository,
                                    IApplicationRepository applicationRepository,
                                    ISkillRepository skillRepository,
                                    IImageURLRepository imageURLRepository,
@@ -37,7 +35,6 @@ namespace lagalt_back_end.Repositories
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
-            _historicEventRepository = historicEventRepository;
             _applicationRepository = applicationRepository;
             _skillRepository = skillRepository;
             _imageURLRepository = imageURLRepository;
@@ -48,8 +45,6 @@ namespace lagalt_back_end.Repositories
         public IProjectRepository Projects => _projectRepository;
 
         public IUserRepository Users => _userRepository;
-
-        public IHistoricEventRepository History => _historicEventRepository;
 
         public IApplicationRepository Applications => _applicationRepository;
 

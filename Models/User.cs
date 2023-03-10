@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using lagalt_web_api.Models.History;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lagalt_back_end.Models
@@ -18,7 +19,8 @@ namespace lagalt_back_end.Models
         public bool UserStatus { get; set; }
         public string? MotivationLetter { get; set; }
         public virtual ICollection<Skill>? Skills { get; set; }
-        public virtual ICollection<Application>? Applications { get; set; }
-        public virtual ICollection<HistoricEvent> HistoricEvents { get; set; } 
+        public virtual ICollection<Application>? Applications { get; set; } 
+
+        public virtual Record Record { get; set; }
     }
 }
