@@ -10,6 +10,5 @@ public class ImageUrl
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public string Url { get; set; }
-    [ForeignKey("ProjectId")]
-    public virtual ICollection<Project> Projects { get; set; }
+    public virtual ICollection<Project>? Projects { get; set; }
 }

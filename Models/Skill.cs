@@ -10,12 +10,6 @@ public class Skill
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public string Name { get; set; }
-    
-    //public int ProjectId { get; set; }
-    //[ForeignKey("ProjectId")]
     public virtual ICollection<Project>? Projects { get; set; }
-
-    //public int UserId { get; set; }
-    //[ForeignKey("UserId")]
     public virtual ICollection<User>? Users { get; set; }
 }
