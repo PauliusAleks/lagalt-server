@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\DTO\ProjectDTO\ProjectReadDTO.cs" />
     <Compile Remove="Models\DTO\UserDTO\UserAnonymousDTO.cs" />
   </ItemGroup>
 

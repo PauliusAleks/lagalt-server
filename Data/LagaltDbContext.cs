@@ -1,7 +1,7 @@
 ﻿using lagalt_web_api.Models;
 using lagalt_web_api.Data;
 using lagalt_web_api.Models.History;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;  
 
 namespace lagalt_web_api.Data
 {
@@ -48,11 +48,10 @@ namespace lagalt_web_api.Data
             modelBuilder.Entity<Project>().HasData(SeedData.Projects);
             modelBuilder.Entity<User>().HasData(SeedData.Users);
             modelBuilder.Entity<Skill>().HasData(SeedData.Skills);
-            modelBuilder.Entity<Application>().HasData(SeedData.Applications);
             //modelBuilder.Entity<HistoricEvent>().HasData(SeedData.GetHistoricEventSeedData()); 
+            //modelBuilder.Entity<Application>().HasData(SeedData.GetApplicationSeedData()); 
+            //modelBuilder.Entity<Skill>().HasData(SeedData.GetSkillSeedData()); 
 
-
-            // Seeding NeededSkills to Project
             modelBuilder.Entity<Skill>()
            .HasMany(sk => sk.Projects)
            .WithMany(p => p.NeededSkills)
@@ -72,9 +71,7 @@ namespace lagalt_web_api.Data
                        new { SkillId = 4, ProjectId = 3 }
                    );
                });
-
-            // Seeding Skills to User
-
+            
             modelBuilder.Entity<Skill>()
             .HasMany(sk => sk.Users)
             .WithMany(u => u.Skills)
@@ -94,71 +91,7 @@ namespace lagalt_web_api.Data
                        new { SkillId = 4, UserId = 3 }
                    );
                });
-
-            //Seeding ImgURLs to Projects
-
-            modelBuilder.Entity<ImageUrl>()
-           .HasMany(img => img.Projects)
-           .WithMany(p => p.ImageURLs)
-           .UsingEntity<Dictionary<string, object>>(
-               "ImageUrlProject",
-               r => r.HasOne<Project>().WithMany().HasForeignKey("ProjectId"),
-               l => l.HasOne<ImageUrl>().WithMany().HasForeignKey("ImageUrlsId"),
-               je =>
-               {
-                   je.HasKey("ImageUrlsId", "ProjectId");
-                   je.HasData(
-                       new { ImageUrlsId = 5, ProjectId = 1 },
-                       new { ImageUrlsId = 1, ProjectId = 2 },
-                       new { ImageUrlsId = 1, ProjectId = 5 },
-                       new { ImageUrlsId = 2, ProjectId = 2 },
-                       new { ImageUrlsId = 3, ProjectId = 3 },
-                       new { ImageUrlsId = 4, ProjectId = 3 }
-                   );
-               });
-
-            modelBuilder.Entity<Admin>()
-           .HasMany(ad => ad.Projects)
-           .WithMany(pr => pr.Admins)
-           .UsingEntity<Dictionary<string, object>>(
-               "AdminProject",
-               r => r.HasOne<Project>().WithMany().HasForeignKey("ProjectId"),
-               l => l.HasOne<Admin>().WithMany().HasForeignKey("AdminId"),
-               je =>
-               {
-                   je.HasKey("AdminId", "ProjectId");
-                   je.HasData(
-                       new { AdminId = 1, ProjectId = 1 },
-                       new { AdminId = 2, ProjectId = 2 },
-                       new { AdminId = 3, ProjectId = 3 },
-                       new { AdminId = 4, ProjectId = 4 },
-                       new { AdminId = 5, ProjectId = 4 },
-                       new { AdminId = 5, ProjectId = 5 }
-                   );
-               });
-
-            // Seeding data for Contributors
-            modelBuilder.Entity<Contributor>()
-           .HasMany(co => co.Projects)
-           .WithMany(pr => pr.Contributors)
-           .UsingEntity<Dictionary<string, object>>(
-               "ContributorProject",
-               r => r.HasOne<Project>().WithMany().HasForeignKey("ProjectId"),
-               l => l.HasOne<Contributor>().WithMany().HasForeignKey("ContributorId"),
-               je =>
-               {
-                   je.HasKey("ContributorId", "ProjectId");
-                   je.HasData(
-                       new { ContributorId = 5, ProjectId = 1 },
-                       new { ContributorId = 2, ProjectId = 1 },
-                       new { ContributorId = 1, ProjectId = 2 },
-                       new { ContributorId = 2, ProjectId = 3 },
-                       new { ContributorId = 3, ProjectId = 4 },
-                       new { ContributorId = 4, ProjectId = 5 }
-                   );
-               });
-
-
+            
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

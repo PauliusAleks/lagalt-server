@@ -12,8 +12,8 @@
         public ProgressState Progress { get; set; }
         public string? GitURL { get; set; }
         public virtual List<int> ContributorsIds { get; set; }
-        public virtual List<string>? ImageUrls { get; set; }
-        public virtual List<string>? NeededSkillsName { get; set; }
+        public virtual List<int>? ImageUrlIds { get; set; }
+        public virtual List<int>? NeededSkillIds { get; set; }
 
     }
 }

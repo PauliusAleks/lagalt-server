@@ -11,7 +11,7 @@ namespace lagalt_web_api.Models.DTO.Profiles
             CreateMap<User, UserReadDTO>()
                 .ReverseMap();
 
-        /*
+        /* 
          * CreateMap<Movie, MovieReadDTO>()
             .ForMember(mvDTO => mvDTO.CharacterIds, opt => opt // maps from List with Character objects to an array with Character PKs.
             .MapFrom(mv => mv.Characters.Select(ch => ch.Id).ToArray()));

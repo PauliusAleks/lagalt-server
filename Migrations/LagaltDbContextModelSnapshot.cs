@@ -23,143 +23,47 @@ namespace lagalt_web_api.Migrations
 
             modelBuilder.Entity("AdminProject", b =>
                 {
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
-                    b.HasKey("AdminId", "ProjectId");
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ProjectId");
+                    b.HasKey("ProjectId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
 
                     b.ToTable("AdminProject");
-
-                    b.HasData(
-                        new
-                        {
-                            AdminId = 1,
-                            ProjectId = 1
-                        },
-                        new
-                        {
-                            AdminId = 2,
-                            ProjectId = 2
-                        },
-                        new
-                        {
-                            AdminId = 3,
-                            ProjectId = 3
-                        },
-                        new
-                        {
-                            AdminId = 4,
-                            ProjectId = 4
-                        },
-                        new
-                        {
-                            AdminId = 5,
-                            ProjectId = 4
-                        },
-                        new
-                        {
-                            AdminId = 5,
-                            ProjectId = 5
-                        });
                 });
 
             modelBuilder.Entity("ContributorProject", b =>
                 {
-                    b.Property<int>("ContributorId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
-                    b.HasKey("ContributorId", "ProjectId");
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ProjectId");
+                    b.HasKey("ProjectId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
 
                     b.ToTable("ContributorProject");
-
-                    b.HasData(
-                        new
-                        {
-                            ContributorId = 5,
-                            ProjectId = 1
-                        },
-                        new
-                        {
-                            ContributorId = 2,
-                            ProjectId = 1
-                        },
-                        new
-                        {
-                            ContributorId = 1,
-                            ProjectId = 2
-                        },
-                        new
-                        {
-                            ContributorId = 2,
-                            ProjectId = 3
-                        },
-                        new
-                        {
-                            ContributorId = 3,
-                            ProjectId = 4
-                        },
-                        new
-                        {
-                            ContributorId = 4,
-                            ProjectId = 5
-                        });
                 });
 
             modelBuilder.Entity("ImageUrlProject", b =>
                 {
-                    b.Property<int>("ImageUrlsId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
-                    b.HasKey("ImageUrlsId", "ProjectId");
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ProjectId");
+                    b.HasKey("ProjectId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
 
                     b.ToTable("ImageUrlProject");
-
-                    b.HasData(
-                        new
-                        {
-                            ImageUrlsId = 5,
-                            ProjectId = 1
-                        },
-                        new
-                        {
-                            ImageUrlsId = 1,
-                            ProjectId = 2
-                        },
-                        new
-                        {
-                            ImageUrlsId = 1,
-                            ProjectId = 5
-                        },
-                        new
-                        {
-                            ImageUrlsId = 2,
-                            ProjectId = 2
-                        },
-                        new
-                        {
-                            ImageUrlsId = 3,
-                            ProjectId = 3
-                        },
-                        new
-                        {
-                            ImageUrlsId = 4,
-                            ProjectId = 3
-                        });
                 });
 
             modelBuilder.Entity("lagalt_web_api.Models.Application", b =>
@@ -190,48 +94,6 @@ namespace lagalt_web_api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Applications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            MotivationLetter = "Please give me access!",
-                            ProjectId = 1,
-                            State = 0,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            MotivationLetter = "I am so good!(btw I run arch)",
-                            ProjectId = 2,
-                            State = 0,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 3,
-                            MotivationLetter = "I am not good, but fake it til you make it!",
-                            ProjectId = 2,
-                            State = 0,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            MotivationLetter = "I am a fast learner, so give me a chance...",
-                            ProjectId = 3,
-                            State = 0,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            MotivationLetter = "This is the opportunity of a lifetime! So excited!",
-                            ProjectId = 5,
-                            State = 0,
-                            UserId = 5
-                        });
                 });
 
             modelBuilder.Entity("lagalt_web_api.Models.ImageUrl", b =>
@@ -474,15 +336,6 @@ namespace lagalt_web_api.Migrations
                             LastName = "Forr",
                             UserStatus = true,
                             Username = "StrangerHere"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Email = "OleDole@mail.no",
-                            FirstName = "Ole",
-                            LastName = "Dole",
-                            UserStatus = true,
-                            Username = "hulken"
                         });
                 });
 
@@ -598,13 +451,13 @@ namespace lagalt_web_api.Migrations
                 {
                     b.HasOne("lagalt_web_api.Models.Admin", null)
                         .WithMany()
-                        .HasForeignKey("AdminId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("lagalt_web_api.Models.Project", null)
                         .WithMany()
-                        .HasForeignKey("ProjectId")
+                        .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -613,13 +466,13 @@ namespace lagalt_web_api.Migrations
                 {
                     b.HasOne("lagalt_web_api.Models.Contributor", null)
                         .WithMany()
-                        .HasForeignKey("ContributorId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("lagalt_web_api.Models.Project", null)
                         .WithMany()
-                        .HasForeignKey("ProjectId")
+                        .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -628,13 +481,13 @@ namespace lagalt_web_api.Migrations
                 {
                     b.HasOne("lagalt_web_api.Models.ImageUrl", null)
                         .WithMany()
-                        .HasForeignKey("ImageUrlsId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("lagalt_web_api.Models.Project", null)
                         .WithMany()
-                        .HasForeignKey("ProjectId")
+                        .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

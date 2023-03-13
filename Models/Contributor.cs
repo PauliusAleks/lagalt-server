@@ -14,5 +14,6 @@ public class Contributor:User
     /// <value>
     /// The contributer's projects.
     /// </value
+    [ForeignKey("ProjectId")]
     public virtual ICollection<Project> Projects { get; set; }
 }

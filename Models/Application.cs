@@ -45,8 +45,7 @@ public class Application
     /// <value>
     /// The user.
     /// </value>
-    //[ForeignKey("UserId")]
-    public int UserId { get; set; }
+    [ForeignKey("UserId")] 
     public virtual User User { get; set; }
     /// <summary>
     /// Gets or sets the project.
@@ -54,8 +53,7 @@ public class Application
     /// <value>
     /// The project.
     /// </value>
-    //[ForeignKey("ProjectId")]
-    public int ProjectId { get; set; }
+    [ForeignKey("ProjectId")] 
     public virtual Project Project { get; set; }
 }
 /// <summary>
