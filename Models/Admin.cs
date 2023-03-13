@@ -14,6 +14,5 @@ public class Admin:User
     /// <value>
     /// The administrator's projects.
     /// </value>
-    [ForeignKey("ProjectId")] 
     public virtual ICollection<Project> Projects { get; set; }
 }

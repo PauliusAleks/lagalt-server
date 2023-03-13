@@ -19,6 +19,7 @@ public enum CategoryState
 }
 public class Project
 {
+    //CategoryState.Music.ToString(); // => "Music" 
     /// <summary>
     /// Gets or sets the project's identifier.
     /// </summary>
@@ -73,7 +74,6 @@ public class Project
     /// <value>
     /// The project's image URL.
     /// </value>
-    //[ForeignKey("ImageURLId")]
     public virtual ICollection<ImageUrl>? ImageURLs { get; set; }
     /// <summary>
     /// Gets or sets the project's needed skills.
@@ -81,7 +81,6 @@ public class Project
     /// <value>
     /// The project's needed skills.
     /// </value>
-    //[ForeignKey("SkillId")]
     public virtual ICollection<Skill>? NeededSkills { get; set; }
     /// <summary>
     /// Gets or sets the project's admins.
@@ -89,7 +88,6 @@ public class Project
     /// <value>
     /// The admins.
     /// </value>
-    //[ForeignKey("AdminId")]
     public virtual ICollection<Admin>? Admins { get; set; }
     /// <summary>
     /// Gets or sets the project's contributors.
@@ -97,7 +95,6 @@ public class Project
     /// <value>
     /// The project's contributors.
     /// </value>
-    //[ForeignKey("ContributorId")]
     public virtual ICollection<Contributor>? Contributors { get; set; }
 
 
