@@ -19,9 +19,7 @@ public class User
 
     public bool UserStatus { get; set; }
     public string? Portofolio { get; set; }
-    //[ForeignKey("SkillId")]
-    public ICollection<Skill>? Skills { get; set; }
-    //[ForeignKey("ApplicationId")]
+    public virtual ICollection<Skill>? Skills { get; set; }
     public virtual ICollection<Application>? Applications { get; set; }
 
     //public virtual Record Record { get; set; }

@@ -8,5 +8,7 @@ namespace lagalt_web_api.Repositories.Interface
     /// <seealso cref="AssignmentThree.Repositories.Database.IRepository&lt;AssignmentThree.Models.Project&gt;" />
     public interface IProjectRepository : IRepository<Project>
     {
+
+        public Task<IEnumerable<Project>> GetAllProjectsAsync();
     }
 }

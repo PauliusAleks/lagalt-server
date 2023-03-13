@@ -6,34 +6,34 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO
     public class ProjectBannerDTO
     {
         /// <summary>
-        /// Gets or sets the full name.
+        /// Gets or sets the name.
         /// </summary>
         /// <value>
-        /// The full name.
+        /// The name.
         /// </value>
         [MaxLength(50)]
         public string Name { get; set; }
         /// <summary>
-        /// Gets or sets the alias.
+        /// Gets or sets the category.
         /// </summary>
         /// <value>
-        /// The alias.
+        /// The category.
         /// </value>
         [MaxLength(50)]
         public string Category { get; set; }
         /// <summary>
-        /// Gets or sets the gender.
+        /// Gets or sets the progress.
         /// </summary>
         /// <value>
-        /// The gender.
+        /// The progress.
         /// </value>
         public string Progress { get; set; }
         /// <summary>
-        /// Gets or sets the picture.
+        /// Gets or sets the NeededSkillsName.
         /// </summary>
         /// <value>
-        /// The picture.
+        /// The NeededSkillsName.
         /// </value>
-        public List<int>? NeededSkillsId { get; set; }
+        public List<string>? NeededSkillsName { get; set; }
     }
 }

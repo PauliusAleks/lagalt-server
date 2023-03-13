@@ -74,7 +74,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Admin",
                     LastName = "Adminson",
                     Email = "admin123@admin.no",
-                    UserStatus = false, 
+                    UserStatus = false,
                 },
 
                 new User
@@ -85,7 +85,7 @@ namespace lagalt_web_api.Data
                     LastName = "Polle",
                     Email = "PerPolle@sharkboy.no,",
                     UserStatus = true,
-               
+
                 },
                 new User
                 {
@@ -94,7 +94,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Proper",
                     LastName = "Userito",
                     Email = "testing123@Proper.no",
-                    UserStatus = false, 
+                    UserStatus = false,
                 },
                 new User
                 {
@@ -103,18 +103,27 @@ namespace lagalt_web_api.Data
                     FirstName = "Bob",
                     LastName = "Forr",
                     Email = "BobBobby@mail.no",
-                    UserStatus = true, 
+                    UserStatus = true,
+                },
+                new User
+                {
+                    Id = 5,
+                    Username = "hulken",
+                    FirstName = "Ole",
+                    LastName = "Dole",
+                    Email = "OleDole@mail.no",
+                    UserStatus = true,
                 },
             };
 
 
         public static List<ImageUrl> ImageURLs => new List<ImageUrl>
         {
-                 new ImageUrl {Id=5,  Url="https://www.youtube.com/watch?v=LkWQvzrv6gI" },
+                 new ImageUrl {Id=5, Url="https://www.youtube.com/watch?v=LkWQvzrv6gI" },
                  new ImageUrl {Id=4, Url="https://picsum.photos/200/300" },
                  new ImageUrl {Id=3, Url="https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" },
                  new ImageUrl {Id=2, Url="https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" },
-                 new ImageUrl {Id=1,  Url="https://picsum.photos/200/350,https://picsum.photos/200/250" }
+                 new ImageUrl {Id=1, Url="https://picsum.photos/200/350,https://picsum.photos/200/250" }
          };
 
 
@@ -126,47 +135,18 @@ namespace lagalt_web_api.Data
                 new Skill{ Id=4, Name="Sony Vegas"},
                 new Skill{ Id=5, Name="Fruity Loops Studio"}
             };
-        /*
-        public static void Admins(Modelbuilder modelBuilder)
-        {
-            modelBuilder.UsingEntity(j => j
-                .ToTable("UserTechnology")
-                .HasData(new[]
-                    {
-                        { UsersID = 1, TechnologiesID = 1 },
-                        { UsersID = 1, TechnologiesID = 2 }
-                    }
-                ));
-        }
-        */
 
 
-        private static List<Application> Applications => new List<Application>
+
+        public static List<Application> Applications => new List<Application>
             {
-                new Application
-                {
-
-                }
+                new Application { Id = 1, State = ApplicationState.Pending, MotivationLetter = "Please give me access!", UserId=2, ProjectId = 1 },
+                new Application { Id = 2, State = ApplicationState.Pending, MotivationLetter = "I am so good!(btw I run arch)", UserId = 3, ProjectId = 2 },
+                new Application { Id = 3, State = ApplicationState.Pending, MotivationLetter = "I am not good, but fake it til you make it!", UserId=4, ProjectId = 2 },
+                new Application { Id = 4, State = ApplicationState.Pending, MotivationLetter = "I am a fast learner, so give me a chance...", UserId=4, ProjectId = 3 },
+                new Application { Id = 5, State = ApplicationState.Pending, MotivationLetter = "This is the opportunity of a lifetime! So excited!", UserId=5, ProjectId = 5 },
             };
 
-        internal static Application[] ApplicationSeedData()
-        {
-            throw new NotImplementedException();
-        }
 
-        internal static ImageUrl[] ImageUrlSeedData()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static Skill[] SkillSeedData()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static User[] UserSeedData()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

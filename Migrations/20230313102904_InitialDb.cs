@@ -4,7 +4,7 @@
 
 namespace lagalt_web_api.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,21 +74,21 @@ namespace lagalt_web_api.Migrations
                 name: "ImageUrlProject",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectsId = table.Column<int>(type: "int", nullable: false)
+                    ImageUrlsId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ImageUrlProject", x => new { x.ProjectId, x.ProjectsId });
+                    table.PrimaryKey("PK_ImageUrlProject", x => new { x.ImageUrlsId, x.ProjectId });
                     table.ForeignKey(
-                        name: "FK_ImageUrlProject_ImageUrls_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_ImageUrlProject_ImageUrls_ImageUrlsId",
+                        column: x => x.ImageUrlsId,
                         principalTable: "ImageUrls",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ImageUrlProject_Projects_ProjectsId",
-                        column: x => x.ProjectsId,
+                        name: "FK_ImageUrlProject_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -122,21 +122,21 @@ namespace lagalt_web_api.Migrations
                 name: "AdminProject",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectsId = table.Column<int>(type: "int", nullable: false)
+                    AdminId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdminProject", x => new { x.ProjectId, x.ProjectsId });
+                    table.PrimaryKey("PK_AdminProject", x => new { x.AdminId, x.ProjectId });
                     table.ForeignKey(
-                        name: "FK_AdminProject_Projects_ProjectsId",
-                        column: x => x.ProjectsId,
+                        name: "FK_AdminProject_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AdminProject_Users_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_AdminProject_Users_AdminId",
+                        column: x => x.AdminId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -174,21 +174,21 @@ namespace lagalt_web_api.Migrations
                 name: "ContributorProject",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectsId = table.Column<int>(type: "int", nullable: false)
+                    ContributorId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContributorProject", x => new { x.ProjectId, x.ProjectsId });
+                    table.PrimaryKey("PK_ContributorProject", x => new { x.ContributorId, x.ProjectId });
                     table.ForeignKey(
-                        name: "FK_ContributorProject_Projects_ProjectsId",
-                        column: x => x.ProjectsId,
+                        name: "FK_ContributorProject_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ContributorProject_Users_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_ContributorProject_Users_ContributorId",
+                        column: x => x.ContributorId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -262,7 +262,59 @@ namespace lagalt_web_api.Migrations
                     { 1, "User", "admin123@admin.no", "Admin", "Adminson", null, false, "adminBoy" },
                     { 2, "User", "PerPolle@sharkboy.no,", "Per", "Polle", null, true, "sharkboy05" },
                     { 3, "User", "testing123@Proper.no", "Proper", "Userito", null, false, "ProperUser" },
-                    { 4, "User", "BobBobby@mail.no", "Bob", "Forr", null, true, "StrangerHere" }
+                    { 4, "User", "BobBobby@mail.no", "Bob", "Forr", null, true, "StrangerHere" },
+                    { 5, "User", "OleDole@mail.no", "Ole", "Dole", null, true, "hulken" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AdminProject",
+                columns: new[] { "AdminId", "ProjectId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 4, 4 },
+                    { 5, 4 },
+                    { 5, 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Applications",
+                columns: new[] { "Id", "MotivationLetter", "ProjectId", "State", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "Please give me access!", 1, 0, 2 },
+                    { 2, "I am so good!(btw I run arch)", 2, 0, 3 },
+                    { 3, "I am not good, but fake it til you make it!", 2, 0, 4 },
+                    { 4, "I am a fast learner, so give me a chance...", 3, 0, 4 },
+                    { 5, "This is the opportunity of a lifetime! So excited!", 5, 0, 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ContributorProject",
+                columns: new[] { "ContributorId", "ProjectId" },
+                values: new object[,]
+                {
+                    { 1, 2 },
+                    { 2, 1 },
+                    { 2, 3 },
+                    { 3, 4 },
+                    { 4, 5 },
+                    { 5, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ImageUrlProject",
+                columns: new[] { "ImageUrlsId", "ProjectId" },
+                values: new object[,]
+                {
+                    { 1, 2 },
+                    { 1, 5 },
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 4, 3 },
+                    { 5, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -292,9 +344,9 @@ namespace lagalt_web_api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AdminProject_ProjectsId",
+                name: "IX_AdminProject_ProjectId",
                 table: "AdminProject",
-                column: "ProjectsId");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_ProjectId",
@@ -307,14 +359,14 @@ namespace lagalt_web_api.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContributorProject_ProjectsId",
+                name: "IX_ContributorProject_ProjectId",
                 table: "ContributorProject",
-                column: "ProjectsId");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ImageUrlProject_ProjectsId",
+                name: "IX_ImageUrlProject_ProjectId",
                 table: "ImageUrlProject",
-                column: "ProjectsId");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectSkill_ProjectId",

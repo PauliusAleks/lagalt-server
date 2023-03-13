@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc; 
+﻿using Microsoft.AspNetCore.Mvc;
 using lagalt_web_api.Models;
 using AutoMapper;
-using lagalt_web_api.Repositories; 
+using lagalt_web_api.Repositories;
 using lagalt_web_api.Models.DTO.ProjectDTO;
 
 namespace lagalt_web_api.Controllers
@@ -38,11 +38,10 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjects()
+        public async Task<ActionResult<IEnumerable<ProjectReadDTO>>> GetProjects()
         {
-            var projects = _repositories.Projects.GetAll();
-            var projectsDTO = projects.Select(project => _mapper.Map<ProjectBannerDTO>(projects));
-            return Ok(projects);
+
+            return _mapper.Map<List<ProjectReadDTO>>(await _repositories.Projects.GetAllProjectsAsync());
         }
 
 
