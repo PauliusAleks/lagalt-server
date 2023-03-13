@@ -62,8 +62,7 @@ namespace lagalt_web_api.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserStatus = table.Column<bool>(type: "bit", nullable: false),
-                    Portofolio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Portofolio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,47 +70,51 @@ namespace lagalt_web_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ImageUrlProject",
+                name: "ProjectImageURLs",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectsId = table.Column<int>(type: "int", nullable: false)
+                    ImageURLId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ImageUrlProject", x => new { x.ProjectId, x.ProjectsId });
+                    table.PrimaryKey("PK_ProjectImageURLs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ImageUrlProject_ImageUrls_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_ProjectImageURLs_ImageUrls_ImageURLId",
+                        column: x => x.ImageURLId,
                         principalTable: "ImageUrls",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ImageUrlProject_Projects_ProjectsId",
-                        column: x => x.ProjectsId,
+                        name: "FK_ProjectImageURLs_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectSkill",
+                name: "ProjectSkills",
                 columns: table => new
                 {
-                    SkillId = table.Column<int>(type: "int", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    SkillId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectSkill", x => new { x.SkillId, x.ProjectId });
+                    table.PrimaryKey("PK_ProjectSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectSkill_Projects_ProjectId",
+                        name: "FK_ProjectSkills_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectSkill_Skills_SkillId",
+                        name: "FK_ProjectSkills_Skills_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Skills",
                         principalColumn: "Id",
@@ -119,24 +122,26 @@ namespace lagalt_web_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AdminProject",
+                name: "Admin",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectsId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdminProject", x => new { x.ProjectId, x.ProjectsId });
+                    table.PrimaryKey("PK_Admin", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AdminProject_Projects_ProjectsId",
-                        column: x => x.ProjectsId,
+                        name: "FK_Admin_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AdminProject_Users_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_Admin_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -171,47 +176,51 @@ namespace lagalt_web_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContributorProject",
+                name: "Contributor",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectsId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContributorProject", x => new { x.ProjectId, x.ProjectsId });
+                    table.PrimaryKey("PK_Contributor", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContributorProject_Projects_ProjectsId",
-                        column: x => x.ProjectsId,
+                        name: "FK_Contributor_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ContributorProject_Users_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_Contributor_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserSkill",
+                name: "UserSkills",
                 columns: table => new
                 {
-                    SkillId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    SkillId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSkill", x => new { x.SkillId, x.UserId });
+                    table.PrimaryKey("PK_UserSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserSkill_Skills_SkillId",
+                        name: "FK_UserSkills_Skills_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserSkill_Users_UserId",
+                        name: "FK_UserSkills_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -256,45 +265,88 @@ namespace lagalt_web_api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "Portofolio", "UserStatus", "Username" },
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Portofolio", "UserStatus", "Username" },
                 values: new object[,]
                 {
-                    { 1, "User", "admin123@admin.no", "Admin", "Adminson", null, false, "adminBoy" },
-                    { 2, "User", "PerPolle@sharkboy.no,", "Per", "Polle", null, true, "sharkboy05" },
-                    { 3, "User", "testing123@Proper.no", "Proper", "Userito", null, false, "ProperUser" },
-                    { 4, "User", "BobBobby@mail.no", "Bob", "Forr", null, true, "StrangerHere" }
+                    { 1, "admin123@admin.no", "Admin", "Adminson", null, false, "adminBoy" },
+                    { 2, "PerPolle@sharkboy.no,", "Per", "Polle", null, true, "sharkboy05" },
+                    { 3, "testing123@Proper.no", "Proper", "Userito", null, false, "ProperUser" },
+                    { 4, "BobBobby@mail.no", "Bob", "Forr", null, true, "StrangerHere" }
                 });
 
             migrationBuilder.InsertData(
-                table: "ProjectSkill",
-                columns: new[] { "ProjectId", "SkillId" },
+                table: "Admin",
+                columns: new[] { "Id", "ProjectId", "UserId" },
                 values: new object[,]
                 {
-                    { 2, 1 },
-                    { 5, 1 },
-                    { 2, 2 },
-                    { 3, 3 },
-                    { 3, 4 },
-                    { 1, 5 }
+                    { 1, 1, 1 },
+                    { 2, 2, 2 },
+                    { 3, 2, 1 },
+                    { 4, 3, 3 }
                 });
 
             migrationBuilder.InsertData(
-                table: "UserSkill",
-                columns: new[] { "SkillId", "UserId" },
+                table: "Applications",
+                columns: new[] { "Id", "MotivationLetter", "ProjectId", "State", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 2 },
-                    { 1, 4 },
-                    { 2, 2 },
-                    { 3, 3 },
-                    { 4, 3 },
-                    { 5, 1 }
+                    { 1, "Hallais", 1, 1, 1 },
+                    { 2, "Hallais", 3, 0, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Contributor",
+                columns: new[] { "Id", "ProjectId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 },
+                    { 3, 3, 1 },
+                    { 4, 1, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProjectImageURLs",
+                columns: new[] { "Id", "ImageURLId", "ProjectId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 },
+                    { 3, 3, 1 },
+                    { 4, 1, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProjectSkills",
+                columns: new[] { "Id", "ProjectId", "SkillId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 },
+                    { 3, 3, 1 },
+                    { 4, 1, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserSkills",
+                columns: new[] { "Id", "SkillId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 },
+                    { 3, 1, 3 },
+                    { 4, 3, 1 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AdminProject_ProjectsId",
-                table: "AdminProject",
-                column: "ProjectsId");
+                name: "IX_Admin_ProjectId",
+                table: "Admin",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Admin_UserId",
+                table: "Admin",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_ProjectId",
@@ -307,45 +359,65 @@ namespace lagalt_web_api.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContributorProject_ProjectsId",
-                table: "ContributorProject",
-                column: "ProjectsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImageUrlProject_ProjectsId",
-                table: "ImageUrlProject",
-                column: "ProjectsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProjectSkill_ProjectId",
-                table: "ProjectSkill",
+                name: "IX_Contributor_ProjectId",
+                table: "Contributor",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSkill_UserId",
-                table: "UserSkill",
+                name: "IX_Contributor_UserId",
+                table: "Contributor",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectImageURLs_ImageURLId",
+                table: "ProjectImageURLs",
+                column: "ImageURLId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectImageURLs_ProjectId",
+                table: "ProjectImageURLs",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectSkills_ProjectId",
+                table: "ProjectSkills",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectSkills_SkillId",
+                table: "ProjectSkills",
+                column: "SkillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSkills_SkillId",
+                table: "UserSkills",
+                column: "SkillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSkills_UserId",
+                table: "UserSkills",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AdminProject");
+                name: "Admin");
 
             migrationBuilder.DropTable(
                 name: "Applications");
 
             migrationBuilder.DropTable(
-                name: "ContributorProject");
+                name: "Contributor");
 
             migrationBuilder.DropTable(
-                name: "ImageUrlProject");
+                name: "ProjectImageURLs");
 
             migrationBuilder.DropTable(
-                name: "ProjectSkill");
+                name: "ProjectSkills");
 
             migrationBuilder.DropTable(
-                name: "UserSkill");
+                name: "UserSkills");
 
             migrationBuilder.DropTable(
                 name: "ImageUrls");

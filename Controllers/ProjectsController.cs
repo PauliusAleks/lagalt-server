@@ -3,13 +3,16 @@ using lagalt_web_api.Models;
 using AutoMapper;
 using lagalt_web_api.Repositories; 
 using lagalt_web_api.Models.DTO.ProjectDTO;
+using System.Net.Mime;
+using System.Diagnostics;
 
 namespace lagalt_web_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Produces("Application/json")]
-    [Consumes("Application/json")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class ProjectsController : ControllerBase
     {
         /// <summary>
@@ -41,7 +44,7 @@ namespace lagalt_web_api.Controllers
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjects()
         {
             var projects = _repositories.Projects.GetAll();
-            var projectsDTO = projects.Select(project => _mapper.Map<ProjectBannerDTO>(projects));
+            //var projectsDTO = projects.Select(project => _mapper.Map<ProjectBannerDTO>(projects));
             return Ok(projects);
         }
 
@@ -52,7 +55,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>An ProjectBannerDTO.</returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="GetById")]
         public ActionResult<ProjectBannerDTO> GetProject(int id)
         {
             var project = _repositories.Projects.Get(id);
@@ -102,10 +105,12 @@ namespace lagalt_web_api.Controllers
             if (project is null)
             {
                 return BadRequest("project is null.");
-            }
-            _repositories.Projects.Create(_mapper.Map<Project>(project));
+            } 
 
-            return CreatedAtAction("GetProject", project);
+            var proj = _mapper.Map<Project>(project);  
+            var createdProj = _repositories.Projects.Create(proj);
+            Debug.WriteLine("The newsly created project: " + createdProj);
+            return Ok(_mapper.Map<ProjectBannerDTO>(createdProj));
         }
 
         // DELETE: api/projects/5

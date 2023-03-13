@@ -4,10 +4,10 @@ using lagalt_web_api.Repositories.Interface;
 namespace lagalt_web_api.Repositories.Database;
 
 /// <summary>
-/// Generic database-repository base-class from which the repositories inherit.
+/// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <seealso cref="AssignmentThree.Repositories.Database.IRepository&lt;T&gt;" />
+/// <seealso cref="lagalt_web_api.Repositories.Interface.IRepository&lt;T&gt;" />
 public class DbRepository<T> :  IRepository<T> where T : class
 {
     /// <summary>
@@ -43,7 +43,7 @@ public class DbRepository<T> :  IRepository<T> where T : class
     /// <inheritdoc cref="Microsoft.EntityFrameworkCore.DbContext.Add(object)"/>
     /// </summary>
     /// <param name="entity">The entity.</param>
-    public bool Create(T entity) { var result = dbRepositoryContext.Set<T>().Add(entity); Save(); return result is not null; }
+    public T Create(T entity) { var result = dbRepositoryContext.Set<T>().Add(entity); Save(); return result.Entity; }
     public bool Update(T entity) { var result = dbRepositoryContext.Set<T>().Update(entity); Save(); return result is not null; }
     public bool Delete(T entity) { var result = dbRepositoryContext.Set<T>().Remove(entity); Save(); return result is not null; }
 }

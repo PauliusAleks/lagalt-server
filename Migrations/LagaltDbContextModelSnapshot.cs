@@ -21,49 +21,53 @@ namespace lagalt_web_api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AdminProject", b =>
+            modelBuilder.Entity("lagalt_web_api.Models.Admin", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProjectsId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("ProjectId", "ProjectsId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ProjectsId");
+                    b.HasIndex("ProjectId");
 
-                    b.ToTable("AdminProject");
-                });
+                    b.HasIndex("UserId");
 
-            modelBuilder.Entity("ContributorProject", b =>
-                {
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
+                    b.ToTable("Admin");
 
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProjectId", "ProjectsId");
-
-                    b.HasIndex("ProjectsId");
-
-                    b.ToTable("ContributorProject");
-                });
-
-            modelBuilder.Entity("ImageUrlProject", b =>
-                {
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProjectId", "ProjectsId");
-
-                    b.HasIndex("ProjectsId");
-
-                    b.ToTable("ImageUrlProject");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProjectId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProjectId = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ProjectId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ProjectId = 3,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("lagalt_web_api.Models.Application", b =>
@@ -94,6 +98,73 @@ namespace lagalt_web_api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Applications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MotivationLetter = "Hallais",
+                            ProjectId = 1,
+                            State = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            MotivationLetter = "Hallais",
+                            ProjectId = 3,
+                            State = 0,
+                            UserId = 2
+                        });
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.Contributor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Contributor");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProjectId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProjectId = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ProjectId = 3,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ProjectId = 1,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("lagalt_web_api.Models.ImageUrl", b =>
@@ -137,6 +208,153 @@ namespace lagalt_web_api.Migrations
                         {
                             Id = 1,
                             Url = "https://picsum.photos/200/350,https://picsum.photos/200/250"
+                        });
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.LinkerModels.ProjectImageUrl", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ImageURLId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageURLId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectImageURLs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageURLId = 1,
+                            ProjectId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageURLId = 2,
+                            ProjectId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageURLId = 3,
+                            ProjectId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageURLId = 1,
+                            ProjectId = 3
+                        });
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.LinkerModels.ProjectSkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("ProjectSkills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProjectId = 1,
+                            SkillId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProjectId = 2,
+                            SkillId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ProjectId = 3,
+                            SkillId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ProjectId = 1,
+                            SkillId = 3
+                        });
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.LinkerModels.UserSkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SkillId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserSkills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            SkillId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            SkillId = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            SkillId = 1,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            SkillId = 3,
+                            UserId = 1
                         });
                 });
 
@@ -268,10 +486,6 @@ namespace lagalt_web_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -297,8 +511,6 @@ namespace lagalt_web_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
 
                     b.HasData(
                         new
@@ -339,211 +551,130 @@ namespace lagalt_web_api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ProjectSkill", b =>
-                {
-                    b.Property<int>("SkillId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SkillId", "ProjectId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectSkill");
-
-                    b.HasData(
-                        new
-                        {
-                            SkillId = 5,
-                            ProjectId = 1
-                        },
-                        new
-                        {
-                            SkillId = 1,
-                            ProjectId = 2
-                        },
-                        new
-                        {
-                            SkillId = 1,
-                            ProjectId = 5
-                        },
-                        new
-                        {
-                            SkillId = 2,
-                            ProjectId = 2
-                        },
-                        new
-                        {
-                            SkillId = 3,
-                            ProjectId = 3
-                        },
-                        new
-                        {
-                            SkillId = 4,
-                            ProjectId = 3
-                        });
-                });
-
-            modelBuilder.Entity("UserSkill", b =>
-                {
-                    b.Property<int>("SkillId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SkillId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserSkill");
-
-                    b.HasData(
-                        new
-                        {
-                            SkillId = 5,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            SkillId = 1,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            SkillId = 1,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            SkillId = 2,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            SkillId = 3,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            SkillId = 4,
-                            UserId = 3
-                        });
-                });
-
             modelBuilder.Entity("lagalt_web_api.Models.Admin", b =>
                 {
-                    b.HasBaseType("lagalt_web_api.Models.User");
-
-                    b.HasDiscriminator().HasValue("Admin");
-                });
-
-            modelBuilder.Entity("lagalt_web_api.Models.Contributor", b =>
-                {
-                    b.HasBaseType("lagalt_web_api.Models.User");
-
-                    b.HasDiscriminator().HasValue("Contributor");
-                });
-
-            modelBuilder.Entity("AdminProject", b =>
-                {
-                    b.HasOne("lagalt_web_api.Models.Admin", null)
-                        .WithMany()
+                    b.HasOne("lagalt_web_api.Models.Project", null)
+                        .WithMany("Admins")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("lagalt_web_api.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ContributorProject", b =>
-                {
-                    b.HasOne("lagalt_web_api.Models.Contributor", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("lagalt_web_api.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ImageUrlProject", b =>
-                {
-                    b.HasOne("lagalt_web_api.Models.ImageUrl", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("lagalt_web_api.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
+                    b.HasOne("lagalt_web_api.Models.User", null)
+                        .WithMany("Admins")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("lagalt_web_api.Models.Application", b =>
                 {
-                    b.HasOne("lagalt_web_api.Models.Project", "Project")
-                        .WithMany()
+                    b.HasOne("lagalt_web_api.Models.Project", null)
+                        .WithMany("Applications")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("lagalt_web_api.Models.User", "User")
+                    b.HasOne("lagalt_web_api.Models.User", null)
                         .WithMany("Applications")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Project");
-
-                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProjectSkill", b =>
+            modelBuilder.Entity("lagalt_web_api.Models.Contributor", b =>
                 {
                     b.HasOne("lagalt_web_api.Models.Project", null)
-                        .WithMany()
+                        .WithMany("Contributors")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("lagalt_web_api.Models.User", null)
+                        .WithMany("Contributors")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.LinkerModels.ProjectImageUrl", b =>
+                {
+                    b.HasOne("lagalt_web_api.Models.ImageUrl", null)
+                        .WithMany("ProjectImageUrls")
+                        .HasForeignKey("ImageURLId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("lagalt_web_api.Models.Project", null)
+                        .WithMany("ProjectImageURLs")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.LinkerModels.ProjectSkill", b =>
+                {
+                    b.HasOne("lagalt_web_api.Models.Project", null)
+                        .WithMany("ProjectSkills")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("lagalt_web_api.Models.Skill", null)
-                        .WithMany()
+                        .WithMany("ProjectSkills")
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UserSkill", b =>
+            modelBuilder.Entity("lagalt_web_api.Models.LinkerModels.UserSkill", b =>
                 {
                     b.HasOne("lagalt_web_api.Models.Skill", null)
-                        .WithMany()
+                        .WithMany("UserSkills")
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("lagalt_web_api.Models.User", null)
-                        .WithMany()
+                        .WithMany("UserSkills")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("lagalt_web_api.Models.ImageUrl", b =>
+                {
+                    b.Navigation("ProjectImageUrls");
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.Project", b =>
+                {
+                    b.Navigation("Admins");
+
+                    b.Navigation("Applications");
+
+                    b.Navigation("Contributors");
+
+                    b.Navigation("ProjectImageURLs");
+
+                    b.Navigation("ProjectSkills");
+                });
+
+            modelBuilder.Entity("lagalt_web_api.Models.Skill", b =>
+                {
+                    b.Navigation("ProjectSkills");
+
+                    b.Navigation("UserSkills");
+                });
+
             modelBuilder.Entity("lagalt_web_api.Models.User", b =>
                 {
+                    b.Navigation("Admins");
+
                     b.Navigation("Applications");
+
+                    b.Navigation("Contributors");
+
+                    b.Navigation("UserSkills");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,4 @@
-﻿using lagalt_web_api.Data;
-using lagalt_web_api.Repositories.Database;
-using lagalt_web_api.Repositories.Interface;
-using Microsoft.EntityFrameworkCore;
+﻿using lagalt_web_api.Repositories.Interface; 
 
 namespace lagalt_web_api.Repositories
 {
@@ -15,9 +12,7 @@ namespace lagalt_web_api.Repositories
         private IUserRepository _userRepository;
         private IApplicationRepository _applicationRepository;
         private ISkillRepository _skillRepository;
-        private IImageURLRepository _imageURLRepository;
-        private IAdminRepository _adminRepository;
-        private IContributorRepository _contributorRepository;
+        private IImageURLRepository _imageURLRepository; 
 
 
         /// <summary>
@@ -29,17 +24,13 @@ namespace lagalt_web_api.Repositories
                                    IUserRepository userRepository,
                                    IApplicationRepository applicationRepository,
                                    ISkillRepository skillRepository,
-                                   IImageURLRepository imageURLRepository,
-                                   IAdminRepository adminRepository,
-                                   IContributorRepository contributorRepository)
+                                   IImageURLRepository imageURLRepository )
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
             _applicationRepository = applicationRepository;
             _skillRepository = skillRepository;
-            _imageURLRepository = imageURLRepository;
-            _adminRepository = adminRepository;
-            _contributorRepository = contributorRepository;
+            _imageURLRepository = imageURLRepository; 
         }
 
         public IProjectRepository Projects => _projectRepository;
@@ -50,11 +41,7 @@ namespace lagalt_web_api.Repositories
 
         public ISkillRepository Skills => _skillRepository;
 
-        public IImageURLRepository ImageURLs => _imageURLRepository;
-
-        public IAdminRepository Admins => _adminRepository;
-
-        public IContributorRepository Contributors => _contributorRepository;
+        public IImageURLRepository ImageURLs => _imageURLRepository; 
 
     }
 }

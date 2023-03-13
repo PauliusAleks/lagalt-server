@@ -3,13 +3,15 @@ using lagalt_web_api.Models;
 using AutoMapper;
 using lagalt_web_api.Repositories;
 using lagalt_web_api.Models.DTO.UserDTO;
+using System.Net.Mime;
 
 namespace lagalt_web_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Produces("Application/json")]
-    [Consumes("Application/json")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class UsersController : ControllerBase
     {
         /// <summary>

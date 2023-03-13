@@ -21,7 +21,7 @@ namespace lagalt_web_api.Repositories.Interface
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>Creation success.</returns>
-        bool Create(T entity);
+        T Create(T entity);
         /// <summary>
         /// Updates the specified entity.
         /// </summary>

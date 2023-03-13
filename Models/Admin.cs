@@ -1,19 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace lagalt_web_api.Models;
-
-public class Admin:User
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+namespace lagalt_web_api.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
-    /// <summary>
-    /// Gets or sets the admin's project (the projects where the user is an administrator).
-    /// </summary>
-    /// <value>
-    /// The administrator's projects.
-    /// </value>
-    [ForeignKey("ProjectId")] 
-    public virtual ICollection<Project> Projects { get; set; }
+    public class Admin
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        [ForeignKey("ProjectId")]
+        public int ProjectId { get; set; }
+        [NotMapped]
+        public virtual ICollection<Project> Project { get; set; }
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
+        [NotMapped]
+        public virtual ICollection<User> User { get; set; }
+
+    }
 }

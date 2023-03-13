@@ -14,10 +14,8 @@ ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 var builder = WebApplication.CreateBuilder(args);
 var Configuration = builder.Configuration;
 
-builder.Services.AddDbContext<LagaltDbContext>();
-
 builder.Services.AddSingleton(Configuration);
-
+builder.Services.AddDbContext<LagaltDbContext>();
 builder.Services.AddMvc().AddJsonOptions(options => {
     options.JsonSerializerOptions.WriteIndented = true; });
 
@@ -26,9 +24,7 @@ builder.Services.AddScoped<IProjectRepository, DbProjectRepository>();
 builder.Services.AddScoped<IUserRepository, DbUserRepository>(); 
 builder.Services.AddScoped<IApplicationRepository, DbApplicationRepository>();
 builder.Services.AddScoped<ISkillRepository, DbSkillRepository>();
-builder.Services.AddScoped<IImageURLRepository, DbImageURLRepository>();
-builder.Services.AddScoped<IAdminRepository, DbAdminRepository>();
-builder.Services.AddScoped<IContributorRepository, DbContributorRepository>();
+builder.Services.AddScoped<IImageURLRepository, DbImageURLRepository>(); 
 
 // Use this for accessing data
 builder.Services.AddScoped<IRepositories, Repositories>();
@@ -79,7 +75,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 

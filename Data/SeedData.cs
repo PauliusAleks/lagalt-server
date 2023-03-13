@@ -1,4 +1,5 @@
 ﻿using lagalt_web_api.Models;
+using lagalt_web_api.Models.LinkerModels;
 
 namespace lagalt_web_api.Data
 {
@@ -20,7 +21,7 @@ namespace lagalt_web_api.Data
                     Category = CategoryState.WebDevelopment,
                     Progress = ProgressState.Founding,//In percentage
                     Description = "Joachim Rønning",
-                    GitURL = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C6AB0EDCE8F41882EBBB782B76DD4F05D7E360D7C3F23B4F6D02C24699B26105/scale?width=1200&aspectRatio=1.78&format=jpeg"
+                    GitURL = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C6AB0EDCE8F41882EBBB782B76DD4F05D7E360D7C3F23B4F6D02C24699B26105/scale?width=1200&aspectRatio=1.78&format=jpeg",
                 },
                 new Project
                 {
@@ -74,7 +75,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Admin",
                     LastName = "Adminson",
                     Email = "admin123@admin.no",
-                    UserStatus = false, 
+                    UserStatus = false,
                 },
 
                 new User
@@ -85,7 +86,7 @@ namespace lagalt_web_api.Data
                     LastName = "Polle",
                     Email = "PerPolle@sharkboy.no,",
                     UserStatus = true,
-               
+
                 },
                 new User
                 {
@@ -94,7 +95,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Proper",
                     LastName = "Userito",
                     Email = "testing123@Proper.no",
-                    UserStatus = false, 
+                    UserStatus = false,
                 },
                 new User
                 {
@@ -103,22 +104,59 @@ namespace lagalt_web_api.Data
                     FirstName = "Bob",
                     LastName = "Forr",
                     Email = "BobBobby@mail.no",
-                    UserStatus = true, 
+                    UserStatus = true,
                 },
             };
-
-
-        public static List<ImageUrl> ImageURLs => new List<ImageUrl>
+        public static ICollection<Admin> Admins => new List<Admin>
         {
-                 new ImageUrl {Id=5,  Url="https://www.youtube.com/watch?v=LkWQvzrv6gI" },
+            new Admin { Id=1, UserId = 1, ProjectId = 1 },
+            new Admin { Id=2, UserId = 2, ProjectId = 2 },
+            new Admin { Id=3, UserId = 1, ProjectId = 2 },
+            new Admin { Id=4, UserId = 3, ProjectId = 3 },
+        };
+
+        public static ICollection<Contributor> Contributors => new List<Contributor>
+        {
+            new Contributor { Id=1,UserId = 1, ProjectId = 1 },
+            new Contributor { Id=2,UserId = 2, ProjectId = 2 },
+            new Contributor { Id=3,UserId = 1, ProjectId = 3 },
+            new Contributor { Id=4,UserId = 3, ProjectId = 1 },
+        };
+
+        public static ICollection<ProjectSkill> ProjectSkills => new List<ProjectSkill>
+        {
+            new ProjectSkill { Id=1, SkillId = 1, ProjectId = 1 },
+            new ProjectSkill { Id=2, SkillId = 2, ProjectId = 2 },
+            new ProjectSkill { Id=3, SkillId = 1, ProjectId = 3 },
+            new ProjectSkill { Id=4, SkillId = 3, ProjectId = 1 },
+        };
+
+        public static ICollection<UserSkill> UserSkills => new List<UserSkill>
+        {
+            new UserSkill { Id=1, SkillId = 1, UserId = 1 },
+            new UserSkill { Id=2, SkillId = 2, UserId = 2 },
+            new UserSkill { Id=3, SkillId = 1, UserId = 3 },
+            new UserSkill { Id=4, SkillId = 3, UserId = 1 },
+        };
+        public static ICollection<ProjectImageUrl> ProjectImageURLs => new List<ProjectImageUrl>
+        {
+            new ProjectImageUrl { Id=1, ProjectId = 1, ImageURLId = 1 },
+            new ProjectImageUrl { Id=2, ProjectId = 2, ImageURLId = 2 },
+            new ProjectImageUrl { Id=3, ProjectId = 1, ImageURLId = 3 },
+            new ProjectImageUrl { Id=4, ProjectId = 3, ImageURLId = 1 },
+        };
+
+        public static ICollection<ImageUrl> ImageURLs => new List<ImageUrl>
+        {
+                 new ImageUrl {Id=5, Url="https://www.youtube.com/watch?v=LkWQvzrv6gI" },
                  new ImageUrl {Id=4, Url="https://picsum.photos/200/300" },
                  new ImageUrl {Id=3, Url="https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" },
                  new ImageUrl {Id=2, Url="https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" },
-                 new ImageUrl {Id=1,  Url="https://picsum.photos/200/350,https://picsum.photos/200/250" }
+                 new ImageUrl {Id=1, Url="https://picsum.photos/200/350,https://picsum.photos/200/250" }
          };
 
 
-        public static List<Skill> Skills => new List<Skill>
+        public static ICollection<Skill> Skills => new List<Skill>
             {
                 new Skill{ Id=1, Name="Java"},
                 new Skill{ Id=2, Name="C#"},
@@ -126,47 +164,20 @@ namespace lagalt_web_api.Data
                 new Skill{ Id=4, Name="Sony Vegas"},
                 new Skill{ Id=5, Name="Fruity Loops Studio"}
             };
-        /*
-        public static void Admins(Modelbuilder modelBuilder)
-        {
-            modelBuilder.UsingEntity(j => j
-                .ToTable("UserTechnology")
-                .HasData(new[]
-                    {
-                        { UsersID = 1, TechnologiesID = 1 },
-                        { UsersID = 1, TechnologiesID = 2 }
-                    }
-                ));
-        }
-        */
 
 
-        private static List<Application> Applications => new List<Application>
+
+
+        public static ICollection<Application> Applications => new List<Application>
             {
                 new Application
                 {
-
+                    Id = 1, MotivationLetter = "Hallais", State = ApplicationState.Accepted, UserId= 1, ProjectId = 1
+                },
+                new Application
+                {
+                    Id = 2, MotivationLetter = "Hallais", State = ApplicationState.Pending, UserId= 2, ProjectId = 3
                 }
             };
-
-        internal static Application[] ApplicationSeedData()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static ImageUrl[] ImageUrlSeedData()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static Skill[] SkillSeedData()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static User[] UserSeedData()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

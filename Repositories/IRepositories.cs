@@ -9,8 +9,6 @@ namespace lagalt_web_api.Repositories
         IUserRepository Users { get; }
         IApplicationRepository Applications { get; }
         ISkillRepository Skills { get; }
-        IImageURLRepository ImageURLs { get; }
-        IAdminRepository Admins { get; }
-        IContributorRepository Contributors { get; } 
+        IImageURLRepository ImageURLs { get; } 
     }
 }

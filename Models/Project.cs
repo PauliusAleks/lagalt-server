@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using lagalt_web_api.Models.LinkerModels;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lagalt_web_api.Models;
@@ -34,7 +35,7 @@ public class Project
     /// <value>
     /// The project's name.
     /// </value>
-    [MaxLength(50)]
+    //[MaxLength(50)]
     public string Name { get; set; }
     /// <summary>
     /// Gets or sets the project's category.
@@ -42,7 +43,7 @@ public class Project
     /// <value>
     /// The alias.
     /// </value>
-    [EnumDataType(typeof(CategoryState))]
+    //[EnumDataType(typeof(CategoryState))]
     public CategoryState Category { get; set; }
     /// <summary>
     /// Gets or sets the project's progress.
@@ -50,7 +51,7 @@ public class Project
     /// <value>
     /// The project's progress.
     /// </value>
-    [EnumDataType(typeof(ProgressState))]
+    //[EnumDataType(typeof(ProgressState))]
     public ProgressState Progress { get; set; }
     /// <summary>
     /// Gets or sets the project's description.
@@ -65,7 +66,7 @@ public class Project
     /// <value>
     /// The git URL.
     /// </value>
-    [Url]
+    //[Url]
     public string? GitURL { get; set; }
     /// <summary>
     /// Gets or sets the project's image URL.
@@ -73,32 +74,25 @@ public class Project
     /// <value>
     /// The project's image URL.
     /// </value>
-    //[ForeignKey("ImageURLId")]
+    
+    [NotMapped]
     public virtual ICollection<ImageUrl>? ImageURLs { get; set; }
-    /// <summary>
-    /// Gets or sets the project's needed skills.
-    /// </summary>
-    /// <value>
-    /// The project's needed skills.
-    /// </value>
-    //[ForeignKey("SkillId")]
-    public virtual ICollection<Skill>? NeededSkills { get; set; }
-    /// <summary>
-    /// Gets or sets the project's admins.
-    /// </summary>
-    /// <value>
-    /// The admins.
-    /// </value>
-    //[ForeignKey("AdminId")]
-    public virtual ICollection<Admin>? Admins { get; set; }
-    /// <summary>
-    /// Gets or sets the project's contributors.
-    /// </summary>
-    /// <value>
-    /// The project's contributors.
-    /// </value>
-    //[ForeignKey("ContributorId")]
-    public virtual ICollection<Contributor>? Contributors { get; set; }
 
+    [NotMapped]
+    public virtual ICollection<Skill>? Skills { get; set; }  
+ 
+    public virtual ICollection<Admin>  Admins { get; set; }
+ 
+    public virtual ICollection<Contributor>  Contributors { get; set; }
 
+    public virtual ICollection<Application>? Applications { get; set; }
+
+    public virtual ICollection<ProjectSkill> ProjectSkills { get; set; }
+
+    public virtual ICollection<ProjectImageUrl> ProjectImageURLs { get; set; }
+
+    public override string ToString()
+    {
+        return String.Format("Id: {0}, Name: {1}, Category: {2}, Progress: {3}, Description: {4}, GitURL: {5}", Id, Name,Category, Progress, Description, GitURL);
+    }
 }

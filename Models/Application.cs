@@ -16,6 +16,7 @@ namespace lagalt_web_api.Models;
 /// </summary>
 public class Application
 {
+    //public Application() { }
     /// <summary>
     /// Gets or sets the identifier.
     /// </summary>
@@ -44,16 +45,20 @@ public class Application
     /// </summary>
     /// <value>
     /// The user.
-    /// </value>
-    [ForeignKey("UserId")] 
+    /// </value> 
+    [ForeignKey("UserId")]
+    public int UserId { get; set; }
+    [NotMapped]
     public virtual User User { get; set; }
     /// <summary>
     /// Gets or sets the project.
     /// </summary>
     /// <value>
     /// The project.
-    /// </value>
-    [ForeignKey("ProjectId")] 
+    /// </value> 
+    [ForeignKey("ProjectId")]
+    public int ProjectId { get; set; }
+    [NotMapped]
     public virtual Project Project { get; set; }
 }
 /// <summary>

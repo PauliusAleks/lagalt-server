@@ -11,7 +11,6 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO
         /// <value>
         /// The full name.
         /// </value>
-        [MaxLength(50)]
         public string Name { get; set; }
         /// <summary>
         /// Gets or sets the alias.
@@ -19,21 +18,20 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO
         /// <value>
         /// The alias.
         /// </value>
-        [MaxLength(50)]
-        public string Category { get; set; }
+        public CategoryState Category { get; set; }
         /// <summary>
         /// Gets or sets the gender.
         /// </summary>
         /// <value>
         /// The gender.
         /// </value>
-        public string Progress { get; set; }
-        /// <summary>
-        /// Gets or sets the picture.
-        /// </summary>
-        /// <value>
-        /// The picture.
-        /// </value>
-        public List<int>? NeededSkillsId { get; set; }
+        public ProgressState Progress { get; set; }
+        ///// <summary>
+        ///// Gets or sets the picture.
+        ///// </summary>
+        ///// <value>
+        ///// The picture.
+        ///// </value>
+        //public virtual ICollection<Skill>? SkillsNav { get; set; }
     }
 }
