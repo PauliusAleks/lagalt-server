@@ -1,4 +1,4 @@
-﻿namespace lagalt_web_api.Models.DTO.ProjectDTO
+﻿namespace lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO
 {
     public class ProjectCreateDTO
     {

@@ -1,4 +1,6 @@
 ﻿using lagalt_web_api.Models;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace lagalt_web_api.Repositories.Interface
 {
@@ -8,7 +10,6 @@ namespace lagalt_web_api.Repositories.Interface
     /// <seealso cref="AssignmentThree.Repositories.Database.IRepository&lt;AssignmentThree.Models.Project&gt;" />
     public interface IProjectRepository : IRepository<Project>
     {
-        public Task<IEnumerable<Project>> GetAllProjectsAsync();
-        public Task<Project> GetSpecificProjectAsync(int id);
+        public Task PutProjectSettings(int id, List<string> neededSkills, List<string> imageUrls);
     }
 }

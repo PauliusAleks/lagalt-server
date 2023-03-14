@@ -1,6 +1,8 @@
 ﻿using lagalt_web_api.Data;
 using lagalt_web_api.Models;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO;
 using lagalt_web_api.Repositories.Interface;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace lagalt_web_api.Repositories.Database
@@ -15,25 +17,31 @@ namespace lagalt_web_api.Repositories.Database
             dbRepositoryContext = new LagaltDbContext(config);
         }
 
-        public async Task<IEnumerable<Project>> GetAllProjectsAsync()
+        public async Task PutProjectSettings(int id, List<string> neededSkills, List<string> imageUrls)
         {
-            return await dbRepositoryContext.Projects
-                .Include(pr => pr.NeededSkills)
-                .Include(pr => pr.ImageURLs)
-                .Include(pr => pr.Admins) //.Where(i => i.Id == Id)
-                .Include(pr => pr.Contributors)
-                .ToListAsync();
-        }
+            var project = await dbRepositoryContext.Projects
+               .Include(pr => pr.ImageURLs)
+               .Include(pr => pr.NeededSkills)
+               .Where(pr => pr.Id == id)
+               .FirstOrDefaultAsync();
+            List<ImageUrl> newImageUrls = new List<ImageUrl>();
+            List<Skill> newNeededSkills = new List<Skill>();
 
-        public async Task<Project> GetSpecificProjectAsync(int id)
-        {
-            return await dbRepositoryContext.Projects
-                .Include(pr => pr.NeededSkills)
-                .Include(pr => pr.ImageURLs)
-                .Include(pr => pr.Admins)
-                .Include(pr => pr.Contributors)
-                .Where(pr => pr.Id == id)
-                .FirstOrDefaultAsync();
+            foreach (var url in imageUrls)
+            {
+                ImageUrl imgUrl = await dbRepositoryContext.ImageUrls.FindAsync(url);
+                newImageUrls.Add(imgUrl);
+
+            }
+            foreach (var skill in neededSkills)
+            {
+                Skill nddSkill = await dbRepositoryContext.Skills.FindAsync(skill);
+                newNeededSkills.Add(nddSkill);
+            }
+            project.ImageURLs = newImageUrls;
+            project.NeededSkills = newNeededSkills;
+            await dbRepositoryContext.SaveChangesAsync();
+
         }
     }
 }

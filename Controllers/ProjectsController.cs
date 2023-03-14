@@ -2,8 +2,10 @@
 using lagalt_web_api.Models;
 using AutoMapper;
 using lagalt_web_api.Repositories;
-using lagalt_web_api.Models.DTO.ProjectDTO;
 using Microsoft.EntityFrameworkCore;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectReadDTO;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO;
 
 namespace lagalt_web_api.Controllers
 {
@@ -39,41 +41,42 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<ProjectReadDTO>> GetProjects()
+        public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjectBanners()
         {
-            return _mapper.Map<List<ProjectReadDTO>>(_repositories.Projects.GetAll()
+            return _mapper.Map<List<ProjectBannerDTO>>(_repositories.Projects.GetAll()
+                .Include(pr => pr.NeededSkills));
+        }
+
+        // GET: api/Projects
+        /// <summary>
+        /// Gets the projects.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("project/admin/{id}")]
+        public ActionResult<ProjectAdminDTO> GetAdminProject(int id)
+        {
+            var projectDTO = _mapper.Map<ProjectAdminDTO>(_repositories.Projects.GetAll()
                 .Include(pr => pr.NeededSkills)
                 .Include(pr => pr.ImageURLs)
                 .Include(pr => pr.Admins)
-                .Include(pr => pr.Contributors));
+                .Include(pr => pr.Contributors)
+                .Where(pr => pr.Id == id)
+                .FirstOrDefault());
+
+            if (projectDTO is null)
+            {
+                return NotFound();
+            }
+
+            return projectDTO;
         }
 
-
-        // GET: api/projects/5
-        /// <summary>
-        /// Gets the project.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>An ProjectBannerDTO.</returns>
-
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<ProjectReadDTO>> GetProject1(int id)
-        //{
-        //    Project project = await _repositories.Projects.GetSpecificProjectAsync(id);
-
-        //    if (project == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return _mapper.Map<ProjectReadDTO>(project);
-        //}
-        [HttpGet("{id}")]
-        public ActionResult<ProjectReadDTO> GetProject(int id)
+        [HttpGet("project/{id}")]
+        public ActionResult<ProjectPageDTO> GetProjectPage(int id)
         {
-            var projectDTO = _mapper.Map<ProjectReadDTO>(_repositories.Projects.GetAll()
+            var projectDTO = _mapper.Map<ProjectPageDTO>(_repositories.Projects.GetAll()
                .Include(pr => pr.NeededSkills)
                 .Include(pr => pr.ImageURLs)
-                .Include(pr => pr.Admins)
                 .Include(pr => pr.Contributors)
                 .Where(pr => pr.Id == id)
                 .FirstOrDefault());
@@ -95,9 +98,9 @@ namespace lagalt_web_api.Controllers
         /// <param name="project">The project.</param>
         /// <returns>Action result.</returns>
         [HttpPut("{id}")]
-        public IActionResult PutProject(int id, ProjectEditDTO projectDTO)
+        public async Task<IActionResult> PutProject(int id, ProjectEditDTO projectDTO)
         {
-            if (!ProjectExists(id))
+            if (ProjectExists(projectDTO.Id) == null)
             {
                 return NotFound();
             }
@@ -105,7 +108,7 @@ namespace lagalt_web_api.Controllers
             {
                 return BadRequest();
             }
-            _repositories.Projects.Update(_mapper.Map<Project>(projectDTO));
+            await _repositories.Projects.PutProjectSettings(id, projectDTO.NeededSkillsName.ToList(), projectDTO.ImageUrls.ToList());
 
             return NoContent();
         }
@@ -139,7 +142,7 @@ namespace lagalt_web_api.Controllers
         public IActionResult DeleteProject(int id)
         {
             var projects = _repositories.Projects.Get(id);
-            if (!ProjectExists(id))
+            if (ProjectExists(id) == null)
             {
                 return NotFound();
             }
@@ -152,9 +155,9 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Wether project exists or not.</returns>
-        private bool ProjectExists(int id)
+        private Project ProjectExists(int id)
         {
-            return _repositories.Projects.Get(id) is not null;
+            return _repositories.Projects.Get(id);
         }
     }
 }
