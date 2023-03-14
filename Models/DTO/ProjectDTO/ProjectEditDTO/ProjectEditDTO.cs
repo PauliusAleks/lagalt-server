@@ -1,4 +1,4 @@
-﻿namespace lagalt_web_api.Models.DTO.ProjectDTO
+﻿namespace lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO
 {
     public class ProjectEditDTO
     {
@@ -8,10 +8,10 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        public CategoryState Category { get; set; }
-        public ProgressState Progress { get; set; }
+        public string Category { get; set; }
+        public string Progress { get; set; }
         public string? GitURL { get; set; }
-        public virtual List<int>? ContributorsId { get; set; }
+
         public virtual List<string>? ImageUrls { get; set; }
         public virtual List<string>? NeededSkillsName { get; set; }
 

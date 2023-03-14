@@ -1,5 +1,7 @@
-﻿using lagalt_web_api.Models.DTO.ProjectDTO;
-using AutoMapper;
+﻿using AutoMapper;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectReadDTO;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO;
 
 namespace lagalt_web_api.Models.DTO.Profiles
 {
@@ -8,16 +10,46 @@ namespace lagalt_web_api.Models.DTO.Profiles
         public ProjectProfile()
         {
 
-            CreateMap<Project, ProjectReadDTO>()
-                .ReverseMap();
+            CreateMap<Project, ProjectBannerDTO>()
+                .ForMember(prDTO => prDTO.Progress, opt => opt
+                .MapFrom(pr => pr.Progress.ToString()))
+
+                .ForMember(prDTO => prDTO.Category, opt => opt
+                .MapFrom(pr => pr.Category.ToString()))
+
+                .ForMember(prDTO => prDTO.NeededSkillsName, opt => opt
+                .MapFrom(pr => pr.NeededSkills.Select(sk => sk.Name).ToArray())
+                );
 
             CreateMap<Project, ProjectCreateDTO>()
                 .ReverseMap();
 
-            CreateMap<Project, ProjectEditDTO>()
-                .ReverseMap();
+            CreateMap<ProjectEditDTO, Project>()
+                .ForMember(pr => pr.Progress, opt => opt
+                .MapFrom(prDTO => prDTO.Progress))
 
-            CreateMap<Project, ProjectReadDTO>()
+                .ForMember(pr => pr.Category, opt => opt
+                .MapFrom(prDTO => prDTO.Category)
+                );
+
+            CreateMap<Project, ProjectPageDTO>()
+                .ForMember(prDTO => prDTO.NeededSkillsName, opt => opt
+                .MapFrom(pr => pr.NeededSkills.Select(sk => sk.Name).ToArray()))
+
+                .ForMember(prDTO => prDTO.ImageUrls, opt => opt
+                .MapFrom(pr => pr.ImageURLs.Select(img => img.Url).ToArray()))
+
+                .ForMember(prDTO => prDTO.Contributors, opt => opt
+                .MapFrom(pr => pr.Contributors.Select(con => con.Username).ToArray()))
+
+                .ForMember(prDTO => prDTO.Progress, opt => opt
+                .MapFrom(pr => pr.Progress.ToString()))
+
+                .ForMember(prDTO => prDTO.Category, opt => opt
+                .MapFrom(pr => pr.Category.ToString())
+                );
+
+            CreateMap<Project, ProjectAdminDTO>()
                 .ForMember(prDTO => prDTO.NeededSkillsName, opt => opt
                 .MapFrom(pr => pr.NeededSkills.Select(sk => sk.Name).ToArray()))
 
@@ -34,14 +66,8 @@ namespace lagalt_web_api.Models.DTO.Profiles
                 .MapFrom(pr => pr.Progress.ToString()))
 
                 .ForMember(prDTO => prDTO.Category, opt => opt
-                .MapFrom(pr => pr.Category.ToString()));
-
-
-            /* 
-           CreateMap<Project, ProjectBannerDTO>()
-               .ForMember(prDTO => prDTO.NeededSkillsId, opt => opt
-               .MapFrom(pr=>pr.NeededSkills.Select(sk=>sk.Id).ToArray()));
-           */
+                .MapFrom(pr => pr.Category.ToString())
+                );
         }
     }
 }

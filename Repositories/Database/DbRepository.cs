@@ -1,5 +1,5 @@
 ﻿using lagalt_web_api.Data;
-using lagalt_web_api.Repositories.Interface; 
+using lagalt_web_api.Repositories.Interface;
 
 namespace lagalt_web_api.Repositories.Database;
 
@@ -8,7 +8,7 @@ namespace lagalt_web_api.Repositories.Database;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <seealso cref="AssignmentThree.Repositories.Database.IRepository&lt;T&gt;" />
-public class DbRepository<T> :  IRepository<T> where T : class
+public class DbRepository<T> : IRepository<T> where T : class
 {
     /// <summary>
     /// Gets or sets the repository context.
@@ -16,7 +16,7 @@ public class DbRepository<T> :  IRepository<T> where T : class
     /// <value>
     /// The repository context.
     /// </value>
-    private LagaltDbContext dbRepositoryContext { get; set; } 
+    private LagaltDbContext dbRepositoryContext { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="DbRepository{T}"/> class.
     /// </summary>
@@ -35,15 +35,15 @@ public class DbRepository<T> :  IRepository<T> where T : class
     /// </summary>
     /// <param name="Id">The identifier.</param>
     /// <returns></returns>
-    public T Get(int Id)=> dbRepositoryContext.Set<T>().Find(Id);
-    public bool Save()=>dbRepositoryContext.SaveChanges() != 0;
+    public T Get(int Id) => dbRepositoryContext.Set<T>().Find(Id);
+    public bool Save() => dbRepositoryContext.SaveChanges() != 0;
 
     /// <summary>
     /// Creates the specified entity.
     /// <inheritdoc cref="Microsoft.EntityFrameworkCore.DbContext.Add(object)"/>
     /// </summary>
     /// <param name="entity">The entity.</param>
-    public bool Create(T entity) { var result = dbRepositoryContext.Set<T>().Add(entity); Save(); return result is not null; }
-    public bool Update(T entity) { var result = dbRepositoryContext.Set<T>().Update(entity); Save(); return result is not null; }
-    public bool Delete(T entity) { var result = dbRepositoryContext.Set<T>().Remove(entity); Save(); return result is not null; }
+    public T Create(T entity) { var result = dbRepositoryContext.Set<T>().Add(entity); Save(); return result.Entity; }
+    public T Update(T entity) { var result = dbRepositoryContext.Set<T>().Update(entity); Save(); return result.Entity; }
+    public T Delete(T entity) { var result = dbRepositoryContext.Set<T>().Remove(entity); Save(); return result.Entity; }
 }
