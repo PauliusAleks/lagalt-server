@@ -18,6 +18,7 @@ namespace lagalt_web_api.Models.DTO.Profiles
 
             CreateMap<User, UserCreateDTO>().ReverseMap();
             CreateMap<User, UserEditDTO>().ReverseMap();
+            CreateMap<User, UserHiddenDTO>().ReverseMap();
 
         }
     }

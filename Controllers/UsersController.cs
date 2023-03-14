@@ -45,6 +45,19 @@ namespace lagalt_web_api.Controllers
             return Ok(users);
         }
 
+        // GET: api/Users
+        /// <summary>
+        /// Gets the users.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/hidden")]
+        public ActionResult<IEnumerable<UserReadDTO>> GetUsersWithHidden()
+        {
+            var users = _repositories.Users.GetAll();
+            var usersDTO = users.Select(user => user.IsHidden ? new UserReadDTO { FirstName = user.FirstName } : _mapper.Map<UserReadDTO>(user) );
+            return Ok(usersDTO);
+        }
+
 
         // GET: api/users/5
         /// <summary>
@@ -103,9 +116,9 @@ namespace lagalt_web_api.Controllers
             {
                 return BadRequest("user is null.");
             }
-            _repositories.Users.Create(_mapper.Map<User>(user));
+            var createdUser = _repositories.Users.Create(_mapper.Map<User>(user));
 
-            return CreatedAtAction("GetUser", user);
+            return Ok(createdUser);
         }
 
         // DELETE: api/users/5
@@ -117,13 +130,14 @@ namespace lagalt_web_api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
-            var users = _repositories.Users.Get(id);
-            if (!UserExists(id))
-            {
+            try {
+                var user = _repositories.Users.Delete(new Models.User { Id = id });
+                return Ok(_mapper.Map<UserReadDTO>(user));
+            }
+            catch (Exception e) {
                 return NotFound();
             }
-            _repositories.Users.Delete(users);
-            return NoContent();
+              
         }
 
         /// <summary>
@@ -131,9 +145,9 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Wether project exists or not.</returns>
-        private bool UserExists(int id)
+        private User UserExists(int id)
         {
-            return _repositories.Users.Get(id) is not null;
+            return _repositories.Users.Get(id) ;
         }
     }
 }

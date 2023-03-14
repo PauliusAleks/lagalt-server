@@ -43,7 +43,7 @@ public class DbRepository<T> :  IRepository<T> where T : class
     /// <inheritdoc cref="Microsoft.EntityFrameworkCore.DbContext.Add(object)"/>
     /// </summary>
     /// <param name="entity">The entity.</param>
-    public bool Create(T entity) { var result = dbRepositoryContext.Set<T>().Add(entity); Save(); return result is not null; }
-    public bool Update(T entity) { var result = dbRepositoryContext.Set<T>().Update(entity); Save(); return result is not null; }
-    public bool Delete(T entity) { var result = dbRepositoryContext.Set<T>().Remove(entity); Save(); return result is not null; }
+    public T Create(T entity) { var result = dbRepositoryContext.Set<T>().Add(entity); Save(); return result.Entity; }
+    public T Update(T entity) { var result = dbRepositoryContext.Set<T>().Update(entity); Save(); return result.Entity; }
+    public T Delete(T entity) { var result = dbRepositoryContext.Set<T>().Remove(entity); Save(); return result.Entity; }
 }

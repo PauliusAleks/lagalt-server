@@ -74,7 +74,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Admin",
                     LastName = "Adminson",
                     Email = "admin123@admin.no",
-                    UserStatus = false,
+                    IsHidden = false,
                 },
 
                 new User
@@ -84,7 +84,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Per",
                     LastName = "Polle",
                     Email = "PerPolle@sharkboy.no,",
-                    UserStatus = true,
+                    IsHidden = true,
 
                 },
                 new User
@@ -94,7 +94,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Proper",
                     LastName = "Userito",
                     Email = "testing123@Proper.no",
-                    UserStatus = false,
+                    IsHidden = false,
                 },
                 new User
                 {
@@ -103,7 +103,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Bob",
                     LastName = "Forr",
                     Email = "BobBobby@mail.no",
-                    UserStatus = true,
+                    IsHidden = true,
                 },
                 new User
                 {
@@ -112,7 +112,7 @@ namespace lagalt_web_api.Data
                     FirstName = "Ole",
                     LastName = "Dole",
                     Email = "OleDole@mail.no",
-                    UserStatus = true,
+                    IsHidden = true,
                 },
             };
 

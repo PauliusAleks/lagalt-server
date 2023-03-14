@@ -13,8 +13,5 @@ namespace lagalt_web_api.Models.DTO.UserDTO
         /// </value>
         [MaxLength(30)]
         public string Username { get; set; }
-
-
-
     }
 }
