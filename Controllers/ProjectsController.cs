@@ -44,8 +44,8 @@ namespace lagalt_web_api.Controllers
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjects()
         {
             var projects = _repositories.Projects.GetAll();
-            //var projectsDTO = projects.Select(project => _mapper.Map<ProjectBannerDTO>(projects));
-            return Ok(projects);
+            var projectsDTO = projects.Select(proj => _mapper.Map<ProjectBannerDTO>(proj));
+            return Ok(projectsDTO);
         }
 
 
@@ -87,7 +87,8 @@ namespace lagalt_web_api.Controllers
             {
                 return BadRequest();
             }
-            _repositories.Projects.Update(_mapper.Map<Project>(project));
+            var updateProject = _mapper.Map<Project>(project);
+            _repositories.Projects.Update(updateProject);
 
             return NoContent();
         }
@@ -109,7 +110,7 @@ namespace lagalt_web_api.Controllers
 
             var proj = _mapper.Map<Project>(project);  
             var createdProj = _repositories.Projects.Create(proj);
-            Debug.WriteLine("The newsly created project: " + createdProj);
+            //Debug.WriteLine("The newsly created project: " + createdProj);
             return Ok(_mapper.Map<ProjectBannerDTO>(createdProj));
         }
 

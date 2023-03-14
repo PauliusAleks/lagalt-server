@@ -43,7 +43,7 @@ public class Project
     /// <value>
     /// The alias.
     /// </value>
-    //[EnumDataType(typeof(CategoryState))]
+     [EnumDataType(typeof(CategoryState))]
     public CategoryState Category { get; set; }
     /// <summary>
     /// Gets or sets the project's progress.
@@ -51,7 +51,7 @@ public class Project
     /// <value>
     /// The project's progress.
     /// </value>
-    //[EnumDataType(typeof(ProgressState))]
+     [EnumDataType(typeof(ProgressState))]
     public ProgressState Progress { get; set; }
     /// <summary>
     /// Gets or sets the project's description.

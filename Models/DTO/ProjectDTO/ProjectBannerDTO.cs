@@ -18,6 +18,7 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO
         /// <value>
         /// The alias.
         /// </value>
+        [EnumDataType(typeof(CategoryState))]
         public CategoryState Category { get; set; }
         /// <summary>
         /// Gets or sets the gender.
@@ -25,6 +26,7 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO
         /// <value>
         /// The gender.
         /// </value>
+        [EnumDataType(typeof(ProgressState))]
         public ProgressState Progress { get; set; }
         ///// <summary>
         ///// Gets or sets the picture.

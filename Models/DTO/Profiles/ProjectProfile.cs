@@ -7,7 +7,8 @@ namespace lagalt_web_api.Models.DTO.Profiles
     {
         public ProjectProfile()
         {
-            CreateMap<Project, ProjectBannerDTO>().ReverseMap();
+            CreateMap<Project, ProjectBannerDTO>();
+            CreateMap<ProjectBannerDTO, Project>();
             CreateMap<ProjectCreateDTO, Project>().ReverseMap(); 
             CreateMap<ProjectCreateDTO, ProjectBannerDTO>().ReverseMap();  
         }
