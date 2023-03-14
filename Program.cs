@@ -27,8 +27,6 @@ builder.Services.AddScoped<IUserRepository, DbUserRepository>();
 builder.Services.AddScoped<IApplicationRepository, DbApplicationRepository>();
 builder.Services.AddScoped<ISkillRepository, DbSkillRepository>();
 builder.Services.AddScoped<IImageURLRepository, DbImageURLRepository>();
-builder.Services.AddScoped<IAdminRepository, DbAdminRepository>();
-builder.Services.AddScoped<IContributorRepository, DbContributorRepository>();
 
 // Use this for accessing data
 builder.Services.AddScoped<IRepositories, Repositories>();

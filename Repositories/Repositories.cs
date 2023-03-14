@@ -16,8 +16,7 @@ namespace lagalt_web_api.Repositories
         private IApplicationRepository _applicationRepository;
         private ISkillRepository _skillRepository;
         private IImageURLRepository _imageURLRepository;
-        private IAdminRepository _adminRepository;
-        private IContributorRepository _contributorRepository;
+
 
 
         /// <summary>
@@ -29,17 +28,14 @@ namespace lagalt_web_api.Repositories
                                    IUserRepository userRepository,
                                    IApplicationRepository applicationRepository,
                                    ISkillRepository skillRepository,
-                                   IImageURLRepository imageURLRepository,
-                                   IAdminRepository adminRepository,
-                                   IContributorRepository contributorRepository)
+                                   IImageURLRepository imageURLRepository)
+                                   
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
             _applicationRepository = applicationRepository;
             _skillRepository = skillRepository;
             _imageURLRepository = imageURLRepository;
-            _adminRepository = adminRepository;
-            _contributorRepository = contributorRepository;
         }
 
         public IProjectRepository Projects => _projectRepository;
@@ -52,9 +48,6 @@ namespace lagalt_web_api.Repositories
 
         public IImageURLRepository ImageURLs => _imageURLRepository;
 
-        public IAdminRepository Admins => _adminRepository;
-
-        public IContributorRepository Contributors => _contributorRepository;
 
     }
 }

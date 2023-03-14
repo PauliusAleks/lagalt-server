@@ -7,17 +7,18 @@ namespace lagalt_web_api.Models.DTO.Profiles
 {
     public class UserProfile : Profile
     {
-        public UserProfile() { 
+        public UserProfile()
+        {
             CreateMap<User, UserReadDTO>()
-                .ReverseMap();
+                .ForMember(userDTO => userDTO.SkillNames, opt => opt
+                .MapFrom(user => user.Skills.Select(sk => sk.Name)))
 
-        /*
-         * CreateMap<Movie, MovieReadDTO>()
-            .ForMember(mvDTO => mvDTO.CharacterIds, opt => opt // maps from List with Character objects to an array with Character PKs.
-            .MapFrom(mv => mv.Characters.Select(ch => ch.Id).ToArray()));
-        CreateMap<MovieEditDTO, Movie>();
-        CreateMap<MovieCreateDTO, Movie>();
-        */
+                .ForMember(userDTO => userDTO.ApplicationIds, opt => opt
+                .MapFrom(user => user.Applications.Select(app => app.Id)));
+
+            CreateMap<User, UserCreateDTO>().ReverseMap();
+            CreateMap<User, UserEditDTO>().ReverseMap();
+
         }
     }
 }

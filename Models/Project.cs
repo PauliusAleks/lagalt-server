@@ -59,7 +59,7 @@ public class Project
     /// <value>
     /// The project's description.
     /// </value>
-    public string? Description { get; set; }
+    public string Description { get; set; }
     /// <summary>
     /// Gets or sets the project's git URL.
     /// </summary>
@@ -88,14 +88,14 @@ public class Project
     /// <value>
     /// The admins.
     /// </value>
-    public virtual ICollection<Admin>? Admins { get; set; }
+    public virtual ICollection<User>? Admins { get; set; }
     /// <summary>
     /// Gets or sets the project's contributors.
     /// </summary>
     /// <value>
     /// The project's contributors.
     /// </value>
-    public virtual ICollection<Contributor>? Contributors { get; set; }
+    public virtual ICollection<User>? Contributors { get; set; }
 
 
 }

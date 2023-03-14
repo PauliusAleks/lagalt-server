@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lagalt_web_api.Repositories.Database
 {
-    public class DbProjectRepository : DbRepository<Project>, IProjectRepository    {
+    public class DbProjectRepository : DbRepository<Project>, IProjectRepository
+    {
 
         private LagaltDbContext dbRepositoryContext { get; set; }
 
@@ -17,13 +18,25 @@ namespace lagalt_web_api.Repositories.Database
         public async Task<IEnumerable<Project>> GetAllProjectsAsync()
         {
             return await dbRepositoryContext.Projects
-                .Include(s => s.NeededSkills)
-                .Include(i => i.ImageURLs)
+                .Include(pr => pr.NeededSkills)
+                .Include(pr => pr.ImageURLs)
+                .Include(pr => pr.Admins) //.Where(i => i.Id == Id)
+                .Include(pr => pr.Contributors)
                 .ToListAsync();
+        }
+
+        public async Task<Project> GetSpecificProjectAsync(int id)
+        {
+            return await dbRepositoryContext.Projects
+                .Include(pr => pr.NeededSkills)
+                .Include(pr => pr.ImageURLs)
+                .Include(pr => pr.Admins)
+                .Include(pr => pr.Contributors)
+                .Where(pr => pr.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }
 
 
 
- 

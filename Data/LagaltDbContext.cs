@@ -33,8 +33,7 @@ namespace lagalt_web_api.Data
         public DbSet<Application> Applications { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<ImageUrl> ImageUrls { get; set; }
-        public DbSet<Admin> Admins { get; set; }
-        public DbSet<Contributor> Contributors { get; set; }
+
         //public DbSet<Record> Records { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -117,44 +116,44 @@ namespace lagalt_web_api.Data
                    );
                });
 
-            modelBuilder.Entity<Admin>()
-           .HasMany(ad => ad.Projects)
+            modelBuilder.Entity<User>()
+           .HasMany(ad => ad.AdminProjects)
            .WithMany(pr => pr.Admins)
            .UsingEntity<Dictionary<string, object>>(
                "AdminProject",
                r => r.HasOne<Project>().WithMany().HasForeignKey("ProjectId"),
-               l => l.HasOne<Admin>().WithMany().HasForeignKey("AdminId"),
+               l => l.HasOne<User>().WithMany().HasForeignKey("UserId"),
                je =>
                {
-                   je.HasKey("AdminId", "ProjectId");
+                   je.HasKey("UserId", "ProjectId");
                    je.HasData(
-                       new { AdminId = 1, ProjectId = 1 },
-                       new { AdminId = 2, ProjectId = 2 },
-                       new { AdminId = 3, ProjectId = 3 },
-                       new { AdminId = 4, ProjectId = 4 },
-                       new { AdminId = 5, ProjectId = 4 },
-                       new { AdminId = 5, ProjectId = 5 }
+                       new { UserId = 1, ProjectId = 1 },
+                       new { UserId = 2, ProjectId = 2 },
+                       new { UserId = 3, ProjectId = 3 },
+                       new { UserId = 4, ProjectId = 4 },
+                       new { UserId = 5, ProjectId = 4 },
+                       new { UserId = 5, ProjectId = 5 }
                    );
                });
 
             // Seeding data for Contributors
-            modelBuilder.Entity<Contributor>()
-           .HasMany(co => co.Projects)
+            modelBuilder.Entity<User>()
+           .HasMany(co => co.ContributorProjects)
            .WithMany(pr => pr.Contributors)
            .UsingEntity<Dictionary<string, object>>(
                "ContributorProject",
                r => r.HasOne<Project>().WithMany().HasForeignKey("ProjectId"),
-               l => l.HasOne<Contributor>().WithMany().HasForeignKey("ContributorId"),
+               l => l.HasOne<User>().WithMany().HasForeignKey("UserId"),
                je =>
                {
-                   je.HasKey("ContributorId", "ProjectId");
+                   je.HasKey("UserId", "ProjectId");
                    je.HasData(
-                       new { ContributorId = 5, ProjectId = 1 },
-                       new { ContributorId = 2, ProjectId = 1 },
-                       new { ContributorId = 1, ProjectId = 2 },
-                       new { ContributorId = 2, ProjectId = 3 },
-                       new { ContributorId = 3, ProjectId = 4 },
-                       new { ContributorId = 4, ProjectId = 5 }
+                       new { UserId = 5, ProjectId = 1 },
+                       new { UserId = 2, ProjectId = 1 },
+                       new { UserId = 1, ProjectId = 2 },
+                       new { UserId = 2, ProjectId = 3 },
+                       new { UserId = 3, ProjectId = 4 },
+                       new { UserId = 4, ProjectId = 5 }
                    );
                });
 
