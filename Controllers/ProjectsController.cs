@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using lagalt_web_api.Models.DTO.ProjectDTO.ProjectReadDTO;
 using lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO;
 using lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO;
+using lagalt_web_api.Models.DTO.UserDTO;
 
 namespace lagalt_web_api.Controllers
 {
@@ -40,16 +41,28 @@ namespace lagalt_web_api.Controllers
         /// Gets the projects.
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("getProjectBanners")]
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjectBanners()
         {
             return _mapper.Map<List<ProjectBannerDTO>>(_repositories.Projects.GetAll()
-                .Include(pr => pr.NeededSkills));
+                .Include(pr => pr.NeededSkills).Include(pr => pr.ImageURLs));
+        }
+
+        /// <summary>
+        /// Gets the users in a project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("getUsersInProject/{id}")]
+        public ActionResult<IEnumerable<UserReadDTO>> GetProjectUsers(int id)
+        {
+            return _mapper.Map<List<UserReadDTO>>(_repositories.Users.GetAll()
+                .Where(us => us.ContributorProjects.Contains(_repositories.Projects.Get(id))));
         }
 
         // GET: api/Projects
         /// <summary>
-        /// Gets the projects.
+        /// Gets the admin project.
         /// </summary>
         /// <returns></returns>
         [HttpGet("project/admin/{id}")]
@@ -71,6 +84,11 @@ namespace lagalt_web_api.Controllers
             return projectDTO;
         }
 
+        /// <summary>
+        /// Get project by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("project/{id}")]
         public ActionResult<ProjectPageDTO> GetProjectPage(int id)
         {
@@ -92,12 +110,12 @@ namespace lagalt_web_api.Controllers
         // PUT: api/Projects/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Puts the project.
+        /// Update project by id.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="project">The project.</param>
         /// <returns>Action result.</returns>
-        [HttpPut("{id}")]
+        [HttpPut("updateProject/{id}")]
         public async Task<IActionResult> PutProject(int id, ProjectEditDTO projectDTO)
         {
             if (ProjectExists(projectDTO.Id) == null)
@@ -108,7 +126,45 @@ namespace lagalt_web_api.Controllers
             {
                 return BadRequest();
             }
-            await _repositories.Projects.PutProjectSettings(id, projectDTO.NeededSkillsName.ToList(), projectDTO.ImageUrls.ToList());
+            await _repositories.Projects.PutProjectSettings(id, projectDTO);
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Update contributors in project
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpPut("addContributor/{projectId}")]
+        public async Task<IActionResult> AddContributorToProject(int projectId, int userId)
+        {
+            if (ProjectExists(projectId) == null)
+            {
+                return NotFound();
+            }
+
+            await _repositories.Projects.PutProjectContributor(projectId, userId);
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Update admins in project
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpPut("addAdmin/{projectId}")]
+        public async Task<IActionResult> AddAdminToProject(int projectId, int userId)
+        {
+            if (ProjectExists(projectId) == null)
+            {
+                return NotFound();
+            }
+
+            await _repositories.Projects.PutProjectAdmin(projectId, userId);
 
             return NoContent();
         }
@@ -120,16 +176,16 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="project">The project.</param>
         /// <returns>The ProjectCreateDTO.</returns>
-        [HttpPost]
-        public ActionResult<ProjectCreateDTO> PostProject(ProjectCreateDTO project)
+        [HttpPost("createProject")]
+        public ActionResult<ProjectCreateDTO> PostProject(ProjectCreateDTO projectDTO)
         {
-            if (project is null)
+            if (projectDTO is null)
             {
                 return BadRequest("project is null.");
             }
-            _repositories.Projects.Create(_mapper.Map<Project>(project));
+            var createdProject = _repositories.Projects.Create(_mapper.Map<Project>(projectDTO));
 
-            return CreatedAtAction("GetProject", project);
+            return Ok(createdProject);
         }
 
         // DELETE: api/projects/5
@@ -149,6 +205,7 @@ namespace lagalt_web_api.Controllers
             _repositories.Projects.Delete(projects);
             return NoContent();
         }
+
 
         /// <summary>
         /// Project existence check.

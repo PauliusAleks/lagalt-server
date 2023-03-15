@@ -10,6 +10,8 @@ namespace lagalt_web_api.Repositories.Interface
     /// <seealso cref="AssignmentThree.Repositories.Database.IRepository&lt;AssignmentThree.Models.Project&gt;" />
     public interface IProjectRepository : IRepository<Project>
     {
-        public Task PutProjectSettings(int id, List<string> neededSkills, List<string> imageUrls);
+        public Task PutProjectSettings(int id, ProjectEditDTO projectEditDTO);
+        public Task PutProjectContributor(int id, int contributorId);
+        public Task PutProjectAdmin(int id, int adminId);
     }
 }

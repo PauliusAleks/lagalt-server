@@ -54,7 +54,7 @@ namespace lagalt_web_api.Controllers
         public ActionResult<IEnumerable<UserReadDTO>> GetUsersWithHidden()
         {
             var users = _repositories.Users.GetAll();
-            var usersDTO = users.Select(user => user.IsHidden ? new UserReadDTO { FirstName = user.FirstName } : _mapper.Map<UserReadDTO>(user) );
+            var usersDTO = users.Select(user => user.IsHidden ? new UserReadDTO { FirstName = user.FirstName } : _mapper.Map<UserReadDTO>(user));
             return Ok(usersDTO);
         }
 
@@ -86,10 +86,10 @@ namespace lagalt_web_api.Controllers
         /// <param name="id">The identifier.</param>
         /// <param name="user">The user.</param>
         /// <returns>Action result.</returns>
-        [HttpPut("{id}")]
+        [HttpPut("editUser/{id}")]
         public IActionResult PutUser(int id, UserCreateDTO user)
         {
-            if (!UserExists(id))
+            if (UserExists(id) == null)
             {
                 return NotFound();
             }
@@ -109,7 +109,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>The UserCreateDTO.</returns>
-        [HttpPost]
+        [HttpPost("createUser")]
         public ActionResult<UserCreateDTO> PostUser(UserCreateDTO user)
         {
             if (user is null)
@@ -130,14 +130,16 @@ namespace lagalt_web_api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
-            try {
+            try
+            {
                 var user = _repositories.Users.Delete(new Models.User { Id = id });
                 return Ok(_mapper.Map<UserReadDTO>(user));
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 return NotFound();
             }
-              
+
         }
 
         /// <summary>
@@ -147,7 +149,7 @@ namespace lagalt_web_api.Controllers
         /// <returns>Wether project exists or not.</returns>
         private User UserExists(int id)
         {
-            return _repositories.Users.Get(id) ;
+            return _repositories.Users.Get(id);
         }
     }
 }

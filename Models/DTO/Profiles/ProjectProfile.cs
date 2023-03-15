@@ -10,6 +10,19 @@ namespace lagalt_web_api.Models.DTO.Profiles
         public ProjectProfile()
         {
 
+
+
+            CreateMap<Project, ProjectCreateDTO>()
+                .ReverseMap();
+
+            CreateMap<ProjectEditDTO, Project>();
+            /*.ForMember(pr => pr.Progress, opt => opt
+            .MapFrom(prDTO => prDTO.Progress))
+
+            .ForMember(pr => pr.Category, opt => opt
+            .MapFrom(prDTO => prDTO.Category)*/
+
+
             CreateMap<Project, ProjectBannerDTO>()
                 .ForMember(prDTO => prDTO.Progress, opt => opt
                 .MapFrom(pr => pr.Progress.ToString()))
@@ -18,18 +31,10 @@ namespace lagalt_web_api.Models.DTO.Profiles
                 .MapFrom(pr => pr.Category.ToString()))
 
                 .ForMember(prDTO => prDTO.NeededSkillsName, opt => opt
-                .MapFrom(pr => pr.NeededSkills.Select(sk => sk.Name).ToArray())
-                );
+                .MapFrom(pr => pr.NeededSkills.Select(sk => sk.Name).ToArray()))
 
-            CreateMap<Project, ProjectCreateDTO>()
-                .ReverseMap();
-
-            CreateMap<ProjectEditDTO, Project>()
-                .ForMember(pr => pr.Progress, opt => opt
-                .MapFrom(prDTO => prDTO.Progress))
-
-                .ForMember(pr => pr.Category, opt => opt
-                .MapFrom(prDTO => prDTO.Category)
+                .ForMember(prDTO => prDTO.BannerImage, opt => opt
+                .MapFrom(pr => pr.ImageURLs.ToArray()[0].Url.ToString())//Select(im => im.Url).ToString())
                 );
 
             CreateMap<Project, ProjectPageDTO>()
@@ -39,8 +44,8 @@ namespace lagalt_web_api.Models.DTO.Profiles
                 .ForMember(prDTO => prDTO.ImageUrls, opt => opt
                 .MapFrom(pr => pr.ImageURLs.Select(img => img.Url).ToArray()))
 
-                .ForMember(prDTO => prDTO.Contributors, opt => opt
-                .MapFrom(pr => pr.Contributors.Select(con => con.Username).ToArray()))
+                //.ForMember(prDTO => prDTO.Contributors, opt => opt
+                //.MapFrom(pr => pr.Contributors.Select(con => con.Username).ToArray()))
 
                 .ForMember(prDTO => prDTO.Progress, opt => opt
                 .MapFrom(pr => pr.Progress.ToString()))
