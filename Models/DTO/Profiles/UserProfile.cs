@@ -10,14 +10,20 @@ namespace lagalt_web_api.Models.DTO.Profiles
         public UserProfile()
         {
             CreateMap<User, UserReadDTO>()
-                .ForMember(userDTO => userDTO.SkillNames, opt => opt
+                .ForMember(userDTO => userDTO.Skills, opt => opt
                 .MapFrom(user => user.Skills.Select(sk => sk.Name)))
 
                 .ForMember(userDTO => userDTO.ApplicationIds, opt => opt
                 .MapFrom(user => user.Applications.Select(app => app.Id)));
 
             CreateMap<User, UserCreateDTO>().ReverseMap();
-            CreateMap<User, UserEditDTO>().ReverseMap();
+
+                      //Src  //Dest
+            CreateMap<User, UserEditDTO>()
+                .ForMember((userEditDto) => userEditDto.SkillIds, opt => opt
+                .MapFrom(user => user.Skills.Select(skill=>skill.Id)))
+                .ReverseMap();
+
             CreateMap<User, UserHiddenDTO>().ReverseMap();
 
         }

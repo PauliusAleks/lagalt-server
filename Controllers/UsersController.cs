@@ -3,6 +3,8 @@ using lagalt_web_api.Models;
 using AutoMapper;
 using lagalt_web_api.Repositories;
 using lagalt_web_api.Models.DTO.UserDTO;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectReadDTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace lagalt_web_api.Controllers
 {
@@ -34,29 +36,29 @@ namespace lagalt_web_api.Controllers
 
         // GET: api/Users
         /// <summary>
-        /// Gets the users.
+        /// Get all users.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public ActionResult<IEnumerable<UserReadDTO>> GetUsers()
         {
-            var users = _repositories.Users.GetAll();
-            var usersDTO = users.Select(user => _mapper.Map<UserReadDTO>(users));
-            return Ok(users);
-        }
-
-        // GET: api/Users
-        /// <summary>
-        /// Gets the users.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("/hidden")]
-        public ActionResult<IEnumerable<UserReadDTO>> GetUsersWithHidden()
-        {
-            var users = _repositories.Users.GetAll();
-            var usersDTO = users.Select(user => user.IsHidden ? new UserReadDTO { FirstName = user.FirstName } : _mapper.Map<UserReadDTO>(user));
+            var users = _repositories.Users.GetAll().Include(u => u.Skills);
+            var usersDTO = users.Select(user => _mapper.Map<UserReadDTO>(user));
             return Ok(usersDTO);
         }
+
+        //// GET: api/Users
+        ///// <summary>
+        ///// Get hidden users.
+        ///// </summary>
+        ///// <returns></returns>
+        //[HttpGet("/hidden")]
+        //public ActionResult<IEnumerable<UserReadDTO>> GetUsersWithHidden()
+        //{
+        //    var users = _repositories.Users.GetAll();
+        //    var usersDTO = users.Select(user => user.IsHidden ? new UserReadDTO { FirstName = user.FirstName } : _mapper.Map<UserReadDTO>(user));
+        //    return Ok(usersDTO);
+        //}
 
 
         // GET: api/users/5
@@ -68,14 +70,38 @@ namespace lagalt_web_api.Controllers
         [HttpGet("{id}")]
         public ActionResult<UserReadDTO> GetUser(int id)
         {
-            var user = _repositories.Users.Get(id);
+            var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
+               .Include(u => u.Skills)
+               .Where(u => u.Id == id)
+               .FirstOrDefault());
 
-            if (user is null)
+            if (userDTO is null)
             {
                 return NotFound();
             }
 
-            return _mapper.Map<UserReadDTO>(user);
+            return userDTO;
+        }
+
+        /// <summary>
+        /// Get user by username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [HttpGet("get/{username}")]
+        public ActionResult<UserReadDTO> GetUser(string username)
+        {
+            var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
+               .Include(u => u.Skills)
+               .Where(u => u.Username == username)
+               .FirstOrDefault());
+
+            if (userDTO is null)
+            {
+                return NotFound();
+            }
+
+            return userDTO;
         }
 
         // PUT: api/Users/5
@@ -87,20 +113,23 @@ namespace lagalt_web_api.Controllers
         /// <param name="user">The user.</param>
         /// <returns>Action result.</returns>
         [HttpPut("editUser/{id}")]
-        public IActionResult PutUser(int id, UserCreateDTO user)
+        public IActionResult PutUser(int id, UserEditDTO userDTO) // TODO: fix
         {
             if (UserExists(id) == null)
             {
                 return NotFound();
             }
-            if (user is null)
+            if (userDTO is null)
             {
                 return BadRequest();
             }
-            _repositories.Users.Update(_mapper.Map<User>(user));
+            var mapped = _mapper.Map<User>(userDTO);
+            _repositories.Users.Update(mapped);
 
             return NoContent();
         }
+
+
 
         // POST: api/users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

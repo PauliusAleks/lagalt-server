@@ -4,6 +4,6 @@ public class ApplicationReadDTO
 {
     public int UserId { get; set; }
     public int ProjectId { get; set; }
-    public string motivationLetter { get; set; }
-    public ApplicationState State { get; set; }
+    public string MotivationLetter { get; set; }
+    public string State { get; set; }
 }

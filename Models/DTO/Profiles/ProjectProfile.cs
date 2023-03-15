@@ -10,7 +10,7 @@ namespace lagalt_web_api.Models.DTO.Profiles
         public ProjectProfile()
         {
 
-
+            //MapperReceiver mapperReceiver = new MapperReceiver();
 
             CreateMap<Project, ProjectCreateDTO>()
                 .ReverseMap();
@@ -34,8 +34,7 @@ namespace lagalt_web_api.Models.DTO.Profiles
                 .MapFrom(pr => pr.NeededSkills.Select(sk => sk.Name).ToArray()))
 
                 .ForMember(prDTO => prDTO.BannerImage, opt => opt
-                .MapFrom(pr => pr.ImageURLs.ToArray()[0].Url.ToString())//Select(im => im.Url).ToString())
-                );
+                .MapFrom(pr => pr.ImageURLs.FirstOrDefault().Url));
 
             CreateMap<Project, ProjectPageDTO>()
                 .ForMember(prDTO => prDTO.NeededSkillsName, opt => opt

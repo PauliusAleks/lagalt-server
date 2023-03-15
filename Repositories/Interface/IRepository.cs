@@ -34,5 +34,7 @@ namespace lagalt_web_api.Repositories.Interface
         /// <param name="entity">The entity.</param>
         /// <returns>Deletion success.</returns>
         T Delete(T entity);
+
+        bool Exists(int id);
     }
 }

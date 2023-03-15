@@ -44,12 +44,14 @@ namespace lagalt_web_api.Controllers
         [HttpGet("getProjectBanners")]
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjectBanners()
         {
-            return _mapper.Map<List<ProjectBannerDTO>>(_repositories.Projects.GetAll()
-                .Include(pr => pr.NeededSkills).Include(pr => pr.ImageURLs));
+            var projects = _repositories.Projects.GetAll();
+            var withSkills = projects.Include(pr => pr.NeededSkills);
+            var withImageUrls = withSkills.Include(pr => pr.ImageURLs);
+            return _mapper.Map<List<ProjectBannerDTO>>(withImageUrls);
         }
 
         /// <summary>
-        /// Gets the users in a project
+        /// Gets all users in a project
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -94,10 +96,10 @@ namespace lagalt_web_api.Controllers
         {
             var projectDTO = _mapper.Map<ProjectPageDTO>(_repositories.Projects.GetAll()
                .Include(pr => pr.NeededSkills)
-                .Include(pr => pr.ImageURLs)
-                .Include(pr => pr.Contributors)
-                .Where(pr => pr.Id == id)
-                .FirstOrDefault());
+               .Include(pr => pr.ImageURLs)
+               .Include(pr => pr.Contributors)
+               .Where(pr => pr.Id == id)
+               .FirstOrDefault());
 
             if (projectDTO is null)
             {

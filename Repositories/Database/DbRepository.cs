@@ -1,5 +1,7 @@
 ﻿using lagalt_web_api.Data;
 using lagalt_web_api.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 
 namespace lagalt_web_api.Repositories.Database;
 
@@ -46,4 +48,6 @@ public class DbRepository<T> : IRepository<T> where T : class
     public T Create(T entity) { var result = dbRepositoryContext.Set<T>().Add(entity); Save(); return result.Entity; }
     public T Update(T entity) { var result = dbRepositoryContext.Set<T>().Update(entity); Save(); return result.Entity; }
     public T Delete(T entity) { var result = dbRepositoryContext.Set<T>().Remove(entity); Save(); return result.Entity; }
+
+    public bool Exists(int id) => throw new NotImplementedException("plz implement me :(");//dbRepositoryContext.Set<T>().AsNoTracking().ToList() is not null;
 }

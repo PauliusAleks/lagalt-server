@@ -3,6 +3,6 @@
 public class ApplicationEditDTO
 {
     public int Id { get; set; }
-    //public string MotivationLetter { get; set; } JA/NEI?
+    public string State { get; set; }
 
 }

@@ -6,12 +6,8 @@ namespace lagalt_web_api.Models.DTO.UserDTO
         /// <summary>
         /// Properties for editing a user dto
         /// </summary>
-        public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Email { get; set; }
         public string? Portofolio { get; set; }
         public string? MotivationLetter { get; set; }
-        public virtual List<string>? SkillNames { get; set; }
+        public virtual List<int>? SkillIds { get; set; }
     }
 }
