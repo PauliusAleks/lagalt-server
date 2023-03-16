@@ -422,7 +422,7 @@ namespace lagalt_web_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Portofolio")
+                    b.Property<string>("Portfolio")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

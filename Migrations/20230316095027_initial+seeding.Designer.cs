@@ -11,8 +11,8 @@ using lagalt_web_api.Data;
 namespace lagalt_web_api.Migrations
 {
     [DbContext(typeof(LagaltDbContext))]
-    [Migration("20230314145835_initialMigration")]
-    partial class initialMigration
+    [Migration("20230316095027_initial+seeding")]
+    partial class initialseeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -424,7 +424,7 @@ namespace lagalt_web_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Portofolio")
+                    b.Property<string>("Portfolio")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

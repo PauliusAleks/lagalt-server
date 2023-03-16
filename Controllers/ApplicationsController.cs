@@ -47,7 +47,7 @@ namespace lagalt_web_api.Controllers
                 .Where(us => us.ProjectId == _repositories.Projects.Get(id).Id));
         }
         /// <summary>
-        /// Creates and application
+        /// Creates an application
         /// </summary>
         /// <param name="applicationDTO"></param>
         /// <returns></returns>
@@ -70,12 +70,46 @@ namespace lagalt_web_api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteApplication(int id)
         {
-            var application = _repositories.Application.Get(id);
-            if (ProjectExists(id) == null)
+            var application = _repositories.Applications.Get(id);
+            if (ApplicationExists(id) == null)
             {
                 return NotFound();
             }
             _repositories.Applications.Delete(application);
+            return NoContent();
+        }
+        /// <summary>
+        /// Accepts an application
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("accept/{id}")]
+        public IActionResult ChangeApplicationStateToAccepted(int id)
+        {
+            var application = _repositories.Applications.Get(id);
+            if (ApplicationExists(id) == null)
+            {
+                return NotFound();
+            }
+            application.State = ApplicationState.Accepted;
+            _repositories.Applications.Update(application);
+            return NoContent();
+        }
+        /// <summary>
+        /// Rejects an application
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("reject/{id}")]
+        public IActionResult ChangeApplicationStateToRejected(int id)
+        {
+            var application = _repositories.Applications.Get(id);
+            if (ApplicationExists(id) == null)
+            {
+                return NotFound();
+            }
+            application.State = ApplicationState.Rejected;
+            _repositories.Applications.Update(application);
             return NoContent();
         }
         /// <summary>

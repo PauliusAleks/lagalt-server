@@ -18,12 +18,12 @@ public class User
     public string Email { get; set; }
 
     public bool IsHidden { get; set; }
-    public string? Portofolio { get; set; }
+    public string? Portfolio { get; set; }
     public virtual ICollection<Skill>? Skills { get; set; }
     public virtual ICollection<Application>? Applications { get; set; }
     public virtual ICollection<Project> AdminProjects { get; set; }
     public virtual ICollection<Project> ContributorProjects { get; set; }
 
- 
+
     //public virtual Record Record { get; set; }
 }

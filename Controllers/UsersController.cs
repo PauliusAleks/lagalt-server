@@ -88,7 +88,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        [HttpGet("get/{username}")]
+        [HttpGet("getByUsername/{username}")]
         public ActionResult<UserReadDTO> GetUser(string username)
         {
             var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
@@ -107,15 +107,15 @@ namespace lagalt_web_api.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Puts the user.
+        /// Update user by id
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="user">The user.</param>
         /// <returns>Action result.</returns>
-        [HttpPut("editUser/{id}")]
-        public IActionResult PutUser(int id, UserEditDTO userDTO) // TODO: fix
+        [HttpPut("editUserById/{id}")]
+        public async Task<IActionResult> PutUserById(int id, UserEditDTO userDTO) // TODO: fix
         {
-            if (UserExists(id) == null)
+            if (UserExists(userDTO.Id) == null)
             {
                 return NotFound();
             }
@@ -123,8 +123,29 @@ namespace lagalt_web_api.Controllers
             {
                 return BadRequest();
             }
-            var mapped = _mapper.Map<User>(userDTO);
-            _repositories.Users.Update(mapped);
+            await _repositories.Users.PutUserSettingsId(id, userDTO);
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Update user by username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="userDTO"></param>
+        /// <returns>ActionResult</returns>
+        [HttpPut("editUserByUsername/{username}")]
+        public async Task<IActionResult> PutUserByUsername(string username, UserEditDTO userDTO)
+        {
+            if (UserExists(userDTO.Id) == null)
+            {
+                return NotFound();
+            }
+            if (userDTO is null)
+            {
+                return BadRequest();
+            }
+            await _repositories.Users.PutUserSettingsUsername(username, userDTO);
 
             return NoContent();
         }
@@ -134,7 +155,7 @@ namespace lagalt_web_api.Controllers
         // POST: api/users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Posts the users.
+        /// Create user.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>The UserCreateDTO.</returns>
@@ -152,7 +173,7 @@ namespace lagalt_web_api.Controllers
 
         // DELETE: api/users/5
         /// <summary>
-        /// Deletes the user.
+        /// Deletes the user by id.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>The action result.</returns>

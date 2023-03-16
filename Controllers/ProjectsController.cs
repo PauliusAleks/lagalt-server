@@ -7,6 +7,7 @@ using lagalt_web_api.Models.DTO.ProjectDTO.ProjectReadDTO;
 using lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO;
 using lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO;
 using lagalt_web_api.Models.DTO.UserDTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lagalt_web_api.Controllers
 {
@@ -41,6 +42,7 @@ namespace lagalt_web_api.Controllers
         /// Gets the projects.
         /// </summary>
         /// <returns></returns>
+        //[Authorize]
         [HttpGet("getProjectBanners")]
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjectBanners()
         {
@@ -51,15 +53,27 @@ namespace lagalt_web_api.Controllers
         }
 
         /// <summary>
-        /// Gets all users in a project
+        /// Gets all contributors in a project
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("getUsersInProject/{id}")]
-        public ActionResult<IEnumerable<UserReadDTO>> GetProjectUsers(int id)
+        [HttpGet("getContributorsInProject/{id}")]
+        public ActionResult<IEnumerable<UserReadDTO>> GetProjectContributors(int id)
         {
             return _mapper.Map<List<UserReadDTO>>(_repositories.Users.GetAll()
                 .Where(us => us.ContributorProjects.Contains(_repositories.Projects.Get(id))));
+        }
+
+        /// <summary>
+        /// Gets all admins in a project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("getAdminsInProject/{id}")]
+        public ActionResult<IEnumerable<UserReadDTO>> GetProjectAdmins(int id)
+        {
+            return _mapper.Map<List<UserReadDTO>>(_repositories.Users.GetAll()
+                .Where(us => us.AdminProjects.Contains(_repositories.Projects.Get(id))));
         }
 
         // GET: api/Projects
@@ -67,7 +81,7 @@ namespace lagalt_web_api.Controllers
         /// Gets the admin project.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("project/admin/{id}")]
+        [HttpGet("admin/{id}")]
         public ActionResult<ProjectAdminDTO> GetAdminProject(int id)
         {
             var projectDTO = _mapper.Map<ProjectAdminDTO>(_repositories.Projects.GetAll()
@@ -91,7 +105,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("project/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<ProjectPageDTO> GetProjectPage(int id)
         {
             var projectDTO = _mapper.Map<ProjectPageDTO>(_repositories.Projects.GetAll()

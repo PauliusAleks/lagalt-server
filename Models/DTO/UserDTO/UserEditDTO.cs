@@ -6,8 +6,9 @@ namespace lagalt_web_api.Models.DTO.UserDTO
         /// <summary>
         /// Properties for editing a user dto
         /// </summary>
-        public string? Portofolio { get; set; }
-        public string? MotivationLetter { get; set; }
+        public int Id { get; set; }
+        public string? Portfolio { get; set; }
+        public bool IsHidden { get; set; }
         public virtual List<int>? SkillIds { get; set; }
     }
 }

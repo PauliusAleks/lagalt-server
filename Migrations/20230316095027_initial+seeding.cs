@@ -4,7 +4,7 @@
 
 namespace lagalt_web_api.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class initialseeding : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,7 +62,7 @@ namespace lagalt_web_api.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsHidden = table.Column<bool>(type: "bit", nullable: false),
-                    Portofolio = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Portfolio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -255,7 +255,7 @@ namespace lagalt_web_api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "FirstName", "IsHidden", "LastName", "Portofolio", "Username" },
+                columns: new[] { "Id", "Email", "FirstName", "IsHidden", "LastName", "Portfolio", "Username" },
                 values: new object[,]
                 {
                     { 1, "admin123@admin.no", "Admin", false, "Adminson", null, "adminBoy" },
