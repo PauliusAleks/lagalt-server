@@ -91,7 +91,7 @@ namespace lagalt_web_api.Controllers
             {
                 return NotFound();
             }
-            application.State = ApplicationState.Accepted;
+            application.State = ApplicationState.Akseptert;
             _repositories.Applications.Update(application);
             return NoContent();
         }
@@ -108,7 +108,7 @@ namespace lagalt_web_api.Controllers
             {
                 return NotFound();
             }
-            application.State = ApplicationState.Rejected;
+            application.State = ApplicationState.Avvist;
             _repositories.Applications.Update(application);
             return NoContent();
         }

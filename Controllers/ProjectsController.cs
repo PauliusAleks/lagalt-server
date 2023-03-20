@@ -43,7 +43,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <returns></returns>
         //[Authorize]
-        [HttpGet("getProjectBanners")]
+        [HttpGet("banners")]
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjectBanners()
         {
             var projects = _repositories.Projects.GetAll();
@@ -57,7 +57,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("getContributorsInProject/{id}")]
+        [HttpGet("{id}/contributors")]
         public ActionResult<IEnumerable<UserReadDTO>> GetProjectContributors(int id)
         {
             return _mapper.Map<List<UserReadDTO>>(_repositories.Users.GetAll()
@@ -69,7 +69,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("getAdminsInProject/{id}")]
+        [HttpGet("{id}/admins")]
         public ActionResult<IEnumerable<UserReadDTO>> GetProjectAdmins(int id)
         {
             return _mapper.Map<List<UserReadDTO>>(_repositories.Users.GetAll()
@@ -105,7 +105,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("contributor/{id}")]
         public ActionResult<ProjectPageDTO> GetProjectPage(int id)
         {
             var projectDTO = _mapper.Map<ProjectPageDTO>(_repositories.Projects.GetAll()
@@ -153,7 +153,7 @@ namespace lagalt_web_api.Controllers
         /// <param name="projectId"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        [HttpPut("addContributor/{projectId}")]
+        [HttpPut("{projectId}/addContributor")]
         public async Task<IActionResult> AddContributorToProject(int projectId, int userId)
         {
             if (ProjectExists(projectId) == null)
@@ -172,7 +172,7 @@ namespace lagalt_web_api.Controllers
         /// <param name="projectId"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        [HttpPut("addAdmin/{projectId}")]
+        [HttpPut("{projectId}/addAdmin")]
         public async Task<IActionResult> AddAdminToProject(int projectId, int userId)
         {
             if (ProjectExists(projectId) == null)
@@ -204,7 +204,7 @@ namespace lagalt_web_api.Controllers
             return Ok(createdProject);
         }
 
-        [HttpPut("AddImageToProject/{projectId}")]
+        [HttpPut("{projectId}/addImageUrl")]
         public async Task<IActionResult> PutImageInProject(int projectId, string imageUrl)
         {
             if (ProjectExists(projectId) is null)

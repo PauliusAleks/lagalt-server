@@ -67,7 +67,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>An UserReadDTO.</returns>
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public ActionResult<UserReadDTO> GetUser(int id)
         {
             var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
@@ -84,11 +84,11 @@ namespace lagalt_web_api.Controllers
         }
 
         /// <summary>
-        /// Get user by username
+        /// Get user by username    users/?username
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        [HttpGet("getByUsername/{username}")]
+        [HttpGet("username/{username}")]
         public ActionResult<UserReadDTO> GetUser(string username)
         {
             var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
@@ -112,7 +112,7 @@ namespace lagalt_web_api.Controllers
         /// <param name="id">The identifier.</param>
         /// <param name="user">The user.</param>
         /// <returns>Action result.</returns>
-        [HttpPut("editUserById/{id}")]
+        [HttpPut("editWithId/{id}")]
         public async Task<IActionResult> PutUserById(int id, UserEditDTO userDTO) // TODO: fix
         {
             if (UserExists(userDTO.Id) == null)
@@ -134,7 +134,7 @@ namespace lagalt_web_api.Controllers
         /// <param name="username"></param>
         /// <param name="userDTO"></param>
         /// <returns>ActionResult</returns>
-        [HttpPut("editUserByUsername/{username}")]
+        [HttpPut("editWithUsername/{username}")]
         public async Task<IActionResult> PutUserByUsername(string username, UserEditDTO userDTO)
         {
             if (UserExists(userDTO.Id) == null)
@@ -159,7 +159,7 @@ namespace lagalt_web_api.Controllers
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>The UserCreateDTO.</returns>
-        [HttpPost("createUser")]
+        [HttpPost("CreateUser")]
         public ActionResult<UserCreateDTO> PostUser(UserCreateDTO user)
         {
             if (user is null)

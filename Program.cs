@@ -9,6 +9,7 @@ using lagalt_web_api.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using lagalt_web_api.Hubs;
 
 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -68,6 +69,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddHttpClient();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Debug", builder => builder
+    .WithOrigins("https://localhost:7125", "http://localhost:3000", "https://localhost:3000")
+    .AllowAnyHeader()
+    .WithMethods("GET", "POST")
+    .AllowCredentials());
+});
+
+builder.Services.AddSignalR();
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddControllers().
     AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -96,7 +108,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 */
 var app = builder.Build();
-
+app.UseCors("Debug");
 //Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -112,5 +124,5 @@ app.UseAuthorization();
 
 
 app.MapControllers();
-
+app.MapHub<ChatHub>("/chathub");
 app.Run();

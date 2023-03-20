@@ -4,7 +4,7 @@
 
 namespace lagalt_web_api.Migrations
 {
-    public partial class initialseeding : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -222,11 +222,11 @@ namespace lagalt_web_api.Migrations
                 columns: new[] { "Id", "Url" },
                 values: new object[,]
                 {
-                    { 1, "https://picsum.photos/200/350,https://picsum.photos/200/250" },
-                    { 2, "https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" },
-                    { 3, "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" },
-                    { 4, "https://picsum.photos/200/300" },
-                    { 5, "https://www.youtube.com/watch?v=LkWQvzrv6gI" }
+                    { 1, "https://picsum.photos/200/300" },
+                    { 2, "https://picsum.photos/200/325" },
+                    { 3, "https://picsum.photos/200/350" },
+                    { 4, "https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg" },
+                    { 5, "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -235,9 +235,9 @@ namespace lagalt_web_api.Migrations
                 values: new object[,]
                 {
                     { 1, 3, "Joachim Rønning", "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C6AB0EDCE8F41882EBBB782B76DD4F05D7E360D7C3F23B4F6D02C24699B26105/scale?width=1200&aspectRatio=1.78&format=jpeg", "Tinder v2", 0 },
-                    { 2, 3, "Looking for a c# back-end developer", "https://gitlab.com/Frechr/assignment-three/-/tree/master/", "EF_CodeFirst", 0 },
-                    { 3, 3, "Web app to catch pokemons!", "https://gitlab.com/JarandNL/angular_pokemontrainer", "Exciting_Angular_Project", 1 },
-                    { 4, 1, "Hot youth!!!!", "https://www.imdb.com/title/tt0475293/", "High School Musical", 3 },
+                    { 2, 3, "Ser etter c# utvikler", "https://gitlab.com/Frechr/assignment-three/-/tree/master/", "EF CodeFirst", 0 },
+                    { 3, 3, "Applikasjon for å fange pokemons", "https://gitlab.com/JarandNL/angular_pokemontrainer", "Exciting Angular Project", 1 },
+                    { 4, 1, "Søte ungdommer", "https://www.imdb.com/title/tt0475293/", "High School Musical", 3 },
                     { 5, 0, "Pls help make the best song ever", null, "Best song ever!!!", 1 }
                 });
 
@@ -283,11 +283,11 @@ namespace lagalt_web_api.Migrations
                 columns: new[] { "Id", "MotivationLetter", "ProjectId", "State", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Please give me access!", 1, 0, 2 },
-                    { 2, "I am so good!(btw I run arch)", 2, 0, 3 },
-                    { 3, "I am not good, but fake it til you make it!", 2, 0, 4 },
-                    { 4, "I am a fast learner, so give me a chance...", 3, 0, 4 },
-                    { 5, "This is the opportunity of a lifetime! So excited!", 5, 0, 5 }
+                    { 1, "Vær så snill", 1, 0, 2 },
+                    { 2, "Jeg er veldig flink", 2, 0, 3 },
+                    { 3, "Jeg er ikke flink men fake it til you make it!", 2, 0, 4 },
+                    { 4, "Jeg lærer fort så gi meg en sjanse...", 3, 0, 4 },
+                    { 5, "Jeg er veldig spent og motivert. Dette er alt jeg ønsker meg!", 5, 0, 5 }
                 });
 
             migrationBuilder.InsertData(

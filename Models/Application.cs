@@ -63,7 +63,7 @@ public class Application
 /// </summary>
 public enum ApplicationState
 {
-    Pending,
-    Accepted,
-    Rejected
+    Ventende,
+    Akseptert,
+    Avvist
 }

@@ -195,7 +195,7 @@ namespace lagalt_web_api.Migrations
                         new
                         {
                             Id = 1,
-                            MotivationLetter = "Please give me access!",
+                            MotivationLetter = "Vær så snill",
                             ProjectId = 1,
                             State = 0,
                             UserId = 2
@@ -203,7 +203,7 @@ namespace lagalt_web_api.Migrations
                         new
                         {
                             Id = 2,
-                            MotivationLetter = "I am so good!(btw I run arch)",
+                            MotivationLetter = "Jeg er veldig flink",
                             ProjectId = 2,
                             State = 0,
                             UserId = 3
@@ -211,7 +211,7 @@ namespace lagalt_web_api.Migrations
                         new
                         {
                             Id = 3,
-                            MotivationLetter = "I am not good, but fake it til you make it!",
+                            MotivationLetter = "Jeg er ikke flink men fake it til you make it!",
                             ProjectId = 2,
                             State = 0,
                             UserId = 4
@@ -219,7 +219,7 @@ namespace lagalt_web_api.Migrations
                         new
                         {
                             Id = 4,
-                            MotivationLetter = "I am a fast learner, so give me a chance...",
+                            MotivationLetter = "Jeg lærer fort så gi meg en sjanse...",
                             ProjectId = 3,
                             State = 0,
                             UserId = 4
@@ -227,7 +227,7 @@ namespace lagalt_web_api.Migrations
                         new
                         {
                             Id = 5,
-                            MotivationLetter = "This is the opportunity of a lifetime! So excited!",
+                            MotivationLetter = "Jeg er veldig spent og motivert. Dette er alt jeg ønsker meg!",
                             ProjectId = 5,
                             State = 0,
                             UserId = 5
@@ -253,28 +253,28 @@ namespace lagalt_web_api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 5,
-                            Url = "https://www.youtube.com/watch?v=LkWQvzrv6gI"
-                        },
-                        new
-                        {
-                            Id = 4,
+                            Id = 1,
                             Url = "https://picsum.photos/200/300"
                         },
                         new
                         {
-                            Id = 3,
-                            Url = "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg"
+                            Id = 2,
+                            Url = "https://picsum.photos/200/325"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
+                            Url = "https://picsum.photos/200/350"
+                        },
+                        new
+                        {
+                            Id = 4,
                             Url = "https://m.media-amazon.com/images/M/MV5BZmQ3MWEyNTYtOTY1OC00MTljLWI3OGUtMmU1ZDc2OTYxNDQ4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTczNjQwOTY@._V1_.jpg"
                         },
                         new
                         {
-                            Id = 1,
-                            Url = "https://picsum.photos/200/350,https://picsum.photos/200/250"
+                            Id = 5,
+                            Url = "https://www.aboutmusictheory.com/wp-content/uploads/2012/04/composing-music-verse-pop-song.jpg"
                         });
                 });
 
@@ -322,25 +322,25 @@ namespace lagalt_web_api.Migrations
                         {
                             Id = 2,
                             Category = 3,
-                            Description = "Looking for a c# back-end developer",
+                            Description = "Ser etter c# utvikler",
                             GitURL = "https://gitlab.com/Frechr/assignment-three/-/tree/master/",
-                            Name = "EF_CodeFirst",
+                            Name = "EF CodeFirst",
                             Progress = 0
                         },
                         new
                         {
                             Id = 3,
                             Category = 3,
-                            Description = "Web app to catch pokemons!",
+                            Description = "Applikasjon for å fange pokemons",
                             GitURL = "https://gitlab.com/JarandNL/angular_pokemontrainer",
-                            Name = "Exciting_Angular_Project",
+                            Name = "Exciting Angular Project",
                             Progress = 1
                         },
                         new
                         {
                             Id = 4,
                             Category = 1,
-                            Description = "Hot youth!!!!",
+                            Description = "Søte ungdommer",
                             GitURL = "https://www.imdb.com/title/tt0475293/",
                             Name = "High School Musical",
                             Progress = 3

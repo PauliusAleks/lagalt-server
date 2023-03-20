@@ -8,7 +8,7 @@ namespace lagalt_web_api.Models;
 /// </summary>
 public enum ProgressState
 {
-    Oppstart, UnderArbeid, Stalled, Completed
+    Oppstart, UnderUtvikling, Utsatt, Ferdig
 }
 /// <summary>
 /// Enum indicating which category a project belongs to.
