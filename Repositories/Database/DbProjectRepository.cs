@@ -1,5 +1,6 @@
 ﻿using lagalt_web_api.Data;
 using lagalt_web_api.Models;
+using lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO;
 using lagalt_web_api.Models.DTO.ProjectDTO.ProjectEditDTO;
 using lagalt_web_api.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -90,6 +91,7 @@ namespace lagalt_web_api.Repositories.Database
             List<ImageUrl> projectImageUrls = project.ImageURLs.ToList();
 
             ImageUrl imageUrlToCreate = new ImageUrl { Url = imageUrl };
+
             await dbRepositoryContext.ImageUrls.AddAsync(imageUrlToCreate);
             await dbRepositoryContext.SaveChangesAsync();
 
@@ -100,6 +102,53 @@ namespace lagalt_web_api.Repositories.Database
                 projectImageUrls.Add(imageUrlToAdd);
             }
             project.ImageURLs = projectImageUrls;
+            await dbRepositoryContext.SaveChangesAsync();
+        }
+
+        public async Task PostProject(ProjectCreateDTO projectCreateDTO)
+        {
+            List<Skill> skillsToCreate = new List<Skill>();
+            projectCreateDTO.NeededSkills.ForEach(skill => skillsToCreate.Add(new Skill { Name = skill }));
+
+            List<ImageUrl> imageUrlsToCreate = new List<ImageUrl>();
+            projectCreateDTO.ImageUrls.ForEach(url => imageUrlsToCreate.Add(new ImageUrl { Url = url }));
+
+            skillsToCreate.ForEach(async skill =>
+            {
+                if (!dbRepositoryContext.Skills.Contains(skill))
+                {
+                    await dbRepositoryContext.Skills.AddAsync(skill);
+                }
+            });
+
+            imageUrlsToCreate.ForEach(async url =>
+            {
+                if (!dbRepositoryContext.ImageUrls.Contains(url))
+                {
+                    await dbRepositoryContext.ImageUrls.AddAsync(url);
+                }
+            });
+
+            await dbRepositoryContext.SaveChangesAsync();
+
+            List<Skill> skillsToAdd = new List<Skill>();
+            List<ImageUrl> imageUrlsToAdd = new List<ImageUrl>();
+
+            skillsToCreate.ForEach(async skill => skillsToAdd.Add(await dbRepositoryContext.Skills.FindAsync(skill.Id)));
+            imageUrlsToCreate.ForEach(async url => imageUrlsToAdd.Add(await dbRepositoryContext.ImageUrls.FindAsync(url.Id)));
+
+            Project project = new Project
+            {
+                Name = projectCreateDTO.Name,
+                Category = projectCreateDTO.Category,
+                Progress = projectCreateDTO.Progress,
+                Description = projectCreateDTO.Description,
+                GitURL = projectCreateDTO.GitURL,
+                ImageURLs = imageUrlsToAdd,
+                NeededSkills = skillsToAdd
+            };
+
+            dbRepositoryContext.Projects.Add(project);
             await dbRepositoryContext.SaveChangesAsync();
         }
 

@@ -193,15 +193,15 @@ namespace lagalt_web_api.Controllers
         /// <param name="project">The project.</param>
         /// <returns>The ProjectCreateDTO.</returns>
         [HttpPost("createProject")]
-        public ActionResult<ProjectCreateDTO> PostProject(ProjectCreateDTO projectDTO)
+        public async Task<IActionResult> PostProject(ProjectCreateDTO projectDTO)
         {
             if (projectDTO is null)
             {
                 return BadRequest("project is null.");
             }
-            var createdProject = _repositories.Projects.Create(_mapper.Map<Project>(projectDTO));
+            await _repositories.Projects.PostProject(projectDTO);
 
-            return Ok(createdProject);
+            return Ok();
         }
 
         [HttpPut("{projectId}/addImageUrl")]

@@ -10,7 +10,7 @@
         public string? GitURL { get; set; }
         public List<string>? ImageUrls { get; set; }
         public List<string>? NeededSkillsName { get; set; }
-        //public List<UserReadDTO>? Contributors { get; set; }
+        //public List<UserReadDTO>? Contributors { get; set; } !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     }
 }
