@@ -4,7 +4,7 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO.ProjectReadDTO
 {
     public class ProjectBannerDTO
     {
-
+        public int Id { get; set; }
         [MaxLength(50)]
         public string Name { get; set; }
         public string Description { get; set; }

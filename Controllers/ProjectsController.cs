@@ -204,6 +204,17 @@ namespace lagalt_web_api.Controllers
             return Ok(createdProject);
         }
 
+        [HttpPut("AddImageToProject/{projectId}")]
+        public async Task<IActionResult> PutImageInProject(int projectId, string imageUrl)
+        {
+            if (ProjectExists(projectId) is null)
+            {
+                return BadRequest("project is null.");
+            }
+            await _repositories.Projects.PutProjectImageUrl(projectId, imageUrl);
+
+            return Ok();
+        }
         // DELETE: api/projects/5
         /// <summary>
         /// Deletes the project.

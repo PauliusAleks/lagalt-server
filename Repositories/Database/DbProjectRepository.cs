@@ -79,6 +79,30 @@ namespace lagalt_web_api.Repositories.Database
             project.Admins = ProjectAdmins;
             await dbRepositoryContext.SaveChangesAsync();
         }
+
+        public async Task PutProjectImageUrl(int id, string imageUrl)
+        {
+            var project = await dbRepositoryContext.Projects
+               .Include(pr => pr.ImageURLs)
+               .Where(pr => pr.Id == id)
+               .FirstOrDefaultAsync();
+
+            List<ImageUrl> projectImageUrls = project.ImageURLs.ToList();
+
+            ImageUrl imageUrlToCreate = new ImageUrl { Url = imageUrl };
+            await dbRepositoryContext.ImageUrls.AddAsync(imageUrlToCreate);
+            await dbRepositoryContext.SaveChangesAsync();
+
+            ImageUrl imageUrlToAdd = await dbRepositoryContext.ImageUrls.FindAsync(imageUrlToCreate.Id);
+
+            if (!projectImageUrls.Contains(imageUrlToAdd))
+            {
+                projectImageUrls.Add(imageUrlToAdd);
+            }
+            project.ImageURLs = projectImageUrls;
+            await dbRepositoryContext.SaveChangesAsync();
+        }
+
     }
 
 }

@@ -8,14 +8,14 @@ namespace lagalt_web_api.Models;
 /// </summary>
 public enum ProgressState
 {
-    Founding, InProgress, Stalled, Completed
+    Oppstart, UnderArbeid, Stalled, Completed
 }
 /// <summary>
 /// Enum indicating which category a project belongs to.
 /// </summary>
 public enum CategoryState
 {
-    Music, Film, GameDevelopment, WebDevelopment
+    Musikk, Film, SpillUtvikling, NettUtvikling
 }
 public class Project
 {

@@ -13,5 +13,6 @@ namespace lagalt_web_api.Repositories.Interface
         public Task PutProjectSettings(int id, ProjectEditDTO projectEditDTO);
         public Task PutProjectContributor(int id, int contributorId);
         public Task PutProjectAdmin(int id, int adminId);
+        public Task PutProjectImageUrl(int id, string imageUrl);
     }
 }
