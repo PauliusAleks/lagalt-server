@@ -13,7 +13,7 @@
         public string? GitURL { get; set; }
 
         public virtual List<int>? ImageUrls { get; set; }
-        public virtual List<int>? NeededSkillsName { get; set; }
+        public virtual List<int>? NeededSkills { get; set; }
 
     }
 }

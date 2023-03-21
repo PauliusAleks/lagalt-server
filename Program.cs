@@ -31,16 +31,16 @@ builder.Services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRate
 builder.Services.AddInMemoryRateLimiting();
 builder.Services.Configure<ClientRateLimitOptions>(options =>
 {
-    options.EnableEndpointRateLimiting= true;
+    options.EnableEndpointRateLimiting = true;
     options.StackBlockedRequests = true;
     options.HttpStatusCode = ((int)HttpStatusCode.TooManyRequests);
     options.GeneralRules = new List<RateLimitRule>
     {
         new RateLimitRule
         {
-            Endpoint = "*",
+            Endpoint = "/chathub",
             Period = "1s",
-            Limit = 1
+            Limit = 5
         },
         //new RateLimitRule
         //{
@@ -101,7 +101,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Debug", builder => builder
     .WithOrigins("https://localhost:7125", "http://localhost:3000", "https://localhost:3000")
-    .AllowAnyHeader() 
+    .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials());
 });
@@ -113,7 +113,7 @@ builder.Services.AddControllers().
     AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
+/*
 builder.Services.AddSwaggerGen(options =>
 {
     options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -133,7 +133,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
 });
-
+*/
 var app = builder.Build();
 app.UseCors("Debug");
 //Configure the HTTP request pipeline.

@@ -38,7 +38,7 @@ namespace lagalt_web_api.Repositories.Database
                 newImageUrls.Add(imgUrl);
 
             }
-            foreach (var skill in projectEditDTO.NeededSkillsName.ToList())
+            foreach (var skill in projectEditDTO.NeededSkills.ToList())
             {
                 Skill nddSkill = await dbRepositoryContext.Skills.FindAsync(skill);
                 newNeededSkills.Add(nddSkill);
@@ -111,32 +111,14 @@ namespace lagalt_web_api.Repositories.Database
 
         public async Task PostProject(ProjectCreateDTO projectCreateDTO)
         {
-            List<Skill> skillsToCreate = new List<Skill>();
-            projectCreateDTO.NeededSkills.ForEach(skill => skillsToCreate.Add(new Skill { Name = skill }));
-
             List<ImageUrl> imageUrlsToCreate = new List<ImageUrl>();
             projectCreateDTO.ImageUrls.ForEach(url => imageUrlsToCreate.Add(new ImageUrl { Url = url }));
- 
-            Project projectTestee = _mapper.Map<Project>(projectCreateDTO);
-            projectTestee.NeededSkills.ToList().ForEach(skill => { 
-                Debug.WriteLine(skill.Id + ": " + skill.Name);
-            });
- 
-            skillsToCreate.ForEach(async skill =>
-            {
-                Debug.WriteLine(skill.Id);
-                if (dbRepositoryContext.Skills.FirstOrDefaultAsync(sk => sk.Name == skill.Name) == null)
-                //if (!dbRepositoryContext.Skills.Contains(skill))
-                {
 
-                    await dbRepositoryContext.Skills.AddAsync(skill);
-                }
-            });
+
 
             imageUrlsToCreate.ForEach(async url =>
             {
-                if (dbRepositoryContext.ImageUrls.FirstOrDefaultAsync(ur => ur.Url == url.Url) == null)
-                //if (!dbRepositoryContext.ImageUrls.Contains(url))
+                if (!dbRepositoryContext.ImageUrls.Contains(url))
                 {
                     await dbRepositoryContext.ImageUrls.AddAsync(url);
                 }
@@ -147,7 +129,13 @@ namespace lagalt_web_api.Repositories.Database
             List<Skill> skillsToAdd = new List<Skill>();
             List<ImageUrl> imageUrlsToAdd = new List<ImageUrl>();
 
-            skillsToCreate.ForEach(async skill => skillsToAdd.Add(await dbRepositoryContext.Skills.FirstOrDefaultAsync(sk => sk.Name == skill.Name)));
+            foreach (var skillId in projectCreateDTO.NeededSkills)
+            {
+                Skill skill = await dbRepositoryContext.Skills.FindAsync(skillId);
+                skillsToAdd.Add(skill);
+
+            }
+
             imageUrlsToCreate.ForEach(async url => imageUrlsToAdd.Add(await dbRepositoryContext.ImageUrls.FirstOrDefaultAsync(ur => ur.Url == url.Url)));
 
             Project project = new Project

@@ -9,6 +9,6 @@ namespace lagalt_web_api.Models.DTO.UserDTO
         public int Id { get; set; }
         public string? Portfolio { get; set; }
         public bool IsHidden { get; set; }
-        public virtual List<int>? SkillIds { get; set; }
+        public virtual List<int>? Skills { get; set; }
     }
 }

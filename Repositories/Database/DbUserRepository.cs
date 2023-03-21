@@ -23,7 +23,7 @@ namespace lagalt_web_api.Repositories.Database
                 .FirstOrDefaultAsync();
             List<Skill> newUserSkills = new List<Skill>();
 
-            foreach (var skill in userEditDTO.SkillIds.ToList())
+            foreach (var skill in userEditDTO.Skills.ToList())
             {
                 Skill userSkill = await dbRepositoryContext.Skills.FindAsync(skill);
                 newUserSkills.Add(userSkill);
@@ -42,7 +42,7 @@ namespace lagalt_web_api.Repositories.Database
                 .FirstOrDefaultAsync();
             List<Skill> newUserSkills = new List<Skill>();
 
-            foreach (var skill in userEditDTO.SkillIds.ToList())
+            foreach (var skill in userEditDTO.Skills.ToList())
             {
                 Skill userSkill = await dbRepositoryContext.Skills.FindAsync(skill);
                 newUserSkills.Add(userSkill);

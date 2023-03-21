@@ -12,6 +12,6 @@ namespace lagalt_web_api.Models.DTO.UserDTO
         public string LastName { get; set; }
         public string Email { get; set; }
         public string? Portfolio { get; set; }
-        public bool? UserStatus { get; set; }
+        public bool? isHidden { get; set; }
     }
 }
