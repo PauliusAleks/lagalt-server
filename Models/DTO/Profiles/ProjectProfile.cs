@@ -13,6 +13,7 @@ namespace lagalt_web_api.Models.DTO.Profiles
             //MapperReceiver mapperReceiver = new MapperReceiver();
 
             CreateMap<Project, ProjectCreateDTO>()
+                .ForMember(projectCreateDto => projectCreateDto.NeededSkills, opt => opt.MapFrom(project => project.NeededSkills))
                 .ReverseMap();
 
             CreateMap<ProjectEditDTO, Project>();

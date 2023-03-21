@@ -13,6 +13,6 @@
     <WebStackScaffolding_DbContextTypeFullName>lagalt_back_end.Data.LagaltDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>False</WebStackScaffolding_IsViewGenerationSelected>
-    <NameOfLastUsedPublishProfile>C:\Users\PAleks\source\repos\lagalt-web-api\Properties\PublishProfiles\lagaltapi - Web Deploy1.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>lagaltapi - Web Deploy1</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
