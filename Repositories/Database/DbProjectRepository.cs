@@ -116,12 +116,12 @@ namespace lagalt_web_api.Repositories.Database
 
             List<ImageUrl> imageUrlsToCreate = new List<ImageUrl>();
             projectCreateDTO.ImageUrls.ForEach(url => imageUrlsToCreate.Add(new ImageUrl { Url = url }));
-            /*
+ 
             Project projectTestee = _mapper.Map<Project>(projectCreateDTO);
             projectTestee.NeededSkills.ToList().ForEach(skill => { 
                 Debug.WriteLine(skill.Id + ": " + skill.Name);
             });
-            */
+ 
             skillsToCreate.ForEach(async skill =>
             {
                 Debug.WriteLine(skill.Id);

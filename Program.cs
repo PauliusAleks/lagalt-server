@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using lagalt_web_api.Hubs;
+using lagalt_web_api.Middleware;
+using AspNetCoreRateLimit;
 
 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -22,11 +24,37 @@ builder.Services.AddDbContext<LagaltDbContext>();
 
 builder.Services.AddSingleton(Configuration);
 
+builder.Services.AddOptions();
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.Configure<ClientRateLimitOptions>(options =>
+{
+    options.EnableEndpointRateLimiting= true;
+    options.StackBlockedRequests = true;
+    options.HttpStatusCode = ((int)HttpStatusCode.TooManyRequests);
+    options.GeneralRules = new List<RateLimitRule>
+    {
+        new RateLimitRule
+        {
+            Endpoint = "*",
+            Period = "1s",
+            Limit = 1
+        },
+        //new RateLimitRule
+        //{
+        // Endpoint = "POST:/chathub",
+        // Period = "1s",
+        // Limit = 2,
+        //}
+    };
+});
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddMvc().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.WriteIndented = true;
 });
-
 
 builder.Services.AddScoped<IProjectRepository, DbProjectRepository>();
 builder.Services.AddScoped<IUserRepository, DbUserRepository>();
@@ -73,8 +101,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Debug", builder => builder
     .WithOrigins("https://localhost:7125", "http://localhost:3000", "https://localhost:3000")
-    .AllowAnyHeader()
-    //.WithMethods("GET", "POST")
+    .AllowAnyHeader() 
     .AllowAnyMethod()
     .AllowCredentials());
 });
@@ -87,7 +114,6 @@ builder.Services.AddControllers().
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options =>
 {
     options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -117,13 +143,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-
+app.UseIpRateLimiting();
+app.UseMiddleware<RequestLimiterMiddleware>();
+app.MapHub<ChatHub>("/chathub");
 app.MapControllers();
-//app.MapHub<ChatHub>("/chathub");
 app.Run();
