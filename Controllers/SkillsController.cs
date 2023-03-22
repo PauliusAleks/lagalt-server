@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using lagalt_web_api.Repositories.API;
 using System.Net.Http.Headers;
 using System.Net;
+using NuGet.Protocol;
 
 namespace lagalt_web_api.Controllers
 {
@@ -44,17 +45,16 @@ namespace lagalt_web_api.Controllers
             return Ok(skillsDTO);
         }
 
-        [HttpGet("normalized")]
-        public async Task<string> GetNormalizedSkill(string job_title)
+        [HttpGet("titles")]
+        public async Task<IEnumerable<string>> GetSkillTitles(string skillTitle)
         {
             try
             {
-                var skills = await SkillsAPIRepository.GetNormalizedJobTitle(job_title);
-                return skills;
+                return await SkillsAPIRepository.GetSkillTitles(skillTitle);
             }
             catch (Exception e) {
                 string errorMessage = e.Message;
-                return errorMessage;
+                return new List<string> { errorMessage };
             }
         }
 

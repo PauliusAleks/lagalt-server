@@ -2,6 +2,6 @@
 {
     public interface ISkillsAPIRepository
     {
-        Task<string> GetNormalizedJobTitle(string jobTitle);
+        Task<List<string>> GetSkillTitles(string jobTitle);
     }
 }
