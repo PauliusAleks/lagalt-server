@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using lagalt_web_api.Hubs;
 using lagalt_web_api.Middleware;
 using AspNetCoreRateLimit;
+using lagalt_web_api.Repositories.API;
 
 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -96,6 +97,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            });
 
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<ISkillsAPIRepository, SkillsAPIRepository>();
 
 builder.Services.AddCors(options =>
 {
@@ -113,32 +115,36 @@ builder.Services.AddControllers().
     AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-/*
-builder.Services.AddSwaggerGen(options =>
+
+if (builder.Environment.IsDevelopment())
 {
-    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-    options.SwaggerDoc("v1", new OpenApiInfo
+    builder.Services.AddSwaggerGen();
+    builder.Services.AddSwaggerGen(options =>
     {
-        Title = "Lagalt API",
-        Version = "v1",
-        Description = "Web API for lagalt.no.",
-        Contact = new OpenApiContact
+        options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+        options.SwaggerDoc("v1", new OpenApiInfo
         {
-            Name = "Fredrik Christensen Paulius Aleksandravicius " +
-            "Erik Aardal Jarand Larsen Ida Huun Michelsen"
-        }
+            Title = "Lagalt API",
+            Version = "v1",
+            Description = "Web API for lagalt.no.",
+            Contact = new OpenApiContact
+            {
+                Name = "Fredrik Christensen Paulius Aleksandravicius " +
+                "Erik Aardal Jarand Larsen Ida Huun Michelsen"
+            }
+
+        });
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
     });
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
-});
-*/
+}
 var app = builder.Build();
-app.UseCors("Debug");
 //Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors("Debug");
     app.UseSwagger();
     app.UseSwaggerUI();
 }

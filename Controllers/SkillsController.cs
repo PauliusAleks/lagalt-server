@@ -6,6 +6,10 @@ using lagalt_web_api.Models.DTO.UserDTO;
 using lagalt_web_api.Models.DTO.ProjectDTO.ProjectReadDTO;
 using Microsoft.EntityFrameworkCore;
 using lagalt_web_api.Models.DTO.SkillDTO;
+using Newtonsoft.Json;
+using lagalt_web_api.Repositories.API;
+using System.Net.Http.Headers;
+using System.Net;
 
 namespace lagalt_web_api.Controllers
 {
@@ -20,11 +24,15 @@ namespace lagalt_web_api.Controllers
 
         private readonly IMapper _mapper;
 
+        public ISkillsAPIRepository SkillsAPIRepository { get; }
+        public IHttpClientFactory HttpClientFactory { get; }
 
-        public SkillsController(IRepositories repositories, IMapper mapper)
+        public SkillsController(IRepositories repositories, IMapper mapper, IHttpClientFactory httpClientFactory, ISkillsAPIRepository skillsAPIRepository)
         {
             _repositories = repositories;
             _mapper = mapper;
+            HttpClientFactory = httpClientFactory;
+            SkillsAPIRepository = skillsAPIRepository;
         }
 
 
@@ -34,6 +42,20 @@ namespace lagalt_web_api.Controllers
             var skills = _repositories.Skills.GetAll();
             var skillsDTO = skills.Select(skill => _mapper.Map<SkillReadDTO>(skill));
             return Ok(skillsDTO);
+        }
+
+        [HttpGet("normalized")]
+        public async Task<string> GetNormalizedSkill(string job_title)
+        {
+            try
+            {
+                var skills = await SkillsAPIRepository.GetNormalizedJobTitle(job_title);
+                return skills;
+            }
+            catch (Exception e) {
+                string errorMessage = e.Message;
+                return errorMessage;
+            }
         }
 
         [HttpGet("name/{name}")]
