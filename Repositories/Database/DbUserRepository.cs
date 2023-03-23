@@ -40,11 +40,23 @@ namespace lagalt_web_api.Repositories.Database
                 .Include(s => s.Skills)
                 .Where(u => u.Username == username)
                 .FirstOrDefaultAsync();
-            List<Skill> newUserSkills = new List<Skill>();
 
             foreach (var skill in userEditDTO.Skills.ToList())
             {
-                Skill userSkill = await dbRepositoryContext.Skills.FindAsync(skill);
+                if (await dbRepositoryContext.Skills.Where(sk => sk.Name == skill).FirstOrDefaultAsync() == null)
+                {
+                    dbRepositoryContext.Add(new Skill { Name = skill });
+                }
+            }
+            await dbRepositoryContext.SaveChangesAsync();
+
+            List<Skill> newUserSkills = new List<Skill>();
+
+
+            foreach (var skill in userEditDTO.Skills.ToList())
+            {
+
+                Skill userSkill = await dbRepositoryContext.Skills.Where(sk => sk.Name == skill).FirstOrDefaultAsync();
                 newUserSkills.Add(userSkill);
             }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using AutoMapper;
+using lagalt_web_api.Models.DTO.UserDTO;
 
 namespace lagalt_web_api.Repositories.Database
 {
@@ -22,6 +23,7 @@ namespace lagalt_web_api.Repositories.Database
             _mapper = mapper;
         }
 
+
         public async Task PutProjectSettings(int id, ProjectEditDTO projectEditDTO)
         {
             var project = await dbRepositoryContext.Projects
@@ -29,19 +31,39 @@ namespace lagalt_web_api.Repositories.Database
                .Include(pr => pr.NeededSkills)
                .Where(pr => pr.Id == id)
                .FirstOrDefaultAsync();
-            List<ImageUrl> newImageUrls = new List<ImageUrl>();
-            List<Skill> newNeededSkills = new List<Skill>();
+
+            foreach (var skill in projectEditDTO.NeededSkills.ToList())
+            {
+                if (await dbRepositoryContext.Skills.Where(sk => sk.Name == skill).FirstOrDefaultAsync() == null)
+                {
+                    dbRepositoryContext.Add(new Skill { Name = skill });
+                }
+            }
 
             foreach (var url in projectEditDTO.ImageUrls.ToList())
             {
-                ImageUrl imgUrl = await dbRepositoryContext.ImageUrls.FindAsync(url);
-                newImageUrls.Add(imgUrl);
+                if (await dbRepositoryContext.ImageUrls.Where(ur => ur.Url == url).FirstOrDefaultAsync() == null)
+                {
+                    dbRepositoryContext.Add(new ImageUrl { Url = url });
+                }
+            }
+
+            await dbRepositoryContext.SaveChangesAsync();
+
+            List<Skill> newSkills = new List<Skill>();
+            List<ImageUrl> newImageUrls = new List<ImageUrl>();
+
+            foreach (var skillToAdd in projectEditDTO.NeededSkills.ToList())
+            {
+                Skill skill = await dbRepositoryContext.Skills.Where(sk => sk.Name == skillToAdd).FirstOrDefaultAsync();
+                newSkills.Add(skill);
 
             }
-            foreach (var skill in projectEditDTO.NeededSkills.ToList())
+
+            foreach (var imageUrlToAdd in projectEditDTO.ImageUrls.ToList())
             {
-                Skill nddSkill = await dbRepositoryContext.Skills.FindAsync(skill);
-                newNeededSkills.Add(nddSkill);
+                ImageUrl url = await dbRepositoryContext.ImageUrls.Where(img => img.Url == imageUrlToAdd).FirstOrDefaultAsync();
+                newImageUrls.Add(url);
             }
 
             project.Name = projectEditDTO.Name;
@@ -49,7 +71,7 @@ namespace lagalt_web_api.Repositories.Database
             project.Progress = projectEditDTO.Progress;
             project.Category = projectEditDTO.Category;
             project.ImageURLs = newImageUrls;
-            project.NeededSkills = newNeededSkills;
+            project.NeededSkills = newSkills;
             await dbRepositoryContext.SaveChangesAsync();
         }
 
@@ -111,32 +133,40 @@ namespace lagalt_web_api.Repositories.Database
 
         public async Task PostProject(ProjectCreateDTO projectCreateDTO)
         {
-            List<ImageUrl> imageUrlsToCreate = new List<ImageUrl>();
-            projectCreateDTO.ImageUrls.ForEach(url => imageUrlsToCreate.Add(new ImageUrl { Url = url }));
 
-
-
-            imageUrlsToCreate.ForEach(async url =>
+            foreach (var skill in projectCreateDTO.NeededSkills.ToList())
             {
-                if (!dbRepositoryContext.ImageUrls.Contains(url))
+                if (await dbRepositoryContext.Skills.Where(sk => sk.Name == skill).FirstOrDefaultAsync() == null)
                 {
-                    await dbRepositoryContext.ImageUrls.AddAsync(url);
+                    dbRepositoryContext.Add(new Skill { Name = skill });
                 }
-            });
+            }
+
+            foreach (var url in projectCreateDTO.ImageUrls.ToList())
+            {
+                if (await dbRepositoryContext.ImageUrls.Where(ur => ur.Url == url).FirstOrDefaultAsync() == null)
+                {
+                    dbRepositoryContext.Add(new ImageUrl { Url = url });
+                }
+            }
 
             await dbRepositoryContext.SaveChangesAsync();
 
             List<Skill> skillsToAdd = new List<Skill>();
             List<ImageUrl> imageUrlsToAdd = new List<ImageUrl>();
 
-            foreach (var skillId in projectCreateDTO.NeededSkills)
+            foreach (var skillToAdd in projectCreateDTO.NeededSkills.ToList())
             {
-                Skill skill = await dbRepositoryContext.Skills.FindAsync(skillId);
+                Skill skill = await dbRepositoryContext.Skills.Where(sk => sk.Name == skillToAdd).FirstOrDefaultAsync();
                 skillsToAdd.Add(skill);
 
             }
 
-            imageUrlsToCreate.ForEach(async url => imageUrlsToAdd.Add(await dbRepositoryContext.ImageUrls.FirstOrDefaultAsync(ur => ur.Url == url.Url)));
+            foreach (var imageUrlToAdd in projectCreateDTO.ImageUrls.ToList())
+            {
+                ImageUrl url = await dbRepositoryContext.ImageUrls.Where(img => img.Url == imageUrlToAdd).FirstOrDefaultAsync();
+                imageUrlsToAdd.Add(url);
+            }
 
             Project project = new Project
             {
@@ -152,6 +182,8 @@ namespace lagalt_web_api.Repositories.Database
             dbRepositoryContext.Projects.Add(project);
             await dbRepositoryContext.SaveChangesAsync();
         }
+
+
 
     }
 

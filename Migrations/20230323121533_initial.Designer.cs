@@ -11,7 +11,7 @@ using lagalt_web_api.Data;
 namespace lagalt_web_api.Migrations
 {
     [DbContext(typeof(LagaltDbContext))]
-    [Migration("20230320104121_initial")]
+    [Migration("20230323121533_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

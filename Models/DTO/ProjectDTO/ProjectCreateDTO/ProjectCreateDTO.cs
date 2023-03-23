@@ -11,6 +11,6 @@
         public string Description { get; set; }
         public string? GitURL { get; set; }
         public virtual List<string>? ImageUrls { get; set; }
-        public virtual List<int>? NeededSkills { get; set; } //AddUserToProject(int projectId, int userId)
+        public virtual List<string>? NeededSkills { get; set; } //AddUserToProject(int projectId, int userId)
     }
 }
