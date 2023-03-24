@@ -14,9 +14,7 @@ public class User
     public string Username { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-
     public string Email { get; set; }
-
     public bool IsHidden { get; set; }
     public string? Portfolio { get; set; }
     public virtual ICollection<Skill>? Skills { get; set; }

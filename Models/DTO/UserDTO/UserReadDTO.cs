@@ -12,5 +12,7 @@ namespace lagalt_web_api.Models.DTO.UserDTO
         public string? Portfolio { get; set; }
         public bool IsHidden { get; set; }
         public List<string>? Skills { get; set; }
+        public List<int> ContributorProjects { get; set; }
+        public List<int> AdminProjects { get; set; }
     }
 }
