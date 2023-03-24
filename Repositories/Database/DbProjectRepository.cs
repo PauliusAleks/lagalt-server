@@ -168,6 +168,7 @@ namespace lagalt_web_api.Repositories.Database
                 imageUrlsToAdd.Add(url);
             }
 
+            User admin = await dbRepositoryContext.Users.FindAsync(projectCreateDTO.adminId);
             Project project = new Project
             {
                 Name = projectCreateDTO.Name,
@@ -176,7 +177,11 @@ namespace lagalt_web_api.Repositories.Database
                 Description = projectCreateDTO.Description,
                 GitURL = projectCreateDTO.GitURL,
                 ImageURLs = imageUrlsToAdd,
-                NeededSkills = skillsToAdd
+                NeededSkills = skillsToAdd,
+                Admins = new List<User> { admin },
+                Contributors = new List<User> { admin }
+                
+
             };
 
             dbRepositoryContext.Projects.Add(project);
