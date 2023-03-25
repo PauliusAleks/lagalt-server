@@ -92,6 +92,7 @@ namespace lagalt_web_api.Controllers
                 return NotFound();
             }
             application.State = ApplicationState.Akseptert;
+            _repositories.Projects.PutProjectContributor(application.ProjectId, application.UserId);
             _repositories.Applications.Update(application);
             return NoContent();
         }

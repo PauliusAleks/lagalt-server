@@ -42,9 +42,18 @@ namespace lagalt_web_api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<UserReadDTO>> GetUsers()
         {
-            var users = _repositories.Users.GetAll().Include(u => u.Skills);
+            var users = _repositories.Users.GetAll().Include(u => u.Skills)
+               .Include(u => u.AdminProjects)
+               .Include(u => u.ContributorProjects);
             var usersDTO = users.Select(user => _mapper.Map<UserReadDTO>(user));
             return Ok(usersDTO);
+        }
+
+        [HttpGet("{id}/contributorProjects")]
+        public ActionResult<IEnumerable<ProjectBannerDTO>> GetContributorProjects(int id)
+        {
+            return _mapper.Map<List<ProjectBannerDTO>>(_repositories.Projects.GetAll().Include(pr => pr.ImageURLs).Include(pr => pr.NeededSkills)
+                .Where(pr => pr.Contributors.Contains(_repositories.Users.Get(id))));
         }
 
         //// GET: api/Users
@@ -72,6 +81,8 @@ namespace lagalt_web_api.Controllers
         {
             var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
                .Include(u => u.Skills)
+               .Include(u => u.AdminProjects)
+               .Include(u => u.ContributorProjects)
                .Where(u => u.Id == id)
                .FirstOrDefault());
 
@@ -93,6 +104,8 @@ namespace lagalt_web_api.Controllers
         {
             var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
                .Include(u => u.Skills)
+               .Include(u => u.AdminProjects)
+               .Include(u => u.ContributorProjects)
                .Where(u => u.Username == username)
                .FirstOrDefault());
 
