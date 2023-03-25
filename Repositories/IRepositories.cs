@@ -10,6 +10,7 @@ namespace lagalt_web_api.Repositories
         IApplicationRepository Applications { get; }
         ISkillRepository Skills { get; }
         IImageURLRepository ImageURLs { get; }
+        IUserMessageRepository UserMessages { get; }
 
     }
 }

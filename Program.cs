@@ -13,6 +13,7 @@ using lagalt_web_api.Hubs;
 using lagalt_web_api.Middleware;
 using AspNetCoreRateLimit;
 using lagalt_web_api.Repositories.API;
+using System.Diagnostics;
 
 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -59,6 +60,7 @@ builder.Services.AddMvc().AddJsonOptions(options =>
 
 builder.Services.AddScoped<IProjectRepository, DbProjectRepository>();
 builder.Services.AddScoped<IUserRepository, DbUserRepository>();
+builder.Services.AddScoped<IUserMessageRepository, DbUserMessageRepository>();
 builder.Services.AddScoped<IApplicationRepository, DbApplicationRepository>();
 builder.Services.AddScoped<ISkillRepository, DbSkillRepository>();
 builder.Services.AddScoped<IImageURLRepository, DbImageURLRepository>();
@@ -115,7 +117,7 @@ builder.Services.AddControllers().
     AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-/*
+
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddSwaggerGen();
@@ -139,17 +141,18 @@ if (builder.Environment.IsDevelopment())
 
     });
 }
-*/
+
 var app = builder.Build();
+app.Use(async (context, next) => { var path = context.Request.Path; Debug.WriteLine(path); await next.Invoke(); });
 app.UseCors("Debug");
 //Configure the HTTP request pipeline.
-/*
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-*/
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

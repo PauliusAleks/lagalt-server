@@ -16,6 +16,7 @@ namespace lagalt_web_api.Repositories
         private IApplicationRepository _applicationRepository;
         private ISkillRepository _skillRepository;
         private IImageURLRepository _imageURLRepository;
+        private IUserMessageRepository _userMessageRepository;
 
 
 
@@ -28,7 +29,8 @@ namespace lagalt_web_api.Repositories
                                    IUserRepository userRepository,
                                    IApplicationRepository applicationRepository,
                                    ISkillRepository skillRepository,
-                                   IImageURLRepository imageURLRepository)
+                                   IImageURLRepository imageURLRepository,
+                                   IUserMessageRepository userMessageRepository)
                                    
         {
             _projectRepository = projectRepository;
@@ -36,7 +38,8 @@ namespace lagalt_web_api.Repositories
             _applicationRepository = applicationRepository;
             _skillRepository = skillRepository;
             _imageURLRepository = imageURLRepository;
-        }
+            _userMessageRepository = userMessageRepository;
+    }
 
         public IProjectRepository Projects => _projectRepository;
 
@@ -47,6 +50,7 @@ namespace lagalt_web_api.Repositories
         public ISkillRepository Skills => _skillRepository;
 
         public IImageURLRepository ImageURLs => _imageURLRepository;
+        public IUserMessageRepository UserMessages => _userMessageRepository;
 
 
     }

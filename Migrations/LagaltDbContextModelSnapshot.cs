@@ -481,6 +481,28 @@ namespace lagalt_web_api.Migrations
                         });
                 });
 
+            modelBuilder.Entity("lagalt_web_api.Models.UserMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserMessages");
+                });
+
             modelBuilder.Entity("ProjectSkill", b =>
                 {
                     b.Property<int>("SkillId")
@@ -639,6 +661,15 @@ namespace lagalt_web_api.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("lagalt_web_api.Models.UserMessage", b =>
+                {
+                    b.HasOne("lagalt_web_api.Models.User", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProjectSkill", b =>
                 {
                     b.HasOne("lagalt_web_api.Models.Project", null)
@@ -672,6 +703,8 @@ namespace lagalt_web_api.Migrations
             modelBuilder.Entity("lagalt_web_api.Models.User", b =>
                 {
                     b.Navigation("Applications");
+
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

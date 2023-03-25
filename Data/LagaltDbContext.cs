@@ -33,6 +33,7 @@ namespace lagalt_web_api.Data
         public DbSet<Application> Applications { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<ImageUrl> ImageUrls { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
 
         //public DbSet<Record> Records { get; set; }
 
@@ -47,8 +48,7 @@ namespace lagalt_web_api.Data
             modelBuilder.Entity<Project>().HasData(SeedData.Projects);
             modelBuilder.Entity<User>().HasData(SeedData.Users);
             modelBuilder.Entity<Skill>().HasData(SeedData.Skills);
-            modelBuilder.Entity<Application>().HasData(SeedData.Applications);
-            //modelBuilder.Entity<HistoricEvent>().HasData(SeedData.GetHistoricEventSeedData()); 
+            modelBuilder.Entity<Application>().HasData(SeedData.Applications); 
 
 
             // Seeding NeededSkills to Project
@@ -94,6 +94,7 @@ namespace lagalt_web_api.Data
                    );
                });
 
+ 
             //Seeding ImgURLs to Projects
 
             modelBuilder.Entity<ImageUrl>()

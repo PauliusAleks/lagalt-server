@@ -4,7 +4,7 @@
 
 namespace lagalt_web_api.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -194,6 +194,26 @@ namespace lagalt_web_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserMessages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserMessages_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserSkill",
                 columns: table => new
                 {
@@ -373,6 +393,11 @@ namespace lagalt_web_api.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserMessages_UserId",
+                table: "UserMessages",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserSkill_UserId",
                 table: "UserSkill",
                 column: "UserId");
@@ -394,6 +419,9 @@ namespace lagalt_web_api.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProjectSkill");
+
+            migrationBuilder.DropTable(
+                name: "UserMessages");
 
             migrationBuilder.DropTable(
                 name: "UserSkill");

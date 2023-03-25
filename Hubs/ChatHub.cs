@@ -8,8 +8,8 @@ namespace lagalt_web_api.Hubs
     {
         public async Task SendMessage(/*string user,*/ string message)
         {
-            Debug.Write("Message received: " + message);
-            await Clients.All.SendAsync("ReceiveMessage", /*user,*/ "Server says: " + message);
+            Debug.WriteLine(message);
+            await Clients.All.SendAsync("ReceiveMessage", message);
         }
     }
 }

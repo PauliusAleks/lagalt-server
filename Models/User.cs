@@ -23,6 +23,7 @@ public class User
     public virtual ICollection<Application>? Applications { get; set; }
     public virtual ICollection<Project> AdminProjects { get; set; }
     public virtual ICollection<Project> ContributorProjects { get; set; }
+    public virtual ICollection<UserMessage>? Messages { get; set; }
 
 
     //public virtual Record Record { get; set; }

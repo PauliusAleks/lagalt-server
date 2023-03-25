@@ -1,4 +1,5 @@
 ﻿using lagalt_web_api.Models;
+using System.Diagnostics;
 
 namespace lagalt_web_api.Data
 {
@@ -135,9 +136,7 @@ namespace lagalt_web_api.Data
                 new Skill{ Id=4, Name="Sony Vegas"},
                 new Skill{ Id=5, Name="Fruity Loops Studio"}
             };
-
-
-
+ 
         public static List<Application> Applications => new List<Application>
             {
                 new Application { Id = 1, State = ApplicationState.Ventende, MotivationLetter = "Vær så snill", UserId=2, ProjectId = 1 },
