@@ -65,11 +65,45 @@ namespace lagalt_web_api.Repositories.Database
                 ImageUrl url = await dbRepositoryContext.ImageUrls.Where(img => img.Url == imageUrlToAdd).FirstOrDefaultAsync();
                 newImageUrls.Add(url);
             }
+            if (projectEditDTO.Progress == "Oppstart")
+            {
+                project.Progress = ProgressState.Oppstart;
+            }
+            else if (projectEditDTO.Progress == "UnderUtvikling")
+            {
+                project.Progress = ProgressState.UnderUtvikling;
+
+            }
+            else if (projectEditDTO.Progress == "Utsatt")
+            {
+                project.Progress = ProgressState.Utsatt;
+
+            }
+            else if (projectEditDTO.Progress == "Ferdig")
+            {
+                project.Progress = ProgressState.Ferdig;
+
+            }
+            if (projectEditDTO.Category == "Musikk")
+            {
+                project.Category = CategoryState.Musikk;
+            }
+            else if (projectEditDTO.Category == "Film")
+            {
+                project.Category = CategoryState.Film;
+            }
+            else if (projectEditDTO.Category == "SpillUtvikling")
+            {
+                project.Category = CategoryState.SpillUtvikling;
+            }
+            else if (projectEditDTO.Category == "NettUtvikling")
+            {
+                project.Category = CategoryState.NettUtvikling;
+            }
+
 
             project.Name = projectEditDTO.Name;
             project.Description = projectEditDTO.Description;
-            project.Progress = projectEditDTO.Progress;
-            project.Category = projectEditDTO.Category;
             project.ImageURLs = newImageUrls;
             project.NeededSkills = newSkills;
             await dbRepositoryContext.SaveChangesAsync();
@@ -180,7 +214,7 @@ namespace lagalt_web_api.Repositories.Database
                 NeededSkills = skillsToAdd,
                 Admins = new List<User> { admin },
                 Contributors = new List<User> { admin }
-                
+
 
             };
 

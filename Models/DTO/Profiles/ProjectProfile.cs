@@ -12,7 +12,12 @@ namespace lagalt_web_api.Models.DTO.Profiles
 
             CreateMap<Project, ProjectCreateDTO>().ReverseMap();
 
-            CreateMap<ProjectEditDTO, Project>();
+            CreateMap<ProjectEditDTO, Project>()
+                 .ForMember(prDTO => prDTO.Progress, opt => opt
+                .MapFrom(pr => pr.Progress.ToString()))
+
+                .ForMember(prDTO => prDTO.Category, opt => opt
+                .MapFrom(pr => pr.Category.ToString()));
 
 
             CreateMap<Project, ProjectBannerDTO>()

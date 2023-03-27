@@ -8,8 +8,8 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        public CategoryState Category { get; set; }
-        public ProgressState Progress { get; set; }
+        public string Category { get; set; }
+        public string Progress { get; set; }
         public string? GitURL { get; set; }
 
         public virtual List<string>? ImageUrls { get; set; }

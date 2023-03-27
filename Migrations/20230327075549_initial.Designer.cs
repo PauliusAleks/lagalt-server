@@ -11,8 +11,8 @@ using lagalt_web_api.Data;
 namespace lagalt_web_api.Migrations
 {
     [DbContext(typeof(LagaltDbContext))]
-    [Migration("20230324135044_initial-migration")]
-    partial class initialmigration
+    [Migration("20230327075549_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -665,11 +665,13 @@ namespace lagalt_web_api.Migrations
 
             modelBuilder.Entity("lagalt_web_api.Models.UserMessage", b =>
                 {
-                    b.HasOne("lagalt_web_api.Models.User", null)
+                    b.HasOne("lagalt_web_api.Models.User", "User")
                         .WithMany("Messages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjectSkill", b =>

@@ -663,11 +663,13 @@ namespace lagalt_web_api.Migrations
 
             modelBuilder.Entity("lagalt_web_api.Models.UserMessage", b =>
                 {
-                    b.HasOne("lagalt_web_api.Models.User", null)
+                    b.HasOne("lagalt_web_api.Models.User", "User")
                         .WithMany("Messages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjectSkill", b =>
