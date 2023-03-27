@@ -4,6 +4,7 @@ using lagalt_web_api.Models;
 using lagalt_web_api.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace lagalt_web_api.Controllers
 {
@@ -27,10 +28,11 @@ namespace lagalt_web_api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public  IEnumerable<UserMessageWithUsernameDTO>  GetUserMessages()
+        [HttpGet("{projectId}")]
+        public  IEnumerable<UserMessageWithUsernameDTO>  GetUserMessages(int projectId)
         {
-            var userMessages = _repositories.UserMessages.GetAll().Include(x => x.User).ToList();
+            // TODO: Write new method for retrieving projects by id instead of filtering the whole set with linq.
+            var userMessages = _repositories.UserMessages.GetAll().Include(x => x.User).Include(x=>x.Project).ToList().Where(usermessage=>usermessage.ProjectId == projectId);
             var userMessagesDTOs = _mapper.Map<IEnumerable<UserMessageWithUsernameDTO>>(userMessages);
             return userMessagesDTOs;
         }
