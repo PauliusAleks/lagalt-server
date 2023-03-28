@@ -117,6 +117,23 @@ namespace lagalt_web_api.Controllers
             return userDTO;
         }
 
+        [HttpGet("userExists/{username}")]
+        public ActionResult<bool> UserExists(string username)
+        {
+            var userDTO = _mapper.Map<UserReadDTO>(_repositories.Users.GetAll()
+               .Where(u => u.Username == username)
+               .FirstOrDefault());
+
+            if (userDTO is null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
