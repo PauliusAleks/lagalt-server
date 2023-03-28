@@ -6,10 +6,10 @@ namespace lagalt_web_api.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(/*string user,*/ string message)
+        public async Task SendMessage( string projectId, string message)
         {
-            Debug.WriteLine(message);
-            await Clients.All.SendAsync("ReceiveMessage", message);
+            Debug.WriteLine("From sendmessage: Id: " + projectId + ", " + message);
+            await Clients.All.SendAsync("ReceiveMessage", projectId, message);
         }
     }
 }
