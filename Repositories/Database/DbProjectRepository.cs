@@ -203,11 +203,50 @@ namespace lagalt_web_api.Repositories.Database
             }
 
             User admin = await dbRepositoryContext.Users.FindAsync(projectCreateDTO.adminId);
+            CategoryState category = new CategoryState();
+            ProgressState progress = new ProgressState();
+
+            if (projectCreateDTO.Progress == "Oppstart")
+            {
+                progress = ProgressState.Oppstart;
+            }
+            else if (projectCreateDTO.Progress == "UnderUtvikling")
+            {
+                progress = ProgressState.UnderUtvikling;
+
+            }
+            else if (projectCreateDTO.Progress == "Utsatt")
+            {
+                progress = ProgressState.Utsatt;
+
+            }
+            else if (projectCreateDTO.Progress == "Ferdig")
+            {
+                progress = ProgressState.Ferdig;
+
+            }
+            if (projectCreateDTO.Category == "Musikk")
+            {
+                category = CategoryState.Musikk;
+            }
+            else if (projectCreateDTO.Category == "Film")
+            {
+                category = CategoryState.Film;
+            }
+            else if (projectCreateDTO.Category == "SpillUtvikling")
+            {
+                category = CategoryState.SpillUtvikling;
+            }
+            else if (projectCreateDTO.Category == "NettUtvikling")
+            {
+                category = CategoryState.NettUtvikling;
+            }
+
             Project project = new Project
             {
                 Name = projectCreateDTO.Name,
-                Category = projectCreateDTO.Category,
-                Progress = projectCreateDTO.Progress,
+                Category = category,
+                Progress = progress,
                 Description = projectCreateDTO.Description,
                 GitURL = projectCreateDTO.GitURL,
                 ImageURLs = imageUrlsToAdd,
