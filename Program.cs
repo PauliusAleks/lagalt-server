@@ -117,7 +117,7 @@ builder.Services.AddControllers().
     AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
+/*
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddSwaggerGen();
@@ -141,18 +141,18 @@ if (builder.Environment.IsDevelopment())
 
     });
 }
-
+*/
 var app = builder.Build();
 app.Use(async (context, next) => { var path = context.Request.Path; Debug.WriteLine(path); await next.Invoke(); });
 app.UseCors("Debug");
 //Configure the HTTP request pipeline.
-
+/*
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+*/
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
