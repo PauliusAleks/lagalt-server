@@ -3,7 +3,7 @@
     public class ProjectEditDTO
     {
         /// <summary>
-        /// Properties to edit a project dto
+        /// DTO Properties for editing a project
         /// </summary>
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,7 +11,6 @@
         public string Category { get; set; }
         public string Progress { get; set; }
         public string? GitURL { get; set; }
-
         public virtual List<string>? ImageUrls { get; set; }
         public virtual List<string>? NeededSkills { get; set; }
 

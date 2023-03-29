@@ -2,6 +2,9 @@
 {
     public class ProjectPageDTO
     {
+        /// <summary>
+        /// DTO Properties for reading a project for users that are contributing to a project
+        /// </summary>
         public int Id { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }

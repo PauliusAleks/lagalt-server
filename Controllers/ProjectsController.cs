@@ -37,19 +37,19 @@ namespace lagalt_web_api.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Projects
         /// <summary>
-        /// Gets the projects.
+        /// Gets the project banners.
         /// </summary>
         /// <returns></returns>
         //[Authorize]
         [HttpGet("banners")]
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetProjectBanners()
         {
-            var projects = _repositories.Projects.GetAll();
-            var withSkills = projects.Include(pr => pr.NeededSkills);
-            var withImageUrls = withSkills.Include(pr => pr.ImageURLs);
-            return _mapper.Map<List<ProjectBannerDTO>>(withImageUrls);
+            var projects = _repositories.Projects.GetAll()
+                    .Include(pr => pr.NeededSkills)
+                    .Include(pr => pr.ImageURLs);
+
+            return _mapper.Map<List<ProjectBannerDTO>>(projects);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace lagalt_web_api.Controllers
 
         // GET: api/Projects
         /// <summary>
-        /// Gets the admin project.
+        /// Gets the admin project - ProjectAdminDTO.
         /// </summary>
         /// <returns></returns>
         [HttpGet("admin/{id}")]
@@ -101,7 +101,7 @@ namespace lagalt_web_api.Controllers
         }
 
         /// <summary>
-        /// Get project by id
+        /// Get project by id - response is set to ProjectPageDTO
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -123,8 +123,6 @@ namespace lagalt_web_api.Controllers
             return projectDTO;
         }
 
-        // PUT: api/Projects/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
         /// Update project by id.
         /// </summary>
@@ -185,15 +183,13 @@ namespace lagalt_web_api.Controllers
             return NoContent();
         }
 
-        // POST: api/projects
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
         /// Posts the projects.
         /// </summary>
         /// <param name="project">The project.</param>
         /// <returns>The ProjectCreateDTO.</returns>
         [HttpPost("createProject")]
-        public async Task<IActionResult> PostProject(ProjectCreateDTO projectDTO)
+        public async Task<ActionResult<ProjectAdminDTO>> PostProject(ProjectCreateDTO projectDTO)
         {
             if (projectDTO is null)
             {
@@ -201,9 +197,15 @@ namespace lagalt_web_api.Controllers
             }
             await _repositories.Projects.PostProject(projectDTO);
 
-            return Ok();
+            return _mapper.Map<ProjectAdminDTO>(await _repositories.Projects.GetAll().Where(pr => pr.Name == projectDTO.Name).FirstOrDefaultAsync());
         }
 
+        /// <summary>
+        /// Update image in a project with given id
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <param name="imageUrl"></param>
+        /// <returns></returns>
         [HttpPut("{projectId}/addImageUrl")]
         public async Task<IActionResult> PutImageInProject(int projectId, string imageUrl)
         {

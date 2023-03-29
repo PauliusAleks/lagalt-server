@@ -79,7 +79,7 @@ namespace lagalt_web_api.Controllers
             return NoContent();
         }
         /// <summary>
-        /// Accepts an application
+        /// Accepts an application and sets its state to accepted
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -97,7 +97,7 @@ namespace lagalt_web_api.Controllers
             return NoContent();
         }
         /// <summary>
-        /// Rejects an application
+        /// Rejects an application and sets its state to rejected
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
