@@ -2,6 +2,9 @@
 {
     public class ProjectAdminDTO
     {
+        /// <summary>
+        /// DTO Properties for reading a project for Admins
+        /// </summary>
         public int Id { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }

@@ -5,7 +5,7 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO
     public class ProjectCreateDTO
     {
         /// <summary>
-        /// Properties to create a project dto
+        /// DTO Properties for creating a project
         /// </summary>
         public string Name { get; set; }
         public string Category { get; set; }
@@ -13,7 +13,7 @@ namespace lagalt_web_api.Models.DTO.ProjectDTO.ProjectCreateDTO
         public string Description { get; set; }
         public string? GitURL { get; set; }
         public virtual List<string>? ImageUrls { get; set; }
-        public virtual List<string>? NeededSkills { get; set; } //AddUserToProject(int projectId, int userId)
+        public virtual List<string>? NeededSkills { get; set; }
         public int adminId { get; set; }
     }
 }

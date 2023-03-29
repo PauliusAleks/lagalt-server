@@ -2,6 +2,9 @@
 
 public class ApplicationReadDTO
 {
+    /// <summary>
+    /// DTO Properties for reading an application.
+    /// </summary>
     public int Id { get; set; }
     public int UserId { get; set; }
     public int ProjectId { get; set; }

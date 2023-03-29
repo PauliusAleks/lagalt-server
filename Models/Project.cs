@@ -73,14 +73,16 @@ public class Project
     /// </summary>
     /// <value>
     /// The project's image URL.
-    /// </value>
+    /// </value
+    ///Navigation Property
     public virtual ICollection<ImageUrl>? ImageURLs { get; set; }
     /// <summary>
     /// Gets or sets the project's needed skills.
     /// </summary>
     /// <value>
     /// The project's needed skills.
-    /// </value>
+    /// </value
+    ///Navigation Property
     public virtual ICollection<Skill>? NeededSkills { get; set; }
     /// <summary>
     /// Gets or sets the project's admins.
@@ -88,6 +90,7 @@ public class Project
     /// <value>
     /// The admins.
     /// </value>
+    ///Navigation Property
     public virtual ICollection<User>? Admins { get; set; }
     /// <summary>
     /// Gets or sets the project's contributors.
@@ -95,6 +98,7 @@ public class Project
     /// <value>
     /// The project's contributors.
     /// </value>
+    ///Navigation Property
     public virtual ICollection<User>? Contributors { get; set; }
 
 
