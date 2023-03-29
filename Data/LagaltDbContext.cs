@@ -19,31 +19,62 @@ namespace lagalt_web_api.Data
         /// <summary>
         /// Initializes a new instance of the <see cref="LagaltDbContext"/> class.
         /// </summary>
-        /// <param name="options">The options.</param>
-        //public LagaltDbContext(DbContextOptions<LagaltDbContext> options) : base(options)
-        //{
-        //}
-        protected IConfiguration Configuration { get; set; }
+        /// <param name="config">The configuration.</param>
         public LagaltDbContext(IConfiguration config) : base()
         {
             Configuration = config;
         }
+        /// <summary>
+        /// The configuration.
+        /// </summary>
+        protected IConfiguration Configuration { get; set; }
+
+        /// <summary>
+        /// Gets or sets the users.
+        /// </summary>
         public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// Gets or sets the projects.
+        /// </summary>
         public DbSet<Project> Projects { get; set; }
+
+        /// <summary>
+        /// Gets or sets the applications.
+        /// </summary>
         public DbSet<Application> Applications { get; set; }
+
+        /// <summary>
+        /// Gets or sets the skills.
+        /// </summary>
         public DbSet<Skill> Skills { get; set; }
+
+        /// <summary>
+        /// Gets or sets the image URLs.
+        /// </summary>
         public DbSet<ImageUrl> ImageUrls { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user messages.
+        /// </summary>
         public DbSet<UserMessage> UserMessages { get; set; }
 
-        //public DbSet<Record> Records { get; set; }
-
+        /// <summary>
+        /// Configures the context options.
+        /// </summary>
+        /// <param name="optionsBuilder">The options builder.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder.UseSqlServer(Configuration.GetConnectionString("LAGALT_DB")).EnableSensitiveDataLogging());
         }
 
+        /// <summary>
+        /// Configures the models for the context.
+        /// </summary>
+        /// <param name="modelBuilder">The model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Appointing seeds to entities.
             modelBuilder.Entity<ImageUrl>().HasData(SeedData.ImageURLs);
             modelBuilder.Entity<Project>().HasData(SeedData.Projects);
             modelBuilder.Entity<User>().HasData(SeedData.Users);
@@ -73,7 +104,6 @@ namespace lagalt_web_api.Data
                });
 
             // Seeding Skills to User
-
             modelBuilder.Entity<Skill>()
             .HasMany(sk => sk.Users)
             .WithMany(u => u.Skills)
@@ -95,8 +125,7 @@ namespace lagalt_web_api.Data
                });
 
  
-            //Seeding ImgURLs to Projects
-
+            // Seeding ImgURLs to Projects
             modelBuilder.Entity<ImageUrl>()
            .HasMany(img => img.Projects)
            .WithMany(p => p.ImageURLs)
@@ -117,6 +146,7 @@ namespace lagalt_web_api.Data
                    );
                });
 
+            // Seeding userdata
             modelBuilder.Entity<User>()
            .HasMany(ad => ad.AdminProjects)
            .WithMany(pr => pr.Admins)
@@ -160,7 +190,10 @@ namespace lagalt_web_api.Data
 
 
         }
-
+        /// <summary>
+        /// Configures conventions for the database model.
+        /// </summary>
+        /// <param name="configurationBuilder">The model configuration builder.</param>
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             base.ConfigureConventions(configurationBuilder);

@@ -3,10 +3,10 @@
 namespace lagalt_web_api.Repositories.Interface
 {
     /// <summary>
-    /// 
+    /// Interface for the application repository. Used for accessing and modifying application data in the database.
     /// </summary>
-    /// <seealso cref="AssignmentThree.Repositories.Database.IRepository&lt;AssignmentThree.Models.Project&gt;" />
     public interface IApplicationRepository : IRepository<Application>
     {
+        // No additional members at the moment
     }
 }
