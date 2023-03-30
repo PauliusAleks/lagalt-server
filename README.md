@@ -27,8 +27,8 @@
       </ul>
     </li>
     <li><a href="#technology-stack">Technology stack</a></li>
+    <li><a href="#database-diagram">Database diagram</a></li>
     <li><a href="#contributors">Contributors</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -43,7 +43,7 @@ This manual will show you how to set up the Lagalt Web API and its dependencies.
 ## Project status
 
 ### Lagalt API 1.0
-All of the functionality that is required for the API to be fully usable is implemented. For detailed Endpoints description, download the 'lagaltAPISwaggerDocs.html' file.
+All of the functionality that is required for the API to be fully usable is implemented. For detailed Endpoints description, click <a href='https://gitlab.com/legalt-group/lagalt-web-api/uploads/c6e8ee84813016791ee4e0ac6a8fb63e/lagaltAPISwaggerDocs.html'>here</a> to download an html file.
 
 ### Missing requirements
 * Authentication for Controllers.
@@ -81,8 +81,9 @@ All of the functionality that is required for the API to be fully usable is impl
 * <a href="https://www.keycloak.org/"> 🔑 Keycloak </a>
 * <a href="https://www.cloud-iam.com/"> ☁ Cloud Iam </a> 
 
-## FIgures
-
+## Database diagram
+<div align="center">
+    <img src="https://gitlab.com/legalt-group/lagalt-web-api/uploads/250801af816a484161d3116606d92430/DatabaseDiagram.PNG" alt="Logo">
 
 ## Contributors
 * <a href="https://www.linkedin.com/in/jarand-larsen-58852a257/">Jarand Larsen</a>
