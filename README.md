@@ -43,10 +43,10 @@ This manual will show you how to set up the Lagalt Web API and its dependencies.
 ## Project status
 
 ### Lagalt API 1.0
-All of the functionality that is required for the API to be fully usable is implemented. Endpoints will be listed later.
+All of the functionality that is required for the API to be fully usable is implemented. For detailed Endpoints description, download the 'lagaltAPISwaggerDocs.html' file.
 
 ### Missing requirements
-* Authentication on Controllers.
+* Authentication for Controllers.
 * Sorting algorithm.
 
 ## Usage
