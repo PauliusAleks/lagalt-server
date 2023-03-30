@@ -6,7 +6,7 @@
 </div>
 
 
-<!-- TABLE OF CONTENTS --> ========> COMPLETE WHEN README IS FINISHED
+<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -41,10 +41,12 @@
 ## Description
 This manual will show you how to set up the Lagalt Web API and its dependencies.
 
-### Project's backround
+### Project's backround,
+
 ### Purpose
 
 ## Project status
+
 ### Lagalt API 1.0
 All of the functionality that is required for the API to be fully usable is implemented. All of the endpoints will be listed later.
 
@@ -52,8 +54,8 @@ All of the functionality that is required for the API to be fully usable is impl
 * Authentication on Controllers
 * ?Skills Match Algorithm (sorting)?
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 ## Usage
+
 ### Installation
 1. Install an IDE
 2. Clone this repository: https://gitlab.com/legalt-group/lagalt-web-api.git
@@ -76,12 +78,12 @@ All of the functionality that is required for the API to be fully usable is impl
  * add-migration <name-of-the-initial-migration>
  * update-database
 
-##Technology stack
+## Technology stack
 * [![C#][C#]][C#-url]
 * [![ASP .NET Core 6][ASP.NETCore6]][ASP-.NET-Core-6-url]
 * [![EF 6][EF6]][EF-6-url]
 * [![Azure][Azure.com]][Azure-url]
-* [![VS2022][VS2022.com]][VSC2022-url]
+* [![VS2022][VS2022.com]][VS2022-url]
 * [![SQLServer][SQLServer.com]][SQLServer-url]
 * <a href="https://www.keycloak.org/"> 🔑 Keycloak </a>
 * <a href="https://www.cloud-iam.com/"> ☁ Cloud Iam </a> 
@@ -105,10 +107,10 @@ Distributed under the MIT License.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[ASP.NETCore6]: https://img.shields.io/badge/ASP .NET Core 6-000000?style=for-the-badge&logo=ASP&logoColor=white
+[ASP.NETCore6]: https://img.shields.io/badge/ASP.NETCore6-000000?style=for-the-badge&logo=ASP&logoColor=white
 [ASP-.NET-Core-6-url]: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 
-[EF6]: https://img.shields.io/badge/ef 6-000000?style=for-the-badge&logo=ef -6&logoColor=white
+[EF6]: https://img.shields.io/badge/ef6-000000?style=for-the-badge&logo=ef-6&logoColor=white
 [EF-6-url]: https://learn.microsoft.com/en-us/ef/ef6/
 
 [C#]: https://img.shields.io/badge/csharp-000000?style=for-the-badge&logo=csharp&logoColor=white
