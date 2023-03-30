@@ -41,9 +41,11 @@
 ## Description
 This manual will show you how to set up the Lagalt Web API and its dependencies.
 
-### Project's backround,
+### Project's backround
+This API was made for 'Lagalt' full-stack project int Noroff-accelerate program. The group had full freedom to structure and design this project.
 
 ### Purpose
+The purpose of this API is to allow Lagalt-client communicate with the database. It provides all endpoints that are nessceasry fully manage projects, user and applications.
 
 ## Project status
 
@@ -52,7 +54,6 @@ All of the functionality that is required for the API to be fully usable is impl
 
 ### Missing requirements
 * Authentication on Controllers
-* ?Skills Match Algorithm (sorting)?
 
 ## Usage
 
@@ -60,7 +61,7 @@ All of the functionality that is required for the API to be fully usable is impl
 1. Install an IDE
 2. Clone this repository: https://gitlab.com/legalt-group/lagalt-web-api.git
 3. Install the following packages: 
- * AspNetCoreRateLimit (5.0.0), 
+ * AspNetCoreRateLimit (5.0.0) 
  * AutoMapper.Extensions.Microsoft.DependencyInjection (12.0.0)
  * Microsoft.AspNetCore.Authentication.JwtBearer (6.0.14)
  * Microsoft.AspNetCore.SignalR.Client (6.0.14)
