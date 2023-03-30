@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 namespace lagalt_web_api.Models;
-
 /// <summary>
 ///   <see cref="Id" />
 ///   <br />

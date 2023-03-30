@@ -3,10 +3,10 @@
 namespace lagalt_web_api.Repositories.Interface
 {
     /// <summary>
-    /// 
+    /// Interface for the imageURL repository. Used for accessing and modifying image URL data in the database.
     /// </summary>
-    /// <seealso cref="AssignmentThree.Repositories.Database.IRepository&lt;AssignmentThree.Models.Project&gt;" />
     public interface IImageURLRepository : IRepository<ImageUrl>
     {
+        // No additional members at the moment.
     }
 }

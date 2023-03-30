@@ -8,37 +8,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lagalt_web_api.Controllers
 {
+    /// <summary>
+    /// Controller for handling User-related operations.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Produces("Application/json")]
     [Consumes("Application/json")]
     public class UsersController : ControllerBase
     {
-        /// <summary>
-        /// The context
-        /// </summary>
         private readonly IRepositories _repositories;
-        /// <summary>
-        /// The mapper
-        /// </summary>
         private readonly IMapper _mapper;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectsController"/> class.
-        /// </summary>
-        /// <param name="repositories">The context.</param>
-        /// <param name="mapper">The mapper.</param>
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UsersController"/> class.
+        /// </summary>
+        /// <param name="repositories">The repositories instance.</param>
+        /// <param name="mapper">The IMapper instance.</param>
         public UsersController(IRepositories repositories, IMapper mapper)
         {
             _repositories = repositories;
             _mapper = mapper;
         }
 
-        // GET: api/Users
         /// <summary>
-        /// Get all users.
+        /// Retrieves all users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of UserReadDTO objects.</returns>
         [HttpGet]
         public ActionResult<IEnumerable<UserReadDTO>> GetUsers()
         {
@@ -49,6 +45,11 @@ namespace lagalt_web_api.Controllers
             return Ok(usersDTO);
         }
 
+        /// <summary>
+        /// Retrieves all projects that a user has contributed to.
+        /// </summary>
+        /// <param name="id">The user's id.</param>
+        /// <returns>A list of ProjectBannerDTO objects.</returns>
         [HttpGet("{id}/contributorProjects")]
         public ActionResult<IEnumerable<ProjectBannerDTO>> GetContributorProjects(int id)
         {
@@ -70,12 +71,11 @@ namespace lagalt_web_api.Controllers
         //}
 
 
-        // GET: api/users/5
         /// <summary>
-        /// Gets the user.
+        /// Retrieves a user by id.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>An UserReadDTO.</returns>
+        /// <param name="id">The user's id.</param>
+        /// <returns>An UserReadDTO object.</returns>
         [HttpGet("id/{id}")]
         public ActionResult<UserReadDTO> GetUser(int id)
         {
@@ -95,10 +95,10 @@ namespace lagalt_web_api.Controllers
         }
 
         /// <summary>
-        /// Get user by username    users/?username
+        /// Retrieves a user by username.
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
+        /// <param name="username">The user's username.</param>
+        /// <returns>An UserReadDTO object.</returns>
         [HttpGet("username/{username}")]
         public ActionResult<UserReadDTO> GetUser(string username)
         {
@@ -117,6 +117,11 @@ namespace lagalt_web_api.Controllers
             return userDTO;
         }
 
+        /// <summary>
+        /// Checks if a user exists.
+        /// </summary>
+        /// <param name="username">The user's username.</param>
+        /// <returns>True if the user exists, false otherwise.</returns>
         [HttpGet("userExists/{username}")]
         public ActionResult<bool> UserExists(string username)
         {
@@ -134,14 +139,12 @@ namespace lagalt_web_api.Controllers
             }
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Update user by id
+        /// Updates a user by ID using HTTP PUT with the user's ID provided in the URL.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="user">The user.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="id">The ID of the user to be updated.</param>
+        /// <param name="userDTO">The user DTO containing the new user information.</param>
+        /// <returns>An HTTP action result indicating the success or failure of the operation.</returns>
         [HttpPut("editWithId/{id}")]
         public async Task<IActionResult> PutUserById(int id, UserEditDTO userDTO) // TODO: fix
         {
@@ -159,11 +162,11 @@ namespace lagalt_web_api.Controllers
         }
 
         /// <summary>
-        /// Update user by username
+        /// Updates a user by username using HTTP PUT with the user's username provided in the URL.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="userDTO"></param>
-        /// <returns>ActionResult</returns>
+        /// <param name="username">The username of the user to be updated.</param>
+        /// <param name="userDTO">The user DTO containing the new user information.</param>
+        /// <returns>An HTTP action result indicating the success or failure of the operation.</returns>
         [HttpPut("editWithUsername/{username}")]
         public async Task<IActionResult> PutUserByUsername(string username, UserEditDTO userDTO)
         {
@@ -185,10 +188,10 @@ namespace lagalt_web_api.Controllers
         // POST: api/users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Create user.
+        /// Creates a new user using HTTP POST.
         /// </summary>
-        /// <param name="user">The user.</param>
-        /// <returns>The UserCreateDTO.</returns>
+        /// <param name="user">The user DTO containing the new user information.</param>
+        /// <returns>An HTTP action result containing the newly created user DTO.</returns>
         [HttpPost("CreateUser")]
         public ActionResult<UserCreateDTO> PostUser(UserCreateDTO user)
         {
@@ -201,12 +204,11 @@ namespace lagalt_web_api.Controllers
             return Ok(createdUser);
         }
 
-        // DELETE: api/users/5
         /// <summary>
-        /// Deletes the user by id.
+        /// Deletes the user with the specified ID using HTTP DELETE.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>The action result.</returns>
+        /// <param name="id">The ID of the user to be deleted.</param>
+        /// <returns>An HTTP action result indicating the success or failure of the operation.</returns>
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
@@ -223,10 +225,10 @@ namespace lagalt_web_api.Controllers
         }
 
         /// <summary>
-        /// Project existence check.
+        /// Checks whether a user with the specified ID exists.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>Wether project exists or not.</returns>
+        /// <param name="id">The ID of the user to check for existence.</param>
+        /// <returns>The user if they exist.</returns>
         private User UserExists(int id)
         {
             return _repositories.Users.Get(id);

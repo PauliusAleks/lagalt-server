@@ -28,6 +28,13 @@ namespace lagalt_web_api.Controllers
         public ISkillsAPIRepository SkillsAPIRepository { get; }
         public IHttpClientFactory HttpClientFactory { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SkillsController"/> class.
+        /// </summary>
+        /// <param name="repositories">The repositories.</param>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="httpClientFactory">The HTTP client factory.</param>
+        /// <param name="skillsAPIRepository">The skills API repository.</param>
         public SkillsController(IRepositories repositories, IMapper mapper, IHttpClientFactory httpClientFactory, ISkillsAPIRepository skillsAPIRepository)
         {
             _repositories = repositories;
