@@ -12,10 +12,6 @@
   <ol>
     <li>
       <a href="#description">Description</a>
-      <ul>
-        <li><a href="#Project's-backround">Project's backround</a></li>
-        <li><a href="#Purpose">Purpose</a></li>
-      </ul>
     </li>
     <li>
       <a href="#project-status">Project status</a>
@@ -39,28 +35,26 @@
 
 
 ## Description
+This API was made for 'Lagalt' full-stack project int Noroff-accelerate program.
+The purpose of this API is to make a secure connection between Lagalt-client and the database.
+It provides all endpoints that are necesaary to fully manage projects, user and applications.
 This manual will show you how to set up the Lagalt Web API and its dependencies.
-
-### Project's backround
-This API was made for 'Lagalt' full-stack project int Noroff-accelerate program. The group had full freedom to structure and design this project.
-
-### Purpose
-The purpose of this API is to allow Lagalt-client communicate with the database. It provides all endpoints that are nessceasry fully manage projects, user and applications.
 
 ## Project status
 
 ### Lagalt API 1.0
-All of the functionality that is required for the API to be fully usable is implemented. All of the endpoints will be listed later.
+All of the functionality that is required for the API to be fully usable is implemented. Endpoints will be listed later.
 
 ### Missing requirements
-* Authentication on Controllers
+* Authentication on Controllers.
+* Sorting algorithm.
 
 ## Usage
 
 ### Installation
 1. Install an IDE
 2. Clone this repository: https://gitlab.com/legalt-group/lagalt-web-api.git
-3. Install the following packages: 
+3. Install or check if the following packages are installed: 
  * AspNetCoreRateLimit (5.0.0) 
  * AutoMapper.Extensions.Microsoft.DependencyInjection (12.0.0)
  * Microsoft.AspNetCore.Authentication.JwtBearer (6.0.14)
@@ -71,11 +65,9 @@ All of the functionality that is required for the API to be fully usable is impl
  * Microsoft.VisualStudio.Web.CodeGeneration.Design (6.0.12)
  * Swashbuckle.AspNetCore (6.5.0)
 
-4. Then add the connection string to your appsetting.json file.
-5. To set the user secrets for keycloak run these commands:  
-                               <-------------------------------Noen som kan kommandoene?                         
+4. Add the connection string to your appsetting.json file.
 
-6. As for the database creation, run the following commands in the nuget package manager console:
+5. To set up a database, run the following commands in the nuget package manager console:
  * add-migration <name-of-the-initial-migration>
  * update-database
 
@@ -89,7 +81,7 @@ All of the functionality that is required for the API to be fully usable is impl
 * <a href="https://www.keycloak.org/"> 🔑 Keycloak </a>
 * <a href="https://www.cloud-iam.com/"> ☁ Cloud Iam </a> 
 
-## Eventuell figur???
+## FIgures
 
 
 ## Contributors
@@ -99,12 +91,10 @@ All of the functionality that is required for the API to be fully usable is impl
 * <a href="https://www.linkedin.com/in/ida-huun-michelsen/">Ida Huun Michelsen</a>
 * <a href="https://www.linkedin.com/in/erik-aardal/">Erik Aardal</a>
 
-## Conclusion
-
 <!-- LICENSE -->
 ## License
-
 Distributed under the MIT License.
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
